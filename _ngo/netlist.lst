@@ -1,0 +1,11 @@
+/home/allenyin/Projects/XEM6310RhythmInterface/main.ngc 1463789277
+/home/allenyin/Projects/XEM6310RhythmInterface/okWireIn.ngc 1463681855
+/home/allenyin/Projects/XEM6310RhythmInterface/okTriggerIn.ngc 1463681855
+/home/allenyin/Projects/XEM6310RhythmInterface/okWireOut.ngc 1463681855
+/home/allenyin/Projects/XEM6310RhythmInterface/okPipeOut.ngc 1463681855
+/home/allenyin/Projects/XEM6310RhythmInterface/okCoreHarness.ngc 1463681855
+/home/allenyin/Projects/XEM6310RhythmInterface/TFIFO64x8a_64x8b.ngc 1463780394
+ipcore_dir/fifo_w16_2048_r64_512.ngc 1463786283
+ipcore_dir/fifo_w64_512_r16_2048.ngc 1463787554
+ipcore_dir/multiplier_18x18.ngc 1463695349
+OK

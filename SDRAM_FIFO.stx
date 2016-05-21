@@ -1,0 +1,80 @@
+Release 14.7 - xst P.20131013 (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> 
+Parameter TMPDIR set to /home/allenyin/Projects/XEM6310RhythmInterface/xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.06 secs
+ 
+--> 
+Parameter xsthdpdir set to /home/allenyin/Projects/XEM6310RhythmInterface/xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.06 secs
+ 
+--> 
+Reading design: SDRAM_FIFO.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Analyzing Verilog file "/home/allenyin/Projects/XEM6310RhythmInterface/iodrp_mcb_controller.v" into library work
+Parsing module <iodrp_mcb_controller>.
+Analyzing Verilog file "/home/allenyin/Projects/XEM6310RhythmInterface/iodrp_controller.v" into library work
+Parsing module <iodrp_controller>.
+Analyzing Verilog file "/home/allenyin/Projects/XEM6310RhythmInterface/mcb_soft_calibration.v" into library work
+Parsing module <mcb_soft_calibration>.
+Analyzing Verilog file "/home/allenyin/Projects/XEM6310RhythmInterface/mcb_soft_calibration_top.v" into library work
+Parsing module <mcb_soft_calibration_top>.
+Analyzing Verilog file "/home/allenyin/Projects/XEM6310RhythmInterface/mcb_raw_wrapper.v" into library work
+Parsing module <mcb_raw_wrapper>.
+Analyzing Verilog file "/home/allenyin/Projects/XEM6310RhythmInterface/memc3_wrapper.v" into library work
+Parsing module <memc3_wrapper>.
+Analyzing Verilog file "/home/allenyin/Projects/XEM6310RhythmInterface/memc3_infrastructure.v" into library work
+Parsing module <memc3_infrastructure>.
+Analyzing Verilog file "/home/allenyin/Projects/XEM6310RhythmInterface/fifo_w64_512_r16_2048.v" into library work
+Parsing module <fifo_w64_512_r16_2048>.
+Analyzing Verilog file "/home/allenyin/Projects/XEM6310RhythmInterface/fifo_w16_2048_r64_512.v" into library work
+Parsing module <fifo_w16_2048_r64_512>.
+Analyzing Verilog file "/home/allenyin/Projects/XEM6310RhythmInterface/ddr2_state_machine.v" into library work
+Parsing module <ddr2_state_machine>.
+Analyzing Verilog file "/home/allenyin/Projects/XEM6310RhythmInterface/SDRAM_FIFO.v" into library work
+Parsing module <SDRAM_FIFO>.
+
+
+Total REAL time to Xst completion: 2.00 secs
+Total CPU time to Xst completion: 2.32 secs
+ 
+--> 
+
+
+Total memory usage is 306512 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    0 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+
