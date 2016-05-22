@@ -97,9 +97,6 @@ module main #(
 	input wire								clk1_in_p,
 	input wire								clk1_in_n,
 
-    input wire                              sys_clkp,
-    input wire                              sys_clkn,
-
 	inout  wire [C3_NUM_DQ_PINS-1:0]         ddr2_dq,
 	output wire [C3_MEM_ADDR_WIDTH-1:0]      ddr2_a,
 	output wire [C3_MEM_BANKADDR_WIDTH-1:0]  ddr2_ba,
@@ -725,7 +722,7 @@ module main #(
 		.num_words_in_FIFO			    (num_words_in_FIFO),
 		.ddr2_dq					(ddr2_dq),
 		.ddr2_a					    (ddr2_a),
-		.ddr2_ba					(ddr2__ba),
+		.ddr2_ba					(ddr2_ba),
 		.ddr2_ras_n				    (ddr2_ras_n),
 		.ddr2_cas_n				    (ddr2_cas_n),
 		.ddr2_we_n				    (ddr2_we_n),

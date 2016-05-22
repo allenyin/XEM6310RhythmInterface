@@ -11,9 +11,6 @@
 <msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/variable_freq_clk_generator.v" Line 95: Result of <arg fmt="%d" index="1">32</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">9</arg>-bit target.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="1127" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/SDRAM_FIFO.v" Line 260: Assignment to <arg fmt="%s" index="1">mcb3_dram_cs_n</arg> ignored, since the identifier is never used
-</msg>
-
 <msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/SDRAM_FIFO.v" Line 269: Result of <arg fmt="%d" index="1">5</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">4</arg>-bit target.
 </msg>
 
@@ -140,166 +137,151 @@
 <msg type="warning" file="HDLCompiler" num="634" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/SDRAM_FIFO.v" Line 237: Net &lt;<arg fmt="%s" index="1">selfrefresh_enter</arg>&gt; does not have a driver.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="189" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 728: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">ddr2_ba</arg>&gt;. Formal port size is <arg fmt="%d" index="2">3</arg>-bit while actual signal size is <arg fmt="%d" index="1">1</arg>-bit.
+<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 1044: Result of <arg fmt="%d" index="1">32</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">1</arg>-bit target.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="1127" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 728: Assignment to <arg fmt="%s" index="1">ddr2__ba</arg> ignored, since the identifier is never used
+<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 1045: Result of <arg fmt="%d" index="1">32</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">1</arg>-bit target.
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 1046: Result of <arg fmt="%d" index="1">32</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">1</arg>-bit target.
 </msg>
 
 <msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 1047: Result of <arg fmt="%d" index="1">32</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">1</arg>-bit target.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 1048: Result of <arg fmt="%d" index="1">32</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">1</arg>-bit target.
+<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2026: Result of <arg fmt="%d" index="1">11</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">10</arg>-bit target.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 1049: Result of <arg fmt="%d" index="1">32</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">1</arg>-bit target.
+<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2036: Result of <arg fmt="%d" index="1">11</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">10</arg>-bit target.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 1050: Result of <arg fmt="%d" index="1">32</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">1</arg>-bit target.
+<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2046: Result of <arg fmt="%d" index="1">11</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">10</arg>-bit target.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2029: Result of <arg fmt="%d" index="1">11</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">10</arg>-bit target.
+<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2174: Result of <arg fmt="%d" index="1">7</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">6</arg>-bit target.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2039: Result of <arg fmt="%d" index="1">11</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">10</arg>-bit target.
-</msg>
-
-<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2049: Result of <arg fmt="%d" index="1">11</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">10</arg>-bit target.
-</msg>
-
-<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2177: Result of <arg fmt="%d" index="1">7</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">6</arg>-bit target.
-</msg>
-
-<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2182: Result of <arg fmt="%d" index="1">7</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">6</arg>-bit target.
+<msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2179: Result of <arg fmt="%d" index="1">7</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">6</arg>-bit target.
 </msg>
 
 <msg type="warning" file="HDLCompiler" num="413" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/DAC_output_scalable_HPF.v" Line 64: Result of <arg fmt="%d" index="1">32</arg>-bit expression is truncated to fit in <arg fmt="%d" index="2">19</arg>-bit target.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="189" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2273: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">noise_suppress</arg>&gt;. Formal port size is <arg fmt="%d" index="2">7</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
+<msg type="warning" file="HDLCompiler" num="189" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2270: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">noise_suppress</arg>&gt;. Formal port size is <arg fmt="%d" index="2">7</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="189" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2297: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">noise_suppress</arg>&gt;. Formal port size is <arg fmt="%d" index="2">7</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
+<msg type="warning" file="HDLCompiler" num="189" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2294: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">noise_suppress</arg>&gt;. Formal port size is <arg fmt="%d" index="2">7</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="189" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2321: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">noise_suppress</arg>&gt;. Formal port size is <arg fmt="%d" index="2">7</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
+<msg type="warning" file="HDLCompiler" num="189" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2318: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">noise_suppress</arg>&gt;. Formal port size is <arg fmt="%d" index="2">7</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="189" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2345: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">noise_suppress</arg>&gt;. Formal port size is <arg fmt="%d" index="2">7</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
+<msg type="warning" file="HDLCompiler" num="189" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2342: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">noise_suppress</arg>&gt;. Formal port size is <arg fmt="%d" index="2">7</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="189" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2369: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">noise_suppress</arg>&gt;. Formal port size is <arg fmt="%d" index="2">7</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
+<msg type="warning" file="HDLCompiler" num="189" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2366: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">noise_suppress</arg>&gt;. Formal port size is <arg fmt="%d" index="2">7</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="189" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2393: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">noise_suppress</arg>&gt;. Formal port size is <arg fmt="%d" index="2">7</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
+<msg type="warning" file="HDLCompiler" num="189" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2390: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">noise_suppress</arg>&gt;. Formal port size is <arg fmt="%d" index="2">7</arg>-bit while actual signal size is <arg fmt="%d" index="1">32</arg>-bit.
 </msg>
 
 <msg type="warning" file="HDLCompiler" num="1016" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/okLibrary.v" Line 39: Port <arg fmt="%s" index="1">CLK180</arg> is not connected to this instance
 </msg>
 
-<msg type="warning" file="HDLCompiler" num="189" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2842: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">ep_datain</arg>&gt;. Formal port size is <arg fmt="%d" index="2">32</arg>-bit while actual signal size is <arg fmt="%d" index="1">16</arg>-bit.
+<msg type="warning" file="HDLCompiler" num="189" delta="old" >"/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2839: Size mismatch in connection of port &lt;<arg fmt="%s" index="3">ep_datain</arg>&gt;. Formal port size is <arg fmt="%d" index="2">32</arg>-bit while actual signal size is <arg fmt="%d" index="1">16</arg>-bit.
 </msg>
 
-<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">sys_clkp</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">747</arg>: Output port &lt;<arg fmt="%s" index="3">RAM_data_out_A</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">RAM_bank_1</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="warning" file="Xst" num="647" delta="old" >Input &lt;<arg fmt="%s" index="1">sys_clkn</arg>&gt; is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">782</arg>: Output port &lt;<arg fmt="%s" index="3">RAM_data_out_A</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">RAM_bank_2</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">713</arg>: Output port &lt;<arg fmt="%s" index="3">ddr2_ba</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">SDRAM_FIFO_inst</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">804</arg>: Output port &lt;<arg fmt="%s" index="3">RAM_data_out_A</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">RAM_bank_3</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">750</arg>: Output port &lt;<arg fmt="%s" index="3">RAM_data_out_A</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">RAM_bank_1</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2238</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SYNC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_2</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">785</arg>: Output port &lt;<arg fmt="%s" index="3">RAM_data_out_A</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">RAM_bank_2</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2238</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_2</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">807</arg>: Output port &lt;<arg fmt="%s" index="3">RAM_data_out_A</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">RAM_bank_3</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2262</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SYNC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_3</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2241</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SYNC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_2</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2262</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_3</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2241</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_2</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2286</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SYNC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_4</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2265</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SYNC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_3</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2286</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_4</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2265</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_3</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2310</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SYNC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_5</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2289</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SYNC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_4</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2310</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_5</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2289</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_4</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2334</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SYNC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_6</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2313</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SYNC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_5</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2334</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_6</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2313</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_5</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2358</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SYNC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_7</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2337</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SYNC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_6</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2358</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_7</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2337</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_6</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2382</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SYNC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_8</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2361</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SYNC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_7</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2382</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_8</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2361</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_7</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2424</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_CS</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_2</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2385</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SYNC</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_8</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2424</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_2</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2385</arg>: Output port &lt;<arg fmt="%s" index="3">DAC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">DAC_output_8</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2440</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_CS</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_3</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2427</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_CS</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_2</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2440</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_3</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2427</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_2</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2456</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_CS</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_4</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2443</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_CS</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_3</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2456</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_4</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2443</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_3</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2472</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_CS</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_5</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2459</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_CS</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_4</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2472</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_5</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2459</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_4</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2488</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_CS</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_6</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2475</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_CS</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_5</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2488</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_6</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2475</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_5</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2504</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_CS</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_7</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2491</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_CS</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_6</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2504</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_7</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2491</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_6</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2520</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_CS</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_8</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2507</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_CS</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_7</arg>&gt; is unconnected or connected to loadless signal.
-</msg>
-
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2507</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_7</arg>&gt; is unconnected or connected to loadless signal.
-</msg>
-
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2523</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_CS</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_8</arg>&gt; is unconnected or connected to loadless signal.
-</msg>
-
-<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2523</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_8</arg>&gt; is unconnected or connected to loadless signal.
+<msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/main.v</arg>&quot; line <arg fmt="%s" index="2">2520</arg>: Output port &lt;<arg fmt="%s" index="3">ADC_SCLK</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">ADC_inout_8</arg>&gt; is unconnected or connected to loadless signal.
 </msg>
 
 <msg type="info" file="Xst" num="3210" delta="old" >&quot;<arg fmt="%s" index="1">/home/allenyin/Projects/XEM6310RhythmInterface/SDRAM_FIFO.v</arg>&quot; line <arg fmt="%s" index="2">386</arg>: Output port &lt;<arg fmt="%s" index="3">p0_wr_count</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">memc3_wrapper_inst</arg>&gt; is unconnected or connected to loadless signal.

@@ -5,7 +5,7 @@ Loading device for application Rf_Device from file '6slx150.nph' in environment
    "main" is an NCD, version 3.2, device xc6slx150, package fgg484, speed -2
 Opened constraints file main.pcf.
 
-Fri May 20 22:59:44 2016
+Sat May 21 20:23:50 2016
 
 /media/data_drive1/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/bitgen -intstyle ise -w -g DebugBitstream:No -g Binary:no -g CRC:Enable -g Reset_on_err:No -g ConfigRate:2 -g ProgPin:PullUp -g TckPin:PullUp -g TdiPin:PullUp -g TdoPin:PullUp -g TmsPin:PullUp -g UnusedPin:PullDown -g UserID:0xFFFFFFFF -g ExtMasterCclk_en:No -g SPI_buswidth:1 -g TIMER_CFG:0xFFFF -g multipin_wakeup:No -g StartUpClk:CClk -g DONE_cycle:4 -g GTS_cycle:5 -g GWE_cycle:6 -g LCK_cycle:NoWait -g Security:None -g DonePipe:Yes -g DriveDone:No -g Encrypt:No -g en_sw_gsr:No -g drive_awake:No -g sw_clk:Startupclk -g sw_gwe_cycle:5 -g sw_gts_cycle:4 main.ncd 
 
@@ -156,19 +156,11 @@ WARNING:PhysDesignRules:372 - Gated clock. Clock net ep46trigin<5> is sourced by
 WARNING:PhysDesignRules:372 - Gated clock. Clock net DAC_output_1/state_clk is
    sourced by a combinatorial pin. This is not good design practice. Use the CE
    pin to control the loading of data into the flip-flop.
-ERROR:PhysDesignRules:368 - The signal <ddr2_ba<0>_OBUF> is incomplete. The
-   signal is not driven by any source pin in the design.
-ERROR:PhysDesignRules:368 - The signal <ddr2_ba<1>_OBUF> is incomplete. The
-   signal is not driven by any source pin in the design.
-ERROR:PhysDesignRules:368 - The signal <ddr2_ba<2>_OBUF> is incomplete. The
-   signal is not driven by any source pin in the design.
-ERROR:PhysDesignRules:368 - The signal <ddr2_cs_n_OBUF> is incomplete. The
-   signal is not driven by any source pin in the design.
-WARNING:PhysDesignRules:367 - The signal
-   <host/core0/core0/a0/cb0/BU2/U0/grf.rf/mem/gdm.dm/Mram_RAM2_RAMD_O> is
-   incomplete. The signal does not drive any load pins in the design.
 WARNING:PhysDesignRules:367 - The signal
    <host/core0/core0/a0/cb0/BU2/U0/grf.rf/mem/gdm.dm/Mram_RAM1_RAMD_O> is
+   incomplete. The signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <host/core0/core0/a0/cb0/BU2/U0/grf.rf/mem/gdm.dm/Mram_RAM2_RAMD_O> is
    incomplete. The signal does not drive any load pins in the design.
 WARNING:PhysDesignRules:1414 - Issue with pin connections and/or configuration
    on
@@ -235,9 +227,8 @@ WARNING:PhysDesignRules:1414 - Issue with pin connections and/or configuration
    block:<SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_addr
    _delay_obuft[4].delay_addr_inst>:<IODELAY2_IODELAY2>.  When DELAY_SRC is not
    IO programming the T input pin is not used and will be ignored.
-ERROR:PhysDesignRules:10 - The network <ddr2_ba<0>_OBUF> is completely unrouted.
-ERROR:PhysDesignRules:10 - The network <ddr2_ba<1>_OBUF> is completely unrouted.
-ERROR:PhysDesignRules:10 - The network <ddr2_ba<2>_OBUF> is completely unrouted.
-ERROR:PhysDesignRules:10 - The network <ddr2_cs_n_OBUF> is completely unrouted.
-ERROR:Bitgen:25 - DRC detected 8 errors and 24 warnings.  Please see the
-   previously displayed individual error or warning messages for more details.
+DRC detected 0 errors and 24 warnings.  Please see the previously displayed
+individual error or warning messages for more details.
+Creating bit map...
+Saving bit stream in "main.bit".
+Bitstream generation is complete.

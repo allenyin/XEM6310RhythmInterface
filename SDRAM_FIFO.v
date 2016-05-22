@@ -257,7 +257,7 @@ module SDRAM_FIFO  #(
 	
 	
 	assign c3_sys_clk     = 1'b0;
-	assign mcb3_dram_cs_n = 1'b0;
+	assign ddr2_cs_n = 1'b0;
 
 
 	//MIG infrastructure reset

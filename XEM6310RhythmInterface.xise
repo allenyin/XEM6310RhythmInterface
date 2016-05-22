@@ -129,7 +129,7 @@
       <association xil_pn:name="Implementation" xil_pn:seqID="11"/>
     </file>
     <file xil_pn:name="TFIFO64x8a_64x8b.ngc" xil_pn:type="FILE_NGC">
-      <association xil_pn:name="Implementation" xil_pn:seqID="1" xil_pn:seqIDinc="67"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="1" xil_pn:seqIDinc="32"/>
     </file>
     <file xil_pn:name="ipcore_dir/fifo_w16_2048_r64_512.xco" xil_pn:type="FILE_COREGEN">
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="101"/>

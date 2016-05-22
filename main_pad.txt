@@ -1,7 +1,7 @@
 Release 14.7 - par P.20131013 (lin64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Fri May 20 20:13:01 2016
+Sat May 21 20:18:41 2016
 
 
 INFO: The IO information is provided in three file formats as part of the Place and Route (PAR) process.  These formats are:
@@ -174,7 +174,7 @@ Pinout by Pin Number:
 |E20       |TTL_out<11>  |IOB      |IO_L35P_A11_M1A7_1           |OUTPUT   |LVCMOS33      |1             |12        |SLOW     |           |         |       |LOCATED   |YES        |NONE            |
 |E21       |             |         |GND                          |         |              |              |          |         |           |         |       |          |           |                |
 |E22       |TTL_out<12>  |IOB      |IO_L35N_A10_M1A2_1           |OUTPUT   |LVCMOS33      |1             |12        |SLOW     |           |         |       |LOCATED   |YES        |NONE            |
-|F1        |ddr2_ba<2>   |IOB      |IO_L50N_M3BA2_3              |OUTPUT   |SSTL18_II     |3             |          |         |           |         |       |LOCATED   |NO         |NONE            |
+|F1        |ddr2_ba<2>   |IOB      |IO_L50N_M3BA2_3              |TRISTATE |SSTL18_II     |3             |          |         |           |         |       |LOCATED   |NO         |NONE            |
 |F2        |ddr2_we_n    |IOB      |IO_L50P_M3WE_3               |TRISTATE |SSTL18_II     |3             |          |         |           |         |       |LOCATED   |NO         |NONE            |
 |F3        |ddr2_a<4>    |IOB      |IO_L51N_M3A4_3               |TRISTATE |SSTL18_II     |3             |          |         |           |         |       |LOCATED   |NO         |NONE            |
 |F4        |             |         |VCCO_3                       |         |              |3             |          |         |           |         |1.80   |          |           |                |
@@ -196,9 +196,9 @@ Pinout by Pin Number:
 |F20       |DAC_SCLK     |IOB      |IO_L33N_A14_M1A4_1           |OUTPUT   |LVCMOS33      |1             |12        |SLOW     |           |         |       |LOCATED   |NO         |NONE            |
 |F21       |TTL_in<7>    |IOB      |IO_L37P_A7_M1A0_1            |INPUT    |LVCMOS33      |1             |          |         |           |NONE     |       |LOCATED   |NO         |NONE            |
 |F22       |TTL_in<8>    |IOB      |IO_L37N_A6_M1A1_1            |INPUT    |LVCMOS33      |1             |          |         |           |NONE     |       |LOCATED   |NO         |NONE            |
-|G1        |ddr2_ba<1>   |IOB      |IO_L48N_M3BA1_3              |OUTPUT   |SSTL18_II     |3             |          |         |           |         |       |LOCATED   |NO         |NONE            |
+|G1        |ddr2_ba<1>   |IOB      |IO_L48N_M3BA1_3              |TRISTATE |SSTL18_II     |3             |          |         |           |         |       |LOCATED   |NO         |NONE            |
 |G2        |             |         |VCCO_3                       |         |              |3             |          |         |           |         |1.80   |          |           |                |
-|G3        |ddr2_ba<0>   |IOB      |IO_L48P_M3BA0_3              |OUTPUT   |SSTL18_II     |3             |          |         |           |         |       |LOCATED   |NO         |NONE            |
+|G3        |ddr2_ba<0>   |IOB      |IO_L48P_M3BA0_3              |TRISTATE |SSTL18_II     |3             |          |         |           |         |       |LOCATED   |NO         |NONE            |
 |G4        |ddr2_a<10>   |IOB      |IO_L51P_M3A10_3              |TRISTATE |SSTL18_II     |3             |          |         |           |         |       |LOCATED   |NO         |NONE            |
 |G5        |             |         |GND                          |         |              |              |          |         |           |         |       |          |           |                |
 |G6        |             |IOBM     |IO_L55P_M3A13_3              |UNUSED   |              |3             |          |         |           |         |       |          |           |                |

@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Fri May 20 20:10:25 2016
+// Written by: Map P.20131013 on Sat May 21 20:15:28 2016
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -3578,7 +3578,7 @@ TIMEGRP host_dcm0_clk0 = BEL "SDRAM_FIFO_inst/rst_cnt_3" BEL
         PIN "SP6_INS_BUFIO2FB_DCM_ML_BUFIO2FB_2_pins<1>" PIN
         "host/dcm0_pins<1>";
 PIN
-        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<622>
+        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<625>
         = BEL
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0"
         PINNAME UICLK;
@@ -3587,7 +3587,7 @@ TIMEGRP SDRAM_FIFO_inst_memc3_infrastructure_inst_mcb_drp_clk_bufg_in = BEL
         BEL
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/gen_zio.IODRP2_ZIO"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<622>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<625>"
         BEL
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/syn_uiclk_pll_lock"
         BEL "SDRAM_FIFO_inst/memc3_infrastructure_inst/U_BUFG_CLK1" BEL
@@ -4067,7 +4067,7 @@ TIMEGRP SDRAM_FIFO_inst_memc3_infrastructure_inst_mcb_drp_clk_bufg_in_0 = BEL
         BEL
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/gen_zio.IODRP2_ZIO"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<622>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<625>"
         BEL
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/syn_uiclk_pll_lock"
         BEL "SDRAM_FIFO_inst/memc3_infrastructure_inst/U_BUFG_CLK1" BEL
@@ -4633,7 +4633,7 @@ PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/ioi_udm_0"
         PINNAME CLK0;
 PIN
-        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<604>
+        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<607>
         = BEL
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0"
         PINNAME PLLCLK1;
@@ -4674,7 +4674,7 @@ TIMEGRP SDRAM_FIFO_inst_memc3_infrastructure_inst_clk_2x_180 = PIN
         PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/ioi_udm_0_pins<0>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<604>";
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<607>";
 TIMEGRP SDRAM_FIFO_inst_memc3_infrastructure_inst_clk_2x_180_0 = PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_dq[15].oserdes2_dq_0_pins<0>"
         PIN
@@ -4712,7 +4712,7 @@ TIMEGRP SDRAM_FIFO_inst_memc3_infrastructure_inst_clk_2x_180_0 = PIN
         PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/ioi_udm_0_pins<0>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<604>";
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<607>";
 PIN
         SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/oserdes2_udqsn_0_pins<0>
         = BEL
@@ -4757,6 +4757,21 @@ PIN
         SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/ioi_cas_0_pins<0>
         = BEL
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/ioi_cas_0"
+        PINNAME CLK0;
+PIN
+        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_oserdes2[2].ioi_ba_0_pins<0>
+        = BEL
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_oserdes2[2].ioi_ba_0"
+        PINNAME CLK0;
+PIN
+        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_oserdes2[1].ioi_ba_0_pins<0>
+        = BEL
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_oserdes2[1].ioi_ba_0"
+        PINNAME CLK0;
+PIN
+        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_oserdes2[0].ioi_ba_0_pins<0>
+        = BEL
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_oserdes2[0].ioi_ba_0"
         PINNAME CLK0;
 PIN
         SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_addr_oserdes2[12].ioi_addr_0_pins<0>
@@ -4824,7 +4839,7 @@ PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_addr_oserdes2[0].ioi_addr_0"
         PINNAME CLK0;
 PIN
-        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<603>
+        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<606>
         = BEL
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0"
         PINNAME PLLCLK0;
@@ -4857,6 +4872,12 @@ TIMEGRP SDRAM_FIFO_inst_memc3_infrastructure_inst_clk_2x_0 = PIN
         PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/ioi_cas_0_pins<0>"
         PIN
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_oserdes2[2].ioi_ba_0_pins<0>"
+        PIN
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_oserdes2[1].ioi_ba_0_pins<0>"
+        PIN
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_oserdes2[0].ioi_ba_0_pins<0>"
+        PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_addr_oserdes2[12].ioi_addr_0_pins<0>"
         PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_addr_oserdes2[11].ioi_addr_0_pins<0>"
@@ -4883,7 +4904,7 @@ TIMEGRP SDRAM_FIFO_inst_memc3_infrastructure_inst_clk_2x_0 = PIN
         PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_addr_oserdes2[0].ioi_addr_0_pins<0>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<603>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<606>"
         PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/ioi_ck_0/N_pins<0>"
         PIN
@@ -4907,6 +4928,12 @@ TIMEGRP SDRAM_FIFO_inst_memc3_infrastructure_inst_clk_2x_0_0 = PIN
         PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/ioi_cas_0_pins<0>"
         PIN
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_oserdes2[2].ioi_ba_0_pins<0>"
+        PIN
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_oserdes2[1].ioi_ba_0_pins<0>"
+        PIN
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_oserdes2[0].ioi_ba_0_pins<0>"
+        PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_addr_oserdes2[12].ioi_addr_0_pins<0>"
         PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_addr_oserdes2[11].ioi_addr_0_pins<0>"
@@ -4933,23 +4960,23 @@ TIMEGRP SDRAM_FIFO_inst_memc3_infrastructure_inst_clk_2x_0_0 = PIN
         PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_addr_oserdes2[0].ioi_addr_0_pins<0>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<603>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<606>"
         PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/ioi_ck_0/N_pins<0>"
         PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/ioi_ck_0_pins<0>";
 PIN
-        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<106>
+        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<109>
         = BEL
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0"
         PINNAME P0CMDCLK;
 PIN
-        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<126>
+        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<129>
         = BEL
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0"
         PINNAME P0RDCLK;
 PIN
-        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<165>
+        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<168>
         = BEL
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0"
         PINNAME P0WRCLK;
@@ -4974,23 +5001,23 @@ PIN
         "SDRAM_FIFO_inst/okPipeOut_fifo/U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.mem/gbm.gbmg.gbmga.ngecc.bmg/gnativebmg.native_blk_mem_gen/valid.cstr/ramloop[1].ram.r/s6_noinit.ram/SDP.SIMPLE_PRIM18.ram"
         PINNAME CLKA;
 TIMEGRP SDRAM_FIFO_inst_memc3_infrastructure_inst_clk0_bufg_in = PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<106>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<109>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<126>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<129>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<165>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<168>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<106>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<109>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<126>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<129>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<165>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<168>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<106>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<109>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<126>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<129>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<165>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<168>"
         BEL "SDRAM_FIFO_inst/memc3_infrastructure_inst/U_BUFG_CLK0" BEL
         "SDRAM_FIFO_inst/memc3_infrastructure_inst/powerup_pll_locked" BEL
         "SDRAM_FIFO_inst/memc3_infrastructure_inst/rst0_sync_r_24" BEL
@@ -5534,23 +5561,23 @@ TIMEGRP SDRAM_FIFO_inst_memc3_infrastructure_inst_clk0_bufg_in = PIN
         BEL
         "SDRAM_FIFO_inst/okPipeOut_fifo/U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/wpntr/gic0.gc0.count_d1_0";
 TIMEGRP SDRAM_FIFO_inst_memc3_infrastructure_inst_clk0_bufg_in_0 = PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<106>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<109>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<126>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<129>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<165>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<168>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<106>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<109>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<126>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<129>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<165>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<168>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<106>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<109>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<126>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<129>"
         PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<165>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<168>"
         BEL "SDRAM_FIFO_inst/memc3_infrastructure_inst/U_BUFG_CLK0" BEL
         "SDRAM_FIFO_inst/memc3_infrastructure_inst/powerup_pll_locked" BEL
         "SDRAM_FIFO_inst/memc3_infrastructure_inst/rst0_sync_r_24" BEL
@@ -6159,7 +6186,7 @@ TS_variable_freq_clk_generator_inst_clkout_i_0 = PERIOD TIMEGRP
         "variable_freq_clk_generator_inst_clkout_i_0" TS_SYS_CLK3 / 0.84 HIGH
         50%;
 PIN
-        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<609>
+        SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<612>
         = BEL
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0"
         PINNAME SELFREFRESHMODE;
@@ -6169,7 +6196,7 @@ PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/CKE_Train"
         PINNAME Q;
 PIN
-        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<609>"
+        "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/samc_0_pins<612>"
         TIG;
 PIN
         "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/CKE_Train_pins<2>"

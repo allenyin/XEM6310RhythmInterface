@@ -58,15 +58,6 @@
 <msg type="info" file="NgdBuild" num="1222" delta="old" >Setting <arg fmt="%s" index="1">CLKIN_PERIOD</arg> attribute associated with <arg fmt="%s" index="2">DCM</arg> instance <arg fmt="%s" index="3">variable_freq_clk_generator_inst/DCM_CLKGEN_1</arg> to <arg fmt="%s" index="4">10.000000</arg> ns based on the period specification (<arg fmt="%s" index="5">&lt;TIMESPEC &quot;TS_okSysClk&quot; = PERIOD &quot;okSysClk&quot; 10 ns HIGH 50%;&gt; [xem6310.ucf(38)]</arg>).
 </msg>
 
-<msg type="warning" file="NgdBuild" num="435" delta="old" >TRI primitive &apos;<arg fmt="%s" index="1">SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_obuft[2].iob_ba_inst</arg>&apos; has unconnected output pin
-</msg>
-
-<msg type="warning" file="NgdBuild" num="435" delta="old" >TRI primitive &apos;<arg fmt="%s" index="1">SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_obuft[1].iob_ba_inst</arg>&apos; has unconnected output pin
-</msg>
-
-<msg type="warning" file="NgdBuild" num="435" delta="old" >TRI primitive &apos;<arg fmt="%s" index="1">SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_obuft[0].iob_ba_inst</arg>&apos; has unconnected output pin
-</msg>
-
 <msg type="warning" file="NgdBuild" num="443" delta="old" >SFF primitive &apos;<arg fmt="%s" index="1">host/core0/core0/a0/pc0/read_strobe_flop</arg>&apos; has unconnected output pin
 </msg>
 

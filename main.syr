@@ -5,14 +5,14 @@ Parameter TMPDIR set to xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.06 secs
+Total CPU time to Xst completion: 0.05 secs
  
 --> 
 Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.06 secs
+Total CPU time to Xst completion: 0.05 secs
  
 --> 
 Reading design: main.prj
@@ -184,7 +184,6 @@ Elaborating module <DCM_CLKGEN(CLKFXDV_DIVIDE=2,CLKFX_DIVIDE=25,CLKFX_MD_MAX=0.0
 Elaborating module <BUFG>.
 
 Elaborating module <SDRAM_FIFO(C3_P0_MASK_SIZE=4,C3_P0_DATA_PORT_SIZE=32,C3_P1_MASK_SIZE=4,C3_P1_DATA_PORT_SIZE=32,DEBUG_EN=0,C3_MEMCLK_PERIOD=3200,C3_CALIB_SOFT_IP="TRUE",C3_SIMULATION="FALSE",C3_HW_TESTING="FALSE",C3_RST_ACT_LOW=0,C3_INPUT_CLK_TYPE="DIFFERENTIAL",C3_MEM_ADDR_ORDER="ROW_BANK_COLUMN",C3_NUM_DQ_PINS=16,C3_MEM_ADDR_WIDTH=13,C3_MEM_BANKADDR_WIDTH=3)>.
-WARNING:HDLCompiler:1127 - "/home/allenyin/Projects/XEM6310RhythmInterface/SDRAM_FIFO.v" Line 260: Assignment to mcb3_dram_cs_n ignored, since the identifier is never used
 WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/SDRAM_FIFO.v" Line 269: Result of 5-bit expression is truncated to fit in 4-bit target.
 
 Elaborating module <memc3_infrastructure(C_MEMCLK_PERIOD=10000,C_RST_ACT_LOW=0,C_INPUT_CLK_TYPE="DIFFERENTIAL",C_CLKOUT0_DIVIDE=1,C_CLKOUT1_DIVIDE=1,C_CLKOUT2_DIVIDE=4,C_CLKOUT3_DIVIDE=8,C_CLKFBOUT_MULT=25,C_DIVCLK_DIVIDE=4)>.
@@ -330,8 +329,6 @@ WARNING:HDLCompiler:1499 - "/home/allenyin/Projects/XEM6310RhythmInterface/ipcor
 Elaborating module <fifo_w64_512_r16_2048>.
 WARNING:HDLCompiler:1499 - "/home/allenyin/Projects/XEM6310RhythmInterface/ipcore_dir/fifo_w64_512_r16_2048.v" Line 39: Empty module <fifo_w64_512_r16_2048> remains a black box.
 WARNING:HDLCompiler:634 - "/home/allenyin/Projects/XEM6310RhythmInterface/SDRAM_FIFO.v" Line 237: Net <selfrefresh_enter> does not have a driver.
-WARNING:HDLCompiler:189 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 728: Size mismatch in connection of port <ddr2_ba>. Formal port size is 3-bit while actual signal size is 1-bit.
-WARNING:HDLCompiler:1127 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 728: Assignment to ddr2__ba ignored, since the identifier is never used
 
 Elaborating module <RAM_bank>.
 
@@ -342,26 +339,26 @@ Elaborating module
 ,INIT_35=256'b0,INIT_36=256'b0,INIT_37=256'b0,INIT_38=256'b0,INIT_39=256'b0,INIT_3A=256'b0,INIT_3B=256'b0,INIT_3C=256'b0,INIT_3D=256'b0,INIT_3E=256'b0,INIT_3F=256'b0,INIT_A=36'b0,INIT_B=36'b0,INIT_FILE="NONE",RSTTYPE="SYNC",RST_PRIORITY_A="CE",RST_PRIORITY_B="CE",SIM_COLLISION_CHECK="ALL",SIM_DEVICE="SPARTAN6",SRVAL_A=36'b0,SRVAL_B=36'b0,WRITE_MODE_A="WRITE_FIRST",WRITE_MODE_B="WRITE_FIRST")>.
 
 Elaborating module <command_selector>.
+WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 1044: Result of 32-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 1045: Result of 32-bit expression is truncated to fit in 1-bit target.
+WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 1046: Result of 32-bit expression is truncated to fit in 1-bit target.
 WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 1047: Result of 32-bit expression is truncated to fit in 1-bit target.
-WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 1048: Result of 32-bit expression is truncated to fit in 1-bit target.
-WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 1049: Result of 32-bit expression is truncated to fit in 1-bit target.
-WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 1050: Result of 32-bit expression is truncated to fit in 1-bit target.
-WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2029: Result of 11-bit expression is truncated to fit in 10-bit target.
-WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2039: Result of 11-bit expression is truncated to fit in 10-bit target.
-WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2049: Result of 11-bit expression is truncated to fit in 10-bit target.
-WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2177: Result of 7-bit expression is truncated to fit in 6-bit target.
-WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2182: Result of 7-bit expression is truncated to fit in 6-bit target.
+WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2026: Result of 11-bit expression is truncated to fit in 10-bit target.
+WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2036: Result of 11-bit expression is truncated to fit in 10-bit target.
+WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2046: Result of 11-bit expression is truncated to fit in 10-bit target.
+WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2174: Result of 7-bit expression is truncated to fit in 6-bit target.
+WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2179: Result of 7-bit expression is truncated to fit in 6-bit target.
 
 Elaborating module <DAC_output_scalable_HPF(ms_wait=99,ms_clk1_a=100,ms_clk11_a=140)>.
 WARNING:HDLCompiler:413 - "/home/allenyin/Projects/XEM6310RhythmInterface/DAC_output_scalable_HPF.v" Line 64: Result of 32-bit expression is truncated to fit in 19-bit target.
 
 Elaborating module <multiplier_18x18>.
-WARNING:HDLCompiler:189 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2273: Size mismatch in connection of port <noise_suppress>. Formal port size is 7-bit while actual signal size is 32-bit.
-WARNING:HDLCompiler:189 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2297: Size mismatch in connection of port <noise_suppress>. Formal port size is 7-bit while actual signal size is 32-bit.
-WARNING:HDLCompiler:189 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2321: Size mismatch in connection of port <noise_suppress>. Formal port size is 7-bit while actual signal size is 32-bit.
-WARNING:HDLCompiler:189 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2345: Size mismatch in connection of port <noise_suppress>. Formal port size is 7-bit while actual signal size is 32-bit.
-WARNING:HDLCompiler:189 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2369: Size mismatch in connection of port <noise_suppress>. Formal port size is 7-bit while actual signal size is 32-bit.
-WARNING:HDLCompiler:189 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2393: Size mismatch in connection of port <noise_suppress>. Formal port size is 7-bit while actual signal size is 32-bit.
+WARNING:HDLCompiler:189 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2270: Size mismatch in connection of port <noise_suppress>. Formal port size is 7-bit while actual signal size is 32-bit.
+WARNING:HDLCompiler:189 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2294: Size mismatch in connection of port <noise_suppress>. Formal port size is 7-bit while actual signal size is 32-bit.
+WARNING:HDLCompiler:189 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2318: Size mismatch in connection of port <noise_suppress>. Formal port size is 7-bit while actual signal size is 32-bit.
+WARNING:HDLCompiler:189 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2342: Size mismatch in connection of port <noise_suppress>. Formal port size is 7-bit while actual signal size is 32-bit.
+WARNING:HDLCompiler:189 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2366: Size mismatch in connection of port <noise_suppress>. Formal port size is 7-bit while actual signal size is 32-bit.
+WARNING:HDLCompiler:189 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2390: Size mismatch in connection of port <noise_suppress>. Formal port size is 7-bit while actual signal size is 32-bit.
 
 Elaborating module <ADC_input(ms_wait=99,ms_clk1_a=100,ms_clk11_a=140)>.
 
@@ -389,7 +386,7 @@ Elaborating module <okTriggerIn>.
 Elaborating module <okWireOut>.
 
 Elaborating module <okPipeOut>.
-WARNING:HDLCompiler:189 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2842: Size mismatch in connection of port <ep_datain>. Formal port size is 32-bit while actual signal size is 16-bit.
+WARNING:HDLCompiler:189 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" Line 2839: Size mismatch in connection of port <ep_datain>. Formal port size is 32-bit while actual signal size is 16-bit.
 
 =========================================================================
 *                           HDL Synthesis                               *
@@ -412,40 +409,37 @@ Synthesizing Unit <main>.
         C3_NUM_DQ_PINS = 16
         C3_MEM_ADDR_WIDTH = 13
         C3_MEM_BANKADDR_WIDTH = 3
-WARNING:Xst:647 - Input <sys_clkp> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:647 - Input <sys_clkn> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 713: Output port <ddr2_ba> of the instance <SDRAM_FIFO_inst> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 750: Output port <RAM_data_out_A> of the instance <RAM_bank_1> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 785: Output port <RAM_data_out_A> of the instance <RAM_bank_2> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 807: Output port <RAM_data_out_A> of the instance <RAM_bank_3> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2241: Output port <DAC_SYNC> of the instance <DAC_output_2> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2241: Output port <DAC_SCLK> of the instance <DAC_output_2> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2265: Output port <DAC_SYNC> of the instance <DAC_output_3> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2265: Output port <DAC_SCLK> of the instance <DAC_output_3> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2289: Output port <DAC_SYNC> of the instance <DAC_output_4> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2289: Output port <DAC_SCLK> of the instance <DAC_output_4> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2313: Output port <DAC_SYNC> of the instance <DAC_output_5> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2313: Output port <DAC_SCLK> of the instance <DAC_output_5> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2337: Output port <DAC_SYNC> of the instance <DAC_output_6> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2337: Output port <DAC_SCLK> of the instance <DAC_output_6> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2361: Output port <DAC_SYNC> of the instance <DAC_output_7> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2361: Output port <DAC_SCLK> of the instance <DAC_output_7> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2385: Output port <DAC_SYNC> of the instance <DAC_output_8> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2385: Output port <DAC_SCLK> of the instance <DAC_output_8> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2427: Output port <ADC_CS> of the instance <ADC_inout_2> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2427: Output port <ADC_SCLK> of the instance <ADC_inout_2> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2443: Output port <ADC_CS> of the instance <ADC_inout_3> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2443: Output port <ADC_SCLK> of the instance <ADC_inout_3> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2459: Output port <ADC_CS> of the instance <ADC_inout_4> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2459: Output port <ADC_SCLK> of the instance <ADC_inout_4> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2475: Output port <ADC_CS> of the instance <ADC_inout_5> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2475: Output port <ADC_SCLK> of the instance <ADC_inout_5> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2491: Output port <ADC_CS> of the instance <ADC_inout_6> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2491: Output port <ADC_SCLK> of the instance <ADC_inout_6> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2507: Output port <ADC_CS> of the instance <ADC_inout_7> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2507: Output port <ADC_SCLK> of the instance <ADC_inout_7> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2523: Output port <ADC_CS> of the instance <ADC_inout_8> is unconnected or connected to loadless signal.
-INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2523: Output port <ADC_SCLK> of the instance <ADC_inout_8> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 747: Output port <RAM_data_out_A> of the instance <RAM_bank_1> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 782: Output port <RAM_data_out_A> of the instance <RAM_bank_2> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 804: Output port <RAM_data_out_A> of the instance <RAM_bank_3> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2238: Output port <DAC_SYNC> of the instance <DAC_output_2> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2238: Output port <DAC_SCLK> of the instance <DAC_output_2> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2262: Output port <DAC_SYNC> of the instance <DAC_output_3> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2262: Output port <DAC_SCLK> of the instance <DAC_output_3> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2286: Output port <DAC_SYNC> of the instance <DAC_output_4> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2286: Output port <DAC_SCLK> of the instance <DAC_output_4> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2310: Output port <DAC_SYNC> of the instance <DAC_output_5> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2310: Output port <DAC_SCLK> of the instance <DAC_output_5> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2334: Output port <DAC_SYNC> of the instance <DAC_output_6> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2334: Output port <DAC_SCLK> of the instance <DAC_output_6> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2358: Output port <DAC_SYNC> of the instance <DAC_output_7> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2358: Output port <DAC_SCLK> of the instance <DAC_output_7> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2382: Output port <DAC_SYNC> of the instance <DAC_output_8> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2382: Output port <DAC_SCLK> of the instance <DAC_output_8> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2424: Output port <ADC_CS> of the instance <ADC_inout_2> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2424: Output port <ADC_SCLK> of the instance <ADC_inout_2> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2440: Output port <ADC_CS> of the instance <ADC_inout_3> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2440: Output port <ADC_SCLK> of the instance <ADC_inout_3> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2456: Output port <ADC_CS> of the instance <ADC_inout_4> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2456: Output port <ADC_SCLK> of the instance <ADC_inout_4> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2472: Output port <ADC_CS> of the instance <ADC_inout_5> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2472: Output port <ADC_SCLK> of the instance <ADC_inout_5> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2488: Output port <ADC_CS> of the instance <ADC_inout_6> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2488: Output port <ADC_SCLK> of the instance <ADC_inout_6> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2504: Output port <ADC_CS> of the instance <ADC_inout_7> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2504: Output port <ADC_SCLK> of the instance <ADC_inout_7> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2520: Output port <ADC_CS> of the instance <ADC_inout_8> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 2520: Output port <ADC_SCLK> of the instance <ADC_inout_8> is unconnected or connected to loadless signal.
     Found 10-bit register for signal <loop_aux_cmd_index_1>.
     Found 10-bit register for signal <loop_aux_cmd_index_2>.
     Found 10-bit register for signal <loop_aux_cmd_index_3>.
@@ -1183,45 +1177,45 @@ INFO:Xst:3210 - "/home/allenyin/Projects/XEM6310RhythmInterface/main.v" line 252
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 10-bit adder for signal <aux_cmd_index_1[9]_GND_1_o_add_305_OUT> created at line 2029.
-    Found 10-bit adder for signal <aux_cmd_index_2[9]_GND_1_o_add_313_OUT> created at line 2039.
-    Found 10-bit adder for signal <aux_cmd_index_3[9]_GND_1_o_add_321_OUT> created at line 2049.
-    Found 32-bit adder for signal <timestamp[31]_GND_1_o_add_371_OUT> created at line 2167.
-    Found 6-bit adder for signal <channel[5]_GND_1_o_add_374_OUT> created at line 2177.
-    Found 6-bit adder for signal <channel_MISO[5]_GND_1_o_add_377_OUT> created at line 2182.
-    Found 1-bit 16-to-1 multiplexer for signal <external_fast_settle_channel[3]_TTL_in[15]_Mux_157_o> created at line 1044.
-    Found 1-bit 16-to-1 multiplexer for signal <external_digout_channel_A[3]_TTL_in[15]_Mux_158_o> created at line 1047.
-    Found 1-bit 16-to-1 multiplexer for signal <external_digout_channel_B[3]_TTL_in[15]_Mux_160_o> created at line 1048.
-    Found 1-bit 16-to-1 multiplexer for signal <external_digout_channel_C[3]_TTL_in[15]_Mux_162_o> created at line 1049.
-    Found 1-bit 16-to-1 multiplexer for signal <external_digout_channel_D[3]_TTL_in[15]_Mux_164_o> created at line 1050.
-    Found 16-bit 12-to-1 multiplexer for signal <DAC_stream_sel_1[3]_GND_1_o_wide_mux_347_OUT> created at line 2055.
-    Found 16-bit 12-to-1 multiplexer for signal <DAC_stream_sel_2[3]_GND_1_o_wide_mux_350_OUT> created at line 2069.
-    Found 16-bit 12-to-1 multiplexer for signal <DAC_stream_sel_3[3]_GND_1_o_wide_mux_353_OUT> created at line 2083.
-    Found 16-bit 12-to-1 multiplexer for signal <DAC_stream_sel_4[3]_GND_1_o_wide_mux_356_OUT> created at line 2097.
-    Found 16-bit 12-to-1 multiplexer for signal <DAC_stream_sel_5[3]_GND_1_o_wide_mux_359_OUT> created at line 2111.
-    Found 16-bit 12-to-1 multiplexer for signal <DAC_stream_sel_6[3]_GND_1_o_wide_mux_362_OUT> created at line 2125.
-    Found 16-bit 12-to-1 multiplexer for signal <DAC_stream_sel_7[3]_GND_1_o_wide_mux_365_OUT> created at line 2139.
-    Found 16-bit 12-to-1 multiplexer for signal <DAC_stream_sel_8[3]_GND_1_o_wide_mux_368_OUT> created at line 2153.
-    Found 16-bit 16-to-1 multiplexer for signal <data_stream_1> created at line 2586.
-    Found 16-bit 16-to-1 multiplexer for signal <data_stream_2> created at line 2607.
-    Found 16-bit 16-to-1 multiplexer for signal <data_stream_3> created at line 2628.
-    Found 16-bit 16-to-1 multiplexer for signal <data_stream_4> created at line 2649.
-    Found 16-bit 16-to-1 multiplexer for signal <data_stream_5> created at line 2670.
-    Found 16-bit 16-to-1 multiplexer for signal <data_stream_6> created at line 2691.
-    Found 16-bit 16-to-1 multiplexer for signal <data_stream_7> created at line 2712.
-    Found 16-bit 16-to-1 multiplexer for signal <data_stream_8> created at line 2733.
-    Found 10-bit comparator equal for signal <aux_cmd_index_1[9]_max_aux_cmd_index_1[9]_equal_305_o> created at line 2021
-    Found 10-bit comparator equal for signal <aux_cmd_index_2[9]_max_aux_cmd_index_2[9]_equal_313_o> created at line 2031
-    Found 10-bit comparator equal for signal <aux_cmd_index_3[9]_max_aux_cmd_index_3[9]_equal_321_o> created at line 2041
-    Found 6-bit comparator equal for signal <channel_MISO[5]_GND_1_o_equal_347_o> created at line 2054
-    Found 6-bit comparator equal for signal <channel_MISO[5]_GND_1_o_equal_350_o> created at line 2068
-    Found 6-bit comparator equal for signal <channel_MISO[5]_GND_1_o_equal_353_o> created at line 2082
-    Found 6-bit comparator equal for signal <channel_MISO[5]_GND_1_o_equal_356_o> created at line 2096
-    Found 6-bit comparator equal for signal <channel_MISO[5]_GND_1_o_equal_359_o> created at line 2110
-    Found 6-bit comparator equal for signal <channel_MISO[5]_GND_1_o_equal_362_o> created at line 2124
-    Found 6-bit comparator equal for signal <channel_MISO[5]_GND_1_o_equal_365_o> created at line 2138
-    Found 6-bit comparator equal for signal <channel_MISO[5]_GND_1_o_equal_368_o> created at line 2152
-    Found 32-bit comparator equal for signal <timestamp[31]_max_timestep[31]_equal_381_o> created at line 2190
+    Found 10-bit adder for signal <aux_cmd_index_1[9]_GND_1_o_add_305_OUT> created at line 2026.
+    Found 10-bit adder for signal <aux_cmd_index_2[9]_GND_1_o_add_313_OUT> created at line 2036.
+    Found 10-bit adder for signal <aux_cmd_index_3[9]_GND_1_o_add_321_OUT> created at line 2046.
+    Found 32-bit adder for signal <timestamp[31]_GND_1_o_add_371_OUT> created at line 2164.
+    Found 6-bit adder for signal <channel[5]_GND_1_o_add_374_OUT> created at line 2174.
+    Found 6-bit adder for signal <channel_MISO[5]_GND_1_o_add_377_OUT> created at line 2179.
+    Found 1-bit 16-to-1 multiplexer for signal <external_fast_settle_channel[3]_TTL_in[15]_Mux_157_o> created at line 1041.
+    Found 1-bit 16-to-1 multiplexer for signal <external_digout_channel_A[3]_TTL_in[15]_Mux_158_o> created at line 1044.
+    Found 1-bit 16-to-1 multiplexer for signal <external_digout_channel_B[3]_TTL_in[15]_Mux_160_o> created at line 1045.
+    Found 1-bit 16-to-1 multiplexer for signal <external_digout_channel_C[3]_TTL_in[15]_Mux_162_o> created at line 1046.
+    Found 1-bit 16-to-1 multiplexer for signal <external_digout_channel_D[3]_TTL_in[15]_Mux_164_o> created at line 1047.
+    Found 16-bit 12-to-1 multiplexer for signal <DAC_stream_sel_1[3]_GND_1_o_wide_mux_347_OUT> created at line 2052.
+    Found 16-bit 12-to-1 multiplexer for signal <DAC_stream_sel_2[3]_GND_1_o_wide_mux_350_OUT> created at line 2066.
+    Found 16-bit 12-to-1 multiplexer for signal <DAC_stream_sel_3[3]_GND_1_o_wide_mux_353_OUT> created at line 2080.
+    Found 16-bit 12-to-1 multiplexer for signal <DAC_stream_sel_4[3]_GND_1_o_wide_mux_356_OUT> created at line 2094.
+    Found 16-bit 12-to-1 multiplexer for signal <DAC_stream_sel_5[3]_GND_1_o_wide_mux_359_OUT> created at line 2108.
+    Found 16-bit 12-to-1 multiplexer for signal <DAC_stream_sel_6[3]_GND_1_o_wide_mux_362_OUT> created at line 2122.
+    Found 16-bit 12-to-1 multiplexer for signal <DAC_stream_sel_7[3]_GND_1_o_wide_mux_365_OUT> created at line 2136.
+    Found 16-bit 12-to-1 multiplexer for signal <DAC_stream_sel_8[3]_GND_1_o_wide_mux_368_OUT> created at line 2150.
+    Found 16-bit 16-to-1 multiplexer for signal <data_stream_1> created at line 2583.
+    Found 16-bit 16-to-1 multiplexer for signal <data_stream_2> created at line 2604.
+    Found 16-bit 16-to-1 multiplexer for signal <data_stream_3> created at line 2625.
+    Found 16-bit 16-to-1 multiplexer for signal <data_stream_4> created at line 2646.
+    Found 16-bit 16-to-1 multiplexer for signal <data_stream_5> created at line 2667.
+    Found 16-bit 16-to-1 multiplexer for signal <data_stream_6> created at line 2688.
+    Found 16-bit 16-to-1 multiplexer for signal <data_stream_7> created at line 2709.
+    Found 16-bit 16-to-1 multiplexer for signal <data_stream_8> created at line 2730.
+    Found 10-bit comparator equal for signal <aux_cmd_index_1[9]_max_aux_cmd_index_1[9]_equal_305_o> created at line 2018
+    Found 10-bit comparator equal for signal <aux_cmd_index_2[9]_max_aux_cmd_index_2[9]_equal_313_o> created at line 2028
+    Found 10-bit comparator equal for signal <aux_cmd_index_3[9]_max_aux_cmd_index_3[9]_equal_321_o> created at line 2038
+    Found 6-bit comparator equal for signal <channel_MISO[5]_GND_1_o_equal_347_o> created at line 2051
+    Found 6-bit comparator equal for signal <channel_MISO[5]_GND_1_o_equal_350_o> created at line 2065
+    Found 6-bit comparator equal for signal <channel_MISO[5]_GND_1_o_equal_353_o> created at line 2079
+    Found 6-bit comparator equal for signal <channel_MISO[5]_GND_1_o_equal_356_o> created at line 2093
+    Found 6-bit comparator equal for signal <channel_MISO[5]_GND_1_o_equal_359_o> created at line 2107
+    Found 6-bit comparator equal for signal <channel_MISO[5]_GND_1_o_equal_362_o> created at line 2121
+    Found 6-bit comparator equal for signal <channel_MISO[5]_GND_1_o_equal_365_o> created at line 2135
+    Found 6-bit comparator equal for signal <channel_MISO[5]_GND_1_o_equal_368_o> created at line 2149
+    Found 32-bit comparator equal for signal <timestamp[31]_max_timestep[31]_equal_381_o> created at line 2187
     Summary:
 	inferred   6 Adder/Subtractor(s).
 	inferred 1773 D-type flip-flop(s).
@@ -3006,14 +3000,14 @@ Primitive and Black Box Usage:
 #      SRLC16E                     : 4
 # Clock Buffers                    : 8
 #      BUFG                        : 8
-# IO Buffers                       : 177
+# IO Buffers                       : 178
 #      IBUF                        : 32
 #      IBUFDS                      : 8
 #      IBUFG                       : 1
 #      IBUFGDS                     : 1
 #      IOBUF                       : 51
 #      IOBUFDS                     : 2
-#      OBUF                        : 46
+#      OBUF                        : 47
 #      OBUFDS                      : 12
 #      OBUFT                       : 23
 #      OBUFTDS                     : 1
@@ -3056,8 +3050,8 @@ Slice Logic Distribution:
    Number of unique control sets:       269
 
 IO Utilization: 
- Number of IOs:                         204
- Number of bonded IOBs:                 198  out of    338    58%  
+ Number of IOs:                         202
+ Number of bonded IOBs:                 202  out of    338    59%  
     IOB Flip Flops/Latches:             111
 
 Specific Feature Utilization:
@@ -4569,7 +4563,7 @@ Offset:              4.935ns (Levels of Logic = 1)
 
 =========================================================================
 Timing constraint: Default path analysis
-  Total number of paths / destination ports: 725 / 678
+  Total number of paths / destination ports: 731 / 681
 -------------------------------------------------------------------------
 Delay:               3.593ns (Levels of Logic = 1)
   Source:            SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/dq_15_0_data.iodrp2_dq_15:DOUT (PAD)
@@ -4971,15 +4965,15 @@ variable_freq_clk_generator_inst/clkout_i|   22.776|         |         |        
 =========================================================================
 
 
-Total REAL time to Xst completion: 97.00 secs
-Total CPU time to Xst completion: 96.51 secs
+Total REAL time to Xst completion: 102.00 secs
+Total CPU time to Xst completion: 101.61 secs
  
 --> 
 
 
-Total memory usage is 644208 kilobytes
+Total memory usage is 644116 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :  278 (   0 filtered)
-Number of infos    :  161 (   0 filtered)
+Number of warnings :  273 (   0 filtered)
+Number of infos    :  160 (   0 filtered)
 

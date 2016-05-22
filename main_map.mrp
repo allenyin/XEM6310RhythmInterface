@@ -10,19 +10,19 @@ Target Device  : xc6slx150
 Target Package : fgg484
 Target Speed   : -2
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Fri May 20 20:08:08 2016
+Mapped Date    : Sat May 21 20:13:01 2016
 
 Design Summary
 --------------
 Number of errors:      0
-Number of warnings:   30
+Number of warnings:   26
 Slice Logic Utilization:
   Number of Slice Registers:                 4,800 out of 184,304    2%
     Number used as Flip Flops:               4,800
     Number used as Latches:                      0
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                0
-  Number of Slice LUTs:                      7,661 out of  92,152    8%
+  Number of Slice LUTs:                      7,656 out of  92,152    8%
     Number used as logic:                    7,502 out of  92,152    8%
       Number using O6 output only:           6,471
       Number using O5 output only:             205
@@ -41,18 +41,18 @@ Slice Logic Utilization:
         Number using O6 output only:             4
         Number using O5 output only:             0
         Number using O5 and O6:                  0
-    Number used exclusively as route-thrus:    111
-      Number with same-slice register load:     79
-      Number with same-slice carry load:        32
+    Number used exclusively as route-thrus:    106
+      Number with same-slice register load:     81
+      Number with same-slice carry load:        25
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                 2,888 out of  23,038   12%
+  Number of occupied Slices:                 2,886 out of  23,038   12%
   Number of MUXCYs used:                     1,480 out of  46,076    3%
-  Number of LUT Flip Flop pairs used:        9,129
-    Number with an unused Flip Flop:         4,526 out of   9,129   49%
-    Number with an unused LUT:               1,468 out of   9,129   16%
-    Number of fully used LUT-FF pairs:       3,135 out of   9,129   34%
+  Number of LUT Flip Flop pairs used:        9,123
+    Number with an unused Flip Flop:         4,523 out of   9,123   49%
+    Number with an unused LUT:               1,467 out of   9,123   16%
+    Number of fully used LUT-FF pairs:       3,133 out of   9,123   34%
     Number of unique control sets:             187
     Number of slice register sites lost
       to control set restrictions:             600 out of 184,304    1%
@@ -92,9 +92,9 @@ Specific Feature Utilization:
     Number used as IODELAY2s:                   13
     Number used as IODRP2s:                      2
     Number used as IODRP2_MCBs:                 22
-  Number of OLOGIC2/OSERDES2s:                  84 out of     586   14%
+  Number of OLOGIC2/OSERDES2s:                  87 out of     586   14%
     Number used as OLOGIC2s:                    42
-    Number used as OSERDES2s:                   42
+    Number used as OSERDES2s:                   45
   Number of BSCANs:                              0 out of       4    0%
   Number of BUFHs:                               0 out of     384    0%
   Number of BUFPLLs:                             0 out of       8    0%
@@ -110,9 +110,9 @@ Specific Feature Utilization:
 
 Average Fanout of Non-Clock Nets:                4.33
 
-Peak Memory Usage:  1169 MB
-Total REAL time to MAP completion:  2 mins 19 secs 
-Total CPU time to MAP completion:   2 mins 19 secs 
+Peak Memory Usage:  1170 MB
+Total REAL time to MAP completion:  2 mins 29 secs 
+Total CPU time to MAP completion:   2 mins 29 secs 
 
 Table of Contents
 -----------------
@@ -175,19 +175,11 @@ WARNING:PhysDesignRules:372 - Gated clock. Clock net ep46trigin<5> is sourced by
 WARNING:PhysDesignRules:372 - Gated clock. Clock net DAC_output_1/state_clk is
    sourced by a combinatorial pin. This is not good design practice. Use the CE
    pin to control the loading of data into the flip-flop.
-WARNING:PhysDesignRules:368 - The signal <ddr2_ba<0>_OBUF> is incomplete. The
-   signal is not driven by any source pin in the design.
-WARNING:PhysDesignRules:368 - The signal <ddr2_ba<1>_OBUF> is incomplete. The
-   signal is not driven by any source pin in the design.
-WARNING:PhysDesignRules:368 - The signal <ddr2_ba<2>_OBUF> is incomplete. The
-   signal is not driven by any source pin in the design.
-WARNING:PhysDesignRules:368 - The signal <ddr2_cs_n_OBUF> is incomplete. The
-   signal is not driven by any source pin in the design.
-WARNING:PhysDesignRules:367 - The signal
-   <host/core0/core0/a0/cb0/BU2/U0/grf.rf/mem/gdm.dm/Mram_RAM2_RAMD_O> is
-   incomplete. The signal does not drive any load pins in the design.
 WARNING:PhysDesignRules:367 - The signal
    <host/core0/core0/a0/cb0/BU2/U0/grf.rf/mem/gdm.dm/Mram_RAM1_RAMD_O> is
+   incomplete. The signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal
+   <host/core0/core0/a0/cb0/BU2/U0/grf.rf/mem/gdm.dm/Mram_RAM2_RAMD_O> is
    incomplete. The signal does not drive any load pins in the design.
 WARNING:PhysDesignRules:1414 - Issue with pin connections and/or configuration
    on
@@ -258,7 +250,7 @@ WARNING:PhysDesignRules:1414 - Issue with pin connections and/or configuration
 Section 3 - Informational
 -------------------------
 INFO:LIT:243 - Logical network okHE<111> has no load.
-INFO:LIT:395 - The above info message is repeated 1009 more times for the
+INFO:LIT:395 - The above info message is repeated 1007 more times for the
    following (max. 5 shown):
    okHE<110>,
    okHE<109>,
@@ -279,9 +271,9 @@ INFO:Pack:1650 - Map created a placed design.
 
 Section 4 - Removed Logic Summary
 ---------------------------------
-2755 block(s) removed
+2749 block(s) removed
 2393 block(s) optimized away
-2788 signal(s) removed
+2779 signal(s) removed
 
 Section 5 - Removed Logic
 -------------------------
@@ -740,33 +732,6 @@ is loadless and has been removed.
  Loadless block
 "SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/int_sys_rst11_75"
 (ROM) removed.
-Loadless block
-"SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_obuft[0].i
-ob_ba_inst" (TRI) removed.
- The signal
-"SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/ioi_ba<0>" is
-loadless and has been removed.
- The signal
-"SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/t_ba<0>" is
-loadless and has been removed.
-Loadless block
-"SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_obuft[1].i
-ob_ba_inst" (TRI) removed.
- The signal
-"SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/ioi_ba<1>" is
-loadless and has been removed.
- The signal
-"SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/t_ba<1>" is
-loadless and has been removed.
-Loadless block
-"SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_obuft[2].i
-ob_ba_inst" (TRI) removed.
- The signal
-"SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/ioi_ba<2>" is
-loadless and has been removed.
- The signal
-"SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/t_ba<2>" is
-loadless and has been removed.
 Loadless block "host/core0/core0/a0/pc0/interrupt_ack_flop" (FF) removed.
 Loadless block "host/core0/core0/a0/pc0/k_write_strobe_flop" (SFF) removed.
  The signal "host/core0/core0/a0/pc0/k_write_strobe_value" is loadless and has
@@ -6843,15 +6808,6 @@ The signal "okHE<79>" is unused and has been removed.
  Unused block "host/core0/core0/ti_reg_write" (FF) removed.
 The signal "okHE<46>" is unused and has been removed.
  Unused block "host/core0/core0/ti_blockstrobe" (FF) removed.
-The signal
-"SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/ba_90<2>" is
-unused and has been removed.
-The signal
-"SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/ba_90<1>" is
-unused and has been removed.
-The signal
-"SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/ba_90<0>" is
-unused and has been removed.
 The signal "host/okHC<36>" is unused and has been removed.
  Unused block "host/iob_regs[31].regin0" (SFF) removed.
   The signal "host/iobf0_o<31>" is unused and has been removed.
@@ -6916,15 +6872,6 @@ The signal "host/okHC<21>" is unused and has been removed.
  Unused block "host/iob_regs[16].regin0" (SFF) removed.
   The signal "host/iobf0_o<16>" is unused and has been removed.
    Unused block "host/iob_regs[16].iobf0/IBUF" (BUF) removed.
-Unused block
-"SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_oserdes2[0
-].ioi_ba_0" (OSERDES2) removed.
-Unused block
-"SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_oserdes2[1
-].ioi_ba_0" (OSERDES2) removed.
-Unused block
-"SDRAM_FIFO_inst/memc3_wrapper_inst/memc3_mcb_raw_wrapper_inst/gen_ba_oserdes2[2
-].ioi_ba_0" (OSERDES2) removed.
 Unused block
 "SDRAM_FIFO_inst/okPipeIn_fifo/U0/xst_fifo_generator/gconvfifo.rf/grf.rf/gntv_or
 _sync_fifo.gcx.clkx/Mxor_WR_PNTR[0]_WR_PNTR[1]_XOR_10_o_xo<0>1" (ROM) removed.
@@ -12175,9 +12122,9 @@ Section 6 - IOB Properties
 | ddr2_a<10>                         | IOB              | OUTPUT    | SSTL18_II            |       |          |      |              |          |          |
 | ddr2_a<11>                         | IOB              | OUTPUT    | SSTL18_II            |       |          |      |              |          |          |
 | ddr2_a<12>                         | IOB              | OUTPUT    | SSTL18_II            |       |          |      |              |          |          |
-| ddr2_ba<0>                         | IOB              | OUTPUT    | SSTL18_II            |       |          |      |              |          |          |
-| ddr2_ba<1>                         | IOB              | OUTPUT    | SSTL18_II            |       |          |      |              |          |          |
-| ddr2_ba<2>                         | IOB              | OUTPUT    | SSTL18_II            |       |          |      |              |          |          |
+| ddr2_ba<0>                         | IOB              | OUTPUT    | SSTL18_II            |       |          |      | OSERDES      |          |          |
+| ddr2_ba<1>                         | IOB              | OUTPUT    | SSTL18_II            |       |          |      | OSERDES      |          |          |
+| ddr2_ba<2>                         | IOB              | OUTPUT    | SSTL18_II            |       |          |      | OSERDES      |          |          |
 | ddr2_cas_n                         | IOB              | OUTPUT    | SSTL18_II            |       |          |      | OSERDES      |          |          |
 | ddr2_ck                            | IOB              | OUTPUT    | DIFF_SSTL18_II       |       |          |      | OSERDES      |          |          |
 | ddr2_ck_n                          | IOB              | OUTPUT    | DIFF_SSTL18_II       |       |          |      | OSERDES      |          |          |

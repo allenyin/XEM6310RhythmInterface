@@ -10,22 +10,10 @@
 
 <msg type="info" file="Timing" num="3386" delta="old" >Intersecting Constraints found and resolved.  For more information, see the TSI report.  Please consult the Xilinx Command Line Tools User Guide for information on generating a TSI report.</msg>
 
-<msg type="warning" file="Par" num="289" delta="old" >The signal <arg fmt="%s" index="1">ddr2_ba&lt;0&gt;_OBUF</arg> has no driver.  PAR will not attempt to route this signal.
-</msg>
-
-<msg type="warning" file="Par" num="289" delta="old" >The signal <arg fmt="%s" index="1">ddr2_ba&lt;1&gt;_OBUF</arg> has no driver.  PAR will not attempt to route this signal.
-</msg>
-
-<msg type="warning" file="Par" num="289" delta="old" >The signal <arg fmt="%s" index="1">ddr2_ba&lt;2&gt;_OBUF</arg> has no driver.  PAR will not attempt to route this signal.
-</msg>
-
-<msg type="warning" file="Par" num="289" delta="old" >The signal <arg fmt="%s" index="1">ddr2_cs_n_OBUF</arg> has no driver.  PAR will not attempt to route this signal.
+<msg type="warning" file="Par" num="288" delta="old" >The signal <arg fmt="%s" index="1">host/core0/core0/a0/cb0/BU2/U0/grf.rf/mem/gdm.dm/Mram_RAM1_RAMD_O</arg> has no load.  PAR will not attempt to route this signal.
 </msg>
 
 <msg type="warning" file="Par" num="288" delta="old" >The signal <arg fmt="%s" index="1">host/core0/core0/a0/cb0/BU2/U0/grf.rf/mem/gdm.dm/Mram_RAM2_RAMD_O</arg> has no load.  PAR will not attempt to route this signal.
-</msg>
-
-<msg type="warning" file="Par" num="288" delta="old" >The signal <arg fmt="%s" index="1">host/core0/core0/a0/cb0/BU2/U0/grf.rf/mem/gdm.dm/Mram_RAM1_RAMD_O</arg> has no load.  PAR will not attempt to route this signal.
 </msg>
 
 <msg type="warning" file="Route" num="522" delta="old" >Unusually high hold time violation detected among <arg fmt="%d" index="1">9</arg> connections.The router will continue and try to fix it 
@@ -40,19 +28,11 @@ Try the Design Goal and Strategies for Timing Performance(In ISE select Project 
 
 </msg>
 
-<msg type="warning" file="ParHelpers" num="362" delta="old" >There are <arg fmt="%d" index="1">4</arg> sourceless signals in this design. This design will not pass the DRC check run by Bitgen.
-
-</msg>
-
 <msg type="warning" file="ParHelpers" num="361" delta="old" >There are <arg fmt="%d" index="1">2</arg> loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
 
 </msg>
 
 <msg type="warning" file="Par" num="283" delta="old" >There are <arg fmt="%d" index="1">2</arg> loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
-
-</msg>
-
-<msg type="warning" file="Par" num="284" delta="old" >There are <arg fmt="%d" index="1">4</arg> sourceless signals in this design. This design will not pass the DRC check run by Bitgen.
 
 </msg>
 
