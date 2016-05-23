@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2016-05-21T20:01:30</DateModified>
+  <DateModified>2016-05-23T15:45:36</DateModified>
   <ModuleName>main</ModuleName>
-  <SummaryTimeStamp>2016-05-20T18:03:09</SummaryTimeStamp>
+  <SummaryTimeStamp>2016-05-23T15:21:42</SummaryTimeStamp>
   <SavedFilePath>/home/allenyin/Projects/XEM6310RhythmInterface/iseconfig/main.xreport</SavedFilePath>
   <ImplementationReportsDirectory>/home/allenyin/Projects/XEM6310RhythmInterface/</ImplementationReportsDirectory>
   <DateInitialized>2016-05-19T17:28:21</DateInitialized>

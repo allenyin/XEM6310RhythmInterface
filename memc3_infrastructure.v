@@ -52,7 +52,7 @@
 // \   \   \/     Version            : 3.5
 //  \   \         Application        : MIG
 //  /   /         Filename           : memc3_infrastructure.v
-// /___/   /\     Date Last Modified : $Date: 2014-05-03 14:30:14 -0700 (Sat, 03 May 2014) $
+// /___/   /\     Date Last Modified : $Date: 2010-11-11 01:09:56 -0600 (Thu, 11 Nov 2010) $
 // \   \  /  \    Date Created       : Mon Mar 2 2009
 //  \___\/\___\
 //
@@ -93,7 +93,7 @@ module memc3_infrastructure #
    output pll_ce_0,
    output pll_ce_90,
    output pll_lock,
-   output wire sys_clk_ibufg_out	// added by Intan -- buffered clkc1 output
+   output wire sys_clk_ibufg_out	// Added by Intan -- buffered clk1 output
 
    );
 
@@ -128,9 +128,9 @@ module memc3_infrastructure #
   assign sys_rst = C_RST_ACT_LOW ? ~sys_rst_n: sys_rst_n;
   assign clk0        = clk0_bufg;
   assign pll_lock    = bufpll_mcb_locked;
-
-  assign sys_clk_ibufg_out = sys_clk_ibufg;
   
+  assign sys_clk_ibufg_out = sys_clk_ibufg;
+
   generate
     if (C_INPUT_CLK_TYPE == "DIFFERENTIAL") begin: diff_input_clk
 
