@@ -1,0 +1,13 @@
+##########################
+# Ignore generated files.
+##########################
+*.tcl
+*.asy
+*.ncf
+*.sym
+*.lso
+*.xwbt
+*.xmsgs
+*.html
+*.bat
+*.do

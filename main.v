@@ -28,35 +28,6 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
-//------------------------------------------------------------------------
-// Note on starting Xilinx projects for Opal Kelly XEM6010-LX45 board based on
-// the Opal Kelly RAMTester sample:
-//
-// Start a new project for device xc6slx45-2fgg484, preferred language: Verilog
-//
-// Include the following files from the XEM6010 RAMTester sample directory
-// (C:\Program Files\Opal Kelly\FrontPanelUSB\Samples\RAMTester\XEM6010-Verilog) and
-// FrontPanel directory (C:\Program Files\Opal Kelly\FrontPanelUSB\FrontPanelHDL\XEM6010-LX45)
-// using Project --> Add Source...:
-//   iodrp_mcb_controller.v
-//   iodrp_controller.v
-//   mcb_soft_calibration.v
-//   mcb_soft_calibration_top.v
-//   mcb_raw_wrapper.v
-//   okLibrary.v
-//   memc3_wrapper.v
-//   memc3_infrastructure.v  (the one in the root directory of the XEM6010 RAMTester sample)
-//   fifo_w64_512_r16_2048.v
-//   fifo_w16_2048_r64_512.v
-//   ddr2_test.v
-//   ramtest.v
-//   xem6010.ucf
-// 
-// Copy the associated *.ngc files to the main Xilinx project directory.  Make sure the
-// fifo_w16_2048_r64_512.ngc and fifo_w64_512_r16_2048.ngc are in the main directory, not
-// the Core subdirectory.
-//------------------------------------------------------------------------
-
 `timescale 1ns/1ps
 
 module main #(
@@ -83,16 +54,8 @@ module main #(
 	output wire [2:0]  							  okHU,
 	inout  wire [31:0] 							  okUHU,
 	inout  wire        							  okAA,
-
-// XEM6010-only, i2c to usb controller pins not needed here    
-//	output wire        							  i2c_sda,
-//	output wire        							  i2c_scl,
-//	output wire        							  hi_muxsel,
 	
 	output wire [7:0]  							  led,
-
-// XEM6010-only, XEM6310 no longer uses a cypress PLL    
-//	input  wire                              clk1_in, // CY22393 CLKA, f = 100MHz
 
 	input wire								clk1_in_p,
 	input wire								clk1_in_n,
@@ -170,7 +133,7 @@ module main #(
 	
 	output reg										  sample_clk,
 	
-	input wire [15:0]								  TTL_in,
+	input wire [15:0]								 TTL_in,
 	output wire [15:0]							     TTL_out,
 	
 	output wire										  DAC_SYNC,
@@ -198,21 +161,15 @@ module main #(
 	input wire [3:0]								  board_mode
 	);
 
-// no longer needed for XEM6010
-//	assign i2c_sda    = 1'bz;
-//	assign i2c_scl    = 1'bz;
-//	assign hi_muxsel  = 1'b0;
-
-
 	// LVDS output pins
 	
-// Non-LVDS pin assignment example:
-// assign MOSI_A_p = MOSI_A;
-// assign MOSI_A_n = 1'b0;
-//	assign CS_b_A_p = CS_b;
-//	assign CS_b_A_n = 1'b0;
-//	assign SCLK_A_p = SCLK;
-//	assign SCLK_A_n = 1'b0;
+    // Non-LVDS pin assignment example:
+    // assign MOSI_A_p = MOSI_A;
+    // assign MOSI_A_n = 1'b0;
+    //	assign CS_b_A_p = CS_b;
+    //	assign CS_b_A_n = 1'b0;
+    //	assign SCLK_A_p = SCLK;
+    //	assign SCLK_A_n = 1'b0;
 
 	OBUFDS lvds_driver_out_1  (.O(MOSI_A_p), .OB(MOSI_A_n), .I(MOSI_A));	
 	OBUFDS lvds_driver_out_2  (.O(MOSI_B_p), .OB(MOSI_B_n), .I(MOSI_B));
@@ -260,7 +217,7 @@ module main #(
 	
 	reg [15:0]		FIFO_data_in;
 	reg				FIFO_write_to;
-	wire [15:0] 	FIFO_data_out;
+	wire [31:0] 	FIFO_data_out;
 	wire		    FIFO_read_from;
 	wire [31:0] 	num_words_in_FIFO;
 
@@ -271,7 +228,7 @@ module main #(
 	wire [15:0]		RAM_data_in;
 	wire [15:0]		RAM_data_out_1_pre, RAM_data_out_2_pre, RAM_data_out_3_pre;
 	reg [15:0]		RAM_data_out_1, RAM_data_out_2, RAM_data_out_3;
-	wire				RAM_we_1, RAM_we_2, RAM_we_3;
+    wire		    RAM_we_1, RAM_we_2, RAM_we_3;
 		
 	reg [5:0] 		channel, channel_MISO;  // varies from 0-34 (amplfier channels 0-31, plus 3 auxiliary commands)
 	reg [15:0] 		MOSI_cmd_A, MOSI_cmd_B, MOSI_cmd_C, MOSI_cmd_D;
@@ -709,17 +666,17 @@ module main #(
 		)
 	SDRAM_FIFO_inst
 		(
-		.ti_clk							(ti_clk),
-		.data_in_clk					(dataclk),
-		.clk1_in_p						(clk1_in_p),
-        .clk1_in_n                      (clk1_in_n),
-		.clk1_out						(clk1),
-		.reset							(reset),
-		.FIFO_write_to					(FIFO_write_to),
-		.FIFO_data_in					(FIFO_data_in),
-		.FIFO_read_from				    (FIFO_read_from),
-		.FIFO_data_out					(FIFO_data_out),
-		.num_words_in_FIFO			    (num_words_in_FIFO),
+		.ti_clk 					(ti_clk),
+		.data_in_clk				(dataclk),
+		.clk1_in_p					(clk1_in_p),
+        .clk1_in_n                  (clk1_in_n),
+		.clk1_out					(clk1),
+		.reset						(reset),
+		.FIFO_write_to				(FIFO_write_to),
+		.FIFO_data_in				(FIFO_data_in),
+		.FIFO_read_from				(FIFO_read_from),
+		.FIFO_data_out				(FIFO_data_out),
+		.num_words_in_FIFO			(num_words_in_FIFO),
 		.ddr2_dq					(ddr2_dq),
 		.ddr2_a					    (ddr2_a),
 		.ddr2_ba					(ddr2_ba),
@@ -2762,46 +2719,46 @@ module main #(
 	wire [65*33-1:0] 	okEHx;
 	okWireOR # (.N(33)) wireOR (okEH, okEHx);
 
-	okWireIn     wi00 (.okHE(okHE),                .ep_addr(8'h00), .ep_dataout(ep00wirein));
-	okWireIn     wi01 (.okHE(okHE),                .ep_addr(8'h01), .ep_dataout(ep01wirein));
-	okWireIn     wi02 (.okHE(okHE),                .ep_addr(8'h02), .ep_dataout(ep02wirein));
-	okWireIn     wi03 (.okHE(okHE),                .ep_addr(8'h03), .ep_dataout(ep03wirein));
-	okWireIn     wi04 (.okHE(okHE),                .ep_addr(8'h04), .ep_dataout(ep04wirein));
-	okWireIn     wi05 (.okHE(okHE),                .ep_addr(8'h05), .ep_dataout(ep05wirein));
-	okWireIn     wi06 (.okHE(okHE),                .ep_addr(8'h06), .ep_dataout(ep06wirein));
-	okWireIn     wi07 (.okHE(okHE),                .ep_addr(8'h07), .ep_dataout(ep07wirein));
-	okWireIn     wi08 (.okHE(okHE),                .ep_addr(8'h08), .ep_dataout(ep08wirein));
-	okWireIn     wi09 (.okHE(okHE),                .ep_addr(8'h09), .ep_dataout(ep09wirein));
-	okWireIn     wi0a (.okHE(okHE),                .ep_addr(8'h0a), .ep_dataout(ep0awirein));
-	okWireIn     wi0b (.okHE(okHE),                .ep_addr(8'h0b), .ep_dataout(ep0bwirein));
-	okWireIn     wi0c (.okHE(okHE),                .ep_addr(8'h0c), .ep_dataout(ep0cwirein));
-	okWireIn     wi0d (.okHE(okHE),                .ep_addr(8'h0d), .ep_dataout(ep0dwirein));
-	okWireIn     wi0e (.okHE(okHE),                .ep_addr(8'h0e), .ep_dataout(ep0ewirein));
-	okWireIn     wi0f (.okHE(okHE),                .ep_addr(8'h0f), .ep_dataout(ep0fwirein));
-	okWireIn     wi10 (.okHE(okHE),                .ep_addr(8'h10), .ep_dataout(ep10wirein));
-	okWireIn     wi11 (.okHE(okHE),                .ep_addr(8'h11), .ep_dataout(ep11wirein));
-	okWireIn     wi12 (.okHE(okHE),                .ep_addr(8'h12), .ep_dataout(ep12wirein));
-	okWireIn     wi13 (.okHE(okHE),                .ep_addr(8'h13), .ep_dataout(ep13wirein));
-	okWireIn     wi14 (.okHE(okHE),                .ep_addr(8'h14), .ep_dataout(ep14wirein));
-	okWireIn     wi15 (.okHE(okHE),                .ep_addr(8'h15), .ep_dataout(ep15wirein));
-	okWireIn     wi16 (.okHE(okHE),                .ep_addr(8'h16), .ep_dataout(ep16wirein));
-	okWireIn     wi17 (.okHE(okHE),                .ep_addr(8'h17), .ep_dataout(ep17wirein));
-	okWireIn     wi18 (.okHE(okHE),                .ep_addr(8'h18), .ep_dataout(ep18wirein));
-	okWireIn     wi19 (.okHE(okHE),                .ep_addr(8'h19), .ep_dataout(ep19wirein));
-	okWireIn     wi1a (.okHE(okHE),                .ep_addr(8'h1a), .ep_dataout(ep1awirein));
-	okWireIn     wi1b (.okHE(okHE),                .ep_addr(8'h1b), .ep_dataout(ep1bwirein));
-	okWireIn     wi1c (.okHE(okHE),                 .ep_addr(8'h1c), .ep_dataout(ep1cwirein));
-	okWireIn     wi1d (.okHE(okHE),                .ep_addr(8'h1d), .ep_dataout(ep1dwirein));
-	okWireIn     wi1e (.okHE(okHE),                .ep_addr(8'h1e), .ep_dataout(ep1ewirein));
-	okWireIn     wi1f (.okHE(okHE),                .ep_addr(8'h1f), .ep_dataout(ep1fwirein));
+	okWireIn     wi00 (.okHE(okHE), .ep_addr(8'h00), .ep_dataout(ep00wirein));
+	okWireIn     wi01 (.okHE(okHE), .ep_addr(8'h01), .ep_dataout(ep01wirein));
+	okWireIn     wi02 (.okHE(okHE), .ep_addr(8'h02), .ep_dataout(ep02wirein));
+	okWireIn     wi03 (.okHE(okHE), .ep_addr(8'h03), .ep_dataout(ep03wirein));
+	okWireIn     wi04 (.okHE(okHE), .ep_addr(8'h04), .ep_dataout(ep04wirein));
+	okWireIn     wi05 (.okHE(okHE), .ep_addr(8'h05), .ep_dataout(ep05wirein));
+	okWireIn     wi06 (.okHE(okHE), .ep_addr(8'h06), .ep_dataout(ep06wirein));
+	okWireIn     wi07 (.okHE(okHE), .ep_addr(8'h07), .ep_dataout(ep07wirein));
+	okWireIn     wi08 (.okHE(okHE), .ep_addr(8'h08), .ep_dataout(ep08wirein));
+	okWireIn     wi09 (.okHE(okHE), .ep_addr(8'h09), .ep_dataout(ep09wirein));
+	okWireIn     wi0a (.okHE(okHE), .ep_addr(8'h0a), .ep_dataout(ep0awirein));
+	okWireIn     wi0b (.okHE(okHE), .ep_addr(8'h0b), .ep_dataout(ep0bwirein));
+	okWireIn     wi0c (.okHE(okHE), .ep_addr(8'h0c), .ep_dataout(ep0cwirein));
+	okWireIn     wi0d (.okHE(okHE), .ep_addr(8'h0d), .ep_dataout(ep0dwirein));
+	okWireIn     wi0e (.okHE(okHE), .ep_addr(8'h0e), .ep_dataout(ep0ewirein));
+	okWireIn     wi0f (.okHE(okHE), .ep_addr(8'h0f), .ep_dataout(ep0fwirein));
+	okWireIn     wi10 (.okHE(okHE), .ep_addr(8'h10), .ep_dataout(ep10wirein));
+	okWireIn     wi11 (.okHE(okHE), .ep_addr(8'h11), .ep_dataout(ep11wirein));
+	okWireIn     wi12 (.okHE(okHE), .ep_addr(8'h12), .ep_dataout(ep12wirein));
+	okWireIn     wi13 (.okHE(okHE), .ep_addr(8'h13), .ep_dataout(ep13wirein));
+	okWireIn     wi14 (.okHE(okHE), .ep_addr(8'h14), .ep_dataout(ep14wirein));
+	okWireIn     wi15 (.okHE(okHE), .ep_addr(8'h15), .ep_dataout(ep15wirein));
+	okWireIn     wi16 (.okHE(okHE), .ep_addr(8'h16), .ep_dataout(ep16wirein));
+	okWireIn     wi17 (.okHE(okHE), .ep_addr(8'h17), .ep_dataout(ep17wirein));
+	okWireIn     wi18 (.okHE(okHE), .ep_addr(8'h18), .ep_dataout(ep18wirein));
+	okWireIn     wi19 (.okHE(okHE), .ep_addr(8'h19), .ep_dataout(ep19wirein));
+	okWireIn     wi1a (.okHE(okHE), .ep_addr(8'h1a), .ep_dataout(ep1awirein));
+	okWireIn     wi1b (.okHE(okHE), .ep_addr(8'h1b), .ep_dataout(ep1bwirein));
+	okWireIn     wi1c (.okHE(okHE), .ep_addr(8'h1c), .ep_dataout(ep1cwirein));
+	okWireIn     wi1d (.okHE(okHE), .ep_addr(8'h1d), .ep_dataout(ep1dwirein));
+	okWireIn     wi1e (.okHE(okHE), .ep_addr(8'h1e), .ep_dataout(ep1ewirein));
+	okWireIn     wi1f (.okHE(okHE), .ep_addr(8'h1f), .ep_dataout(ep1fwirein));
 	
-	okTriggerIn  ti40 (.okHE(okHE),                .ep_addr(8'h40), .ep_clk(ti_clk),  .ep_trigger(ep40trigin));
-	okTriggerIn  ti41 (.okHE(okHE),                .ep_addr(8'h41), .ep_clk(dataclk), .ep_trigger(ep41trigin));
-	okTriggerIn  ti42 (.okHE(okHE),                .ep_addr(8'h42), .ep_clk(ti_clk),  .ep_trigger(ep42trigin));
-	okTriggerIn  ti43 (.okHE(okHE),                .ep_addr(8'h43), .ep_clk(ti_clk),  .ep_trigger(ep43trigin));
-	okTriggerIn  ti44 (.okHE(okHE),                .ep_addr(8'h44), .ep_clk(ti_clk),  .ep_trigger(ep44trigin));
-	okTriggerIn  ti45 (.okHE(okHE),                .ep_addr(8'h45), .ep_clk(ti_clk),  .ep_trigger(ep45trigin));
-	okTriggerIn  ti46 (.okHE(okHE),                .ep_addr(8'h46), .ep_clk(ti_clk),  .ep_trigger(ep46trigin));
+	okTriggerIn  ti40 (.okHE(okHE), .ep_addr(8'h40), .ep_clk(ti_clk),  .ep_trigger(ep40trigin));
+	okTriggerIn  ti41 (.okHE(okHE), .ep_addr(8'h41), .ep_clk(dataclk), .ep_trigger(ep41trigin));
+	okTriggerIn  ti42 (.okHE(okHE), .ep_addr(8'h42), .ep_clk(ti_clk),  .ep_trigger(ep42trigin));
+	okTriggerIn  ti43 (.okHE(okHE), .ep_addr(8'h43), .ep_clk(ti_clk),  .ep_trigger(ep43trigin));
+	okTriggerIn  ti44 (.okHE(okHE), .ep_addr(8'h44), .ep_clk(ti_clk),  .ep_trigger(ep44trigin));
+	okTriggerIn  ti45 (.okHE(okHE), .ep_addr(8'h45), .ep_clk(ti_clk),  .ep_trigger(ep45trigin));
+	okTriggerIn  ti46 (.okHE(okHE), .ep_addr(8'h46), .ep_clk(ti_clk),  .ep_trigger(ep46trigin));
 	
 	okWireOut    wo20 (.okHE(okHE), .okEH(okEHx[ 0*65 +: 65 ]),  .ep_addr(8'h20), .ep_datain(ep20wireout));
 	okWireOut    wo21 (.okHE(okHE), .okEH(okEHx[ 1*65 +: 65 ]),  .ep_addr(8'h21), .ep_datain(ep21wireout));
@@ -2836,7 +2793,10 @@ module main #(
 	okWireOut    wo3e (.okHE(okHE), .okEH(okEHx[ 30*65 +: 65 ]), .ep_addr(8'h3e), .ep_datain(ep3ewireout));
 	okWireOut    wo3f (.okHE(okHE), .okEH(okEHx[ 31*65 +: 65 ]), .ep_addr(8'h3f), .ep_datain(ep3fwireout));
 	
-	okPipeOut    poa0 (.okHE(okHE), .okEH(okEHx[ 32*65 +: 65 ]), .ep_addr(8'ha0), .ep_read(FIFO_read_from), .ep_datain(FIFO_data_out));
+    // PC client was implemented in USB2, which reads 16-bit words at
+    // a time. Therefore we flip the 16-bit word order in the 32-bit FIFO
+    // output.
+	okPipeOut    poa0 (.okHE(okHE), .okEH(okEHx[ 32*65 +: 65 ]), .ep_addr(8'ha0), .ep_read(FIFO_read_from), .ep_datain({FIFO_data_out[15:0], FIFO_data_out[31:16]}));
 
 
 endmodule
@@ -2845,10 +2805,10 @@ endmodule
 // This simple module creates MOSI commands.  If channel is between 0 and 31, the command is CONVERT(channel),
 // and the LSB is set if DSP_settle = 1.  If channel is between 32 and 34, aux_cmd is used.
 module command_selector (
-	input wire [5:0] 		channel,
-	input wire				DSP_settle,
+	input wire [5:0] 	channel,
+	input wire			DSP_settle,
 	input wire [15:0] 	aux_cmd,
-	input wire				digout_override,
+	input wire			digout_override,
 	output reg [15:0] 	MOSI_cmd
 	);
 

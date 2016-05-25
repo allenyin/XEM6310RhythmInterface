@@ -53,6 +53,39 @@
 // output mini-FIFO) after the flow of data from the source has stopped.  See
 // ddr_state_machine.v for details on this.
 
+// Mapping Opal Kelly's RAMTester sample (XEM6310)'s ramtest.v and here:
+//  okClk           :   ti_clk
+//  sys_clkp        :   clk1_in_p
+//  sys_clkn        :   clk1_in_n
+//  pi0_ep_write    :   FIFO_write_to
+//  po0_ep_read     :   FIFO_read_from
+//  pi0_ep_dataout  :   FIFO_data_in
+//  po0_ep_datain   :   FIFO_data_out
+//  ep00wire[2]     :   reset
+//
+//
+//
+// Signals added by Opal Kelly in addition to RAMTester
+//  clk1_out                :   Output from memc3_infrastructure
+//  num_words_in_FIFO       :   FIFO capacity monitor.
+//  pipe_in_word_count_ti   :
+//  pipe_out_word_count_ti  :
+//  buffer_byte_addr_wr     :   For FIFO capacity. Output from ddr2_state_machine
+//  buffer_byte_addr_rd     :   For FIFO capacity. Output from ddr2_state_machine
+//  buffer_byte_addr_wr_ti  :
+//  buffer_byte_addr_rd_ti  :
+//  buffer_word_addr_rd_ti  :
+//  buffer_word_addr_wr_ti  :
+//  buffer_word_addr_diff_ti:
+//
+// Signals removed by Intan from Opal Kelly's ramtest.v
+//  pipe_in_start   :   Signal not used anywhere in ramtest.v, removed
+//  pipe_in_done    :   Signal not used anywhere in ramtest.v, removed.
+//  pipe_out_start  :   Signal not used anywhere in ramtest.v, removed.
+//  pipe_out_done   :   Signal not used anywhere in ramtest.v, removed.
+//  i2c_sda         :   Signal not used anywhere in ramtest.v, removed.
+//  i2c_scl         :   Signal not used anywhere in ramtest.v, removed.
+//  hi_muxsel       :   Signal not used anywhere in ramtest.v, removed.
 
 module SDRAM_FIFO  #(
 	parameter C3_P0_MASK_SIZE           = 4,
@@ -82,16 +115,13 @@ module SDRAM_FIFO  #(
 	
 	// FIFO interface
 	input wire							    reset,
-
 	input wire 								FIFO_write_to,
 	input wire [15:0] 						FIFO_data_in,
 	input wire								FIFO_read_from,
-	output wire [15:0]						FIFO_data_out,
-
+	output wire [31:0]						FIFO_data_out,
 
 	// FIFO capacity monitor
 	output wire [31:0]					    num_words_in_FIFO,
-	
 
 	// I/O connections from Xilinx FPGA to 128-MiByte SDRAM
 	inout  wire [C3_NUM_DQ_PINS-1:0]         ddr2_dq,
@@ -114,7 +144,6 @@ module SDRAM_FIFO  #(
 	output wire                              ddr2_ck_n,
 	output wire                              ddr2_cs_n
    );
-
     
     localparam C3_INCLK_PERIOD          = 10000;  // 10000ps -> 10ns -> 100MHz
     localparam C3_CLKOUT0_DIVIDE        = 1;      // 625MHz system clock
@@ -123,76 +152,75 @@ module SDRAM_FIFO  #(
     localparam C3_CLKOUT3_DIVIDE        = 8;      // 78.125 MHz calibration clock
     localparam C3_CLKFBOUT_MULT         = 25;     // 25MHz x 25 = 625MHz system clock
     localparam C3_DIVCLK_DIVIDE         = 4;      // 100MHz/4 = 25MHz
-   
-   localparam C3_ARB_NUM_TIME_SLOTS   = 12;       
-   localparam C3_ARB_TIME_SLOT_0      = 3'o0;       
-   localparam C3_ARB_TIME_SLOT_1      = 3'o0;       
-   localparam C3_ARB_TIME_SLOT_2      = 3'o0;       
-   localparam C3_ARB_TIME_SLOT_3      = 3'o0;       
-   localparam C3_ARB_TIME_SLOT_4      = 3'o0;       
-   localparam C3_ARB_TIME_SLOT_5      = 3'o0;       
-   localparam C3_ARB_TIME_SLOT_6      = 3'o0;       
-   localparam C3_ARB_TIME_SLOT_7      = 3'o0;       
-   localparam C3_ARB_TIME_SLOT_8      = 3'o0;       
-   localparam C3_ARB_TIME_SLOT_9      = 3'o0;       
-   localparam C3_ARB_TIME_SLOT_10     = 3'o0;       
-   localparam C3_ARB_TIME_SLOT_11     = 3'o0;       
-   localparam C3_MEM_TRAS             = 40000;       
-   localparam C3_MEM_TRCD             = 15000;       
-   localparam C3_MEM_TREFI            = 7800000;       
-   localparam C3_MEM_TRFC             = 127500;       
-   localparam C3_MEM_TRP              = 15000;       
-   localparam C3_MEM_TWR              = 15000;       
-   localparam C3_MEM_TRTP             = 7500;       
-   localparam C3_MEM_TWTR             = 7500;       
-   localparam C3_MEM_TYPE             = "DDR2";       
-   localparam C3_MEM_DENSITY          = "1Gb";       
-   localparam C3_MEM_BURST_LEN        = 4;       
-   localparam C3_MEM_CAS_LATENCY      = 5;       
-   localparam C3_MEM_NUM_COL_BITS     = 10;       
-   localparam C3_MEM_DDR1_2_ODS       = "FULL";       
-   localparam C3_MEM_DDR2_RTT         = "50OHMS";       
-   localparam C3_MEM_DDR2_DIFF_DQS_EN  = "YES";       
-   localparam C3_MEM_DDR2_3_PA_SR     = "FULL";       
-   localparam C3_MEM_DDR2_3_HIGH_TEMP_SR  = "NORMAL";       
-   localparam C3_MEM_DDR3_CAS_LATENCY  = 6;       
-   localparam C3_MEM_DDR3_ODS         = "DIV6";       
-   localparam C3_MEM_DDR3_RTT         = "DIV2";       
-   localparam C3_MEM_DDR3_CAS_WR_LATENCY  = 5;       
-   localparam C3_MEM_DDR3_AUTO_SR     = "ENABLED";       
-   localparam C3_MEM_DDR3_DYN_WRT_ODT  = "OFF";       
-   localparam C3_MEM_MOBILE_PA_SR     = "FULL";       
-   localparam C3_MEM_MDDR_ODS         = "FULL";       
-   localparam C3_MC_CALIB_BYPASS      = "NO";       
-   localparam C3_MC_CALIBRATION_MODE  = "CALIBRATION";       
-   localparam C3_MC_CALIBRATION_DELAY  = "HALF";       
-   localparam C3_SKIP_IN_TERM_CAL     = 0;       
-   localparam C3_SKIP_DYNAMIC_CAL     = 0;       
-   localparam C3_LDQSP_TAP_DELAY_VAL  = 0;       
-   localparam C3_LDQSN_TAP_DELAY_VAL  = 0;       
-   localparam C3_UDQSP_TAP_DELAY_VAL  = 0;       
-   localparam C3_UDQSN_TAP_DELAY_VAL  = 0;       
-   localparam C3_DQ0_TAP_DELAY_VAL    = 0;       
-   localparam C3_DQ1_TAP_DELAY_VAL    = 0;       
-   localparam C3_DQ2_TAP_DELAY_VAL    = 0;       
-   localparam C3_DQ3_TAP_DELAY_VAL    = 0;       
-   localparam C3_DQ4_TAP_DELAY_VAL    = 0;       
-   localparam C3_DQ5_TAP_DELAY_VAL    = 0;       
-   localparam C3_DQ6_TAP_DELAY_VAL    = 0;       
-   localparam C3_DQ7_TAP_DELAY_VAL    = 0;       
-   localparam C3_DQ8_TAP_DELAY_VAL    = 0;       
-   localparam C3_DQ9_TAP_DELAY_VAL    = 0;       
-   localparam C3_DQ10_TAP_DELAY_VAL   = 0;       
-   localparam C3_DQ11_TAP_DELAY_VAL   = 0;       
-   localparam C3_DQ12_TAP_DELAY_VAL   = 0;       
-   localparam C3_DQ13_TAP_DELAY_VAL   = 0;       
-   localparam C3_DQ14_TAP_DELAY_VAL   = 0;       
-   localparam C3_DQ15_TAP_DELAY_VAL   = 0;       
-   localparam C3_p0_BEGIN_ADDRESS                   = (C3_HW_TESTING == "TRUE") ? 32'h01000000:32'h00000100;
-   localparam C3_p0_DATA_MODE                       = 4'b0010;
-   localparam C3_p0_END_ADDRESS                     = (C3_HW_TESTING == "TRUE") ? 32'h02ffffff:32'h000002ff;
-   localparam C3_p0_PRBS_EADDR_MASK_POS             = (C3_HW_TESTING == "TRUE") ? 32'hfc000000:32'hfffffc00;
-   localparam C3_p0_PRBS_SADDR_MASK_POS             = (C3_HW_TESTING == "TRUE") ? 32'h01000000:32'h00000100;
+    localparam C3_ARB_NUM_TIME_SLOTS   = 12;       
+    localparam C3_ARB_TIME_SLOT_0      = 3'o0;       
+    localparam C3_ARB_TIME_SLOT_1      = 3'o0;       
+    localparam C3_ARB_TIME_SLOT_2      = 3'o0;       
+    localparam C3_ARB_TIME_SLOT_3      = 3'o0;       
+    localparam C3_ARB_TIME_SLOT_4      = 3'o0;       
+    localparam C3_ARB_TIME_SLOT_5      = 3'o0;       
+    localparam C3_ARB_TIME_SLOT_6      = 3'o0;       
+    localparam C3_ARB_TIME_SLOT_7      = 3'o0;       
+    localparam C3_ARB_TIME_SLOT_8      = 3'o0;       
+    localparam C3_ARB_TIME_SLOT_9      = 3'o0;       
+    localparam C3_ARB_TIME_SLOT_10     = 3'o0;       
+    localparam C3_ARB_TIME_SLOT_11     = 3'o0;       
+    localparam C3_MEM_TRAS             = 40000;       
+    localparam C3_MEM_TRCD             = 15000;       
+    localparam C3_MEM_TREFI            = 7800000;       
+    localparam C3_MEM_TRFC             = 127500;       
+    localparam C3_MEM_TRP              = 15000;       
+    localparam C3_MEM_TWR              = 15000;       
+    localparam C3_MEM_TRTP             = 7500;       
+    localparam C3_MEM_TWTR             = 7500;       
+    localparam C3_MEM_TYPE             = "DDR2";       
+    localparam C3_MEM_DENSITY          = "1Gb";       
+    localparam C3_MEM_BURST_LEN        = 4;       
+    localparam C3_MEM_CAS_LATENCY      = 5;       
+    localparam C3_MEM_NUM_COL_BITS     = 10;       
+    localparam C3_MEM_DDR1_2_ODS       = "FULL";       
+    localparam C3_MEM_DDR2_RTT         = "50OHMS";       
+    localparam C3_MEM_DDR2_DIFF_DQS_EN  = "YES";       
+    localparam C3_MEM_DDR2_3_PA_SR     = "FULL";       
+    localparam C3_MEM_DDR2_3_HIGH_TEMP_SR  = "NORMAL";       
+    localparam C3_MEM_DDR3_CAS_LATENCY  = 6;       
+    localparam C3_MEM_DDR3_ODS         = "DIV6";       
+    localparam C3_MEM_DDR3_RTT         = "DIV2";       
+    localparam C3_MEM_DDR3_CAS_WR_LATENCY  = 5;       
+    localparam C3_MEM_DDR3_AUTO_SR     = "ENABLED";       
+    localparam C3_MEM_DDR3_DYN_WRT_ODT  = "OFF";       
+    localparam C3_MEM_MOBILE_PA_SR     = "FULL";       
+    localparam C3_MEM_MDDR_ODS         = "FULL";       
+    localparam C3_MC_CALIB_BYPASS      = "NO";       
+    localparam C3_MC_CALIBRATION_MODE  = "CALIBRATION";       
+    localparam C3_MC_CALIBRATION_DELAY  = "HALF";       
+    localparam C3_SKIP_IN_TERM_CAL     = 0;       
+    localparam C3_SKIP_DYNAMIC_CAL     = 0;       
+    localparam C3_LDQSP_TAP_DELAY_VAL  = 0;       
+    localparam C3_LDQSN_TAP_DELAY_VAL  = 0;       
+    localparam C3_UDQSP_TAP_DELAY_VAL  = 0;       
+    localparam C3_UDQSN_TAP_DELAY_VAL  = 0;       
+    localparam C3_DQ0_TAP_DELAY_VAL    = 0;       
+    localparam C3_DQ1_TAP_DELAY_VAL    = 0;       
+    localparam C3_DQ2_TAP_DELAY_VAL    = 0;       
+    localparam C3_DQ3_TAP_DELAY_VAL    = 0;       
+    localparam C3_DQ4_TAP_DELAY_VAL    = 0;       
+    localparam C3_DQ5_TAP_DELAY_VAL    = 0;       
+    localparam C3_DQ6_TAP_DELAY_VAL    = 0;       
+    localparam C3_DQ7_TAP_DELAY_VAL    = 0;       
+    localparam C3_DQ8_TAP_DELAY_VAL    = 0;       
+    localparam C3_DQ9_TAP_DELAY_VAL    = 0;       
+    localparam C3_DQ10_TAP_DELAY_VAL   = 0;       
+    localparam C3_DQ11_TAP_DELAY_VAL   = 0;       
+    localparam C3_DQ12_TAP_DELAY_VAL   = 0;       
+    localparam C3_DQ13_TAP_DELAY_VAL   = 0;       
+    localparam C3_DQ14_TAP_DELAY_VAL   = 0;       
+    localparam C3_DQ15_TAP_DELAY_VAL   = 0;       
+    localparam C3_p0_BEGIN_ADDRESS         = (C3_HW_TESTING == "TRUE") ? 32'h01000000:32'h00000100;
+    localparam C3_p0_DATA_MODE             = 4'b0010;
+    localparam C3_p0_END_ADDRESS           = (C3_HW_TESTING == "TRUE") ? 32'h02ffffff:32'h000002ff;
+    localparam C3_p0_PRBS_EADDR_MASK_POS   = (C3_HW_TESTING == "TRUE") ? 32'hfc000000:32'hfffffc00;
+    localparam C3_p0_PRBS_SADDR_MASK_POS   = (C3_HW_TESTING == "TRUE") ? 32'h01000000:32'h00000100;
 	wire                              c3_sys_clk;
 	wire                              c3_error;
 	wire                              c3_calib_done;
@@ -238,26 +266,32 @@ module SDRAM_FIFO  #(
 	wire                              selfrefresh_mode; 
 
 	wire        	pipe_in_read;
-	wire [63:0] 	pipe_in_data;
-	wire [8:0]  	pipe_in_count;
+	wire [31:0] 	pipe_in_data;
+	wire [9:0]  	pipe_in_rd_count;
+    wire [10:0]     pipe_in_wr_count;
 	wire        	pipe_in_valid;
+    wire            pipe_in_full;
 	wire        	pipe_in_empty;
+    reg             pipe_in_ready;      // For block throttle
 	
 	wire        	pipe_out_write;
-	wire [63:0] 	pipe_out_data;
-	wire [8:0]  	pipe_out_count;
+	wire [31:0] 	pipe_out_data;
+	wire [9:0]  	pipe_out_rd_count;
+    wire [9:0]      pipe_out_wr_count;
+    wire            pipe_out_full;
+    wire            pipe_out_empty;
+    reg             pipe_out_ready;     // For block throttle
 	
-	wire [10:0]		pipe_in_word_count, pipe_out_word_count;
-	reg [10:0]		pipe_in_word_count_ti, pipe_out_word_count_ti;
-	
+    // For monitoring FIFO capacity.
+	reg [10:0]		pipe_in_word_count_ti, pipe_out_word_count_ti;  
 	wire [29:0]		buffer_byte_addr_wr, buffer_byte_addr_rd;
 	reg [29:0]		buffer_byte_addr_wr_ti, buffer_byte_addr_rd_ti;
 	wire [25:0]		buffer_word_addr_rd_ti, buffer_word_addr_wr_ti;
 	wire [26:0]		buffer_word_addr_diff_ti;
 	
 	
-	assign c3_sys_clk     = 1'b0;
-	assign ddr2_cs_n = 1'b0;
+	assign c3_sys_clk = 1'b0;
+	assign ddr2_cs_n  = 1'b0;
 
 
 	//MIG infrastructure reset
@@ -449,13 +483,13 @@ module SDRAM_FIFO  #(
 
 		.ib_re(pipe_in_read),
 		.ib_data(pipe_in_data),
-		.ib_count(pipe_in_count),
+		.ib_count(pipe_in_rd_count),
 		.ib_valid(pipe_in_valid),
 		.ib_empty(pipe_in_empty),
 		
 		.ob_we(pipe_out_write),
 		.ob_data(pipe_out_data),
-		.ob_count(pipe_out_count),
+		.ob_count(pipe_out_wr_count),
 		
 		.p0_rd_en_o(c3_p0_rd_en),  
 		.p0_rd_empty(c3_p0_rd_empty), 
@@ -477,37 +511,35 @@ module SDRAM_FIFO  #(
 		);
 
 
-	// Input mini-FIFO (2048 x 16 bits in from Intan chips; 512 x 64 bits out to SDRAM)
-
-	fifo_w16_2048_r64_512 okPipeIn_fifo (
+	// Input mini-FIFO (2048 x 16 bits in from Intan chips; 1024 x 32 bits out to SDRAM)
+	fifo_w16_2048_r32_1024 okPipeIn_fifo (
 		.rst(reset),
 		.wr_clk(data_in_clk),                   // was okClk in ramtest.v
 		.rd_clk(c3_clk0),
-		.din(FIFO_data_in),                     // Bus [15 : 0]   // was pipe_dataout
-		.wr_en(FIFO_write_to),                  // was pipe_write
+		.din(FIFO_data_in),                     // Bus [15 : 0], was pi0_ep_dataout
+		.wr_en(FIFO_write_to),                  // was pi0_ep_write
 		.rd_en(pipe_in_read),
-		.dout(pipe_in_data),                    // Bus [63 : 0] 
-		.full(),
+		.dout(pipe_in_data),                    // Bus [31 : 0] 
+		.full(pipe_in_full),
 		.empty(pipe_in_empty),
 		.valid(pipe_in_valid),
-		.rd_data_count(pipe_in_count),          // Bus [8 : 0] 
-		.wr_data_count(pipe_in_word_count));    // Bus [10 : 0] 
+		.rd_data_count(pipe_in_rd_count),       // Bus [9 : 0] 
+		.wr_data_count(pipe_in_wr_count));      // Bus [10 : 0] 
 
-	// Output mini-FIFO (512 x 54 bits in from SDRAM; 2048 x 16 bits out to Opal Kelly interface)
-
-	fifo_w64_512_r16_2048 okPipeOut_fifo (
+	// Output mini-FIFO (1024 x 32 bits in from SDRAM; 1024 x 32 bits out to Opal Kelly interface)
+	fifo_w32_1024_r32_1024 okPipeOut_fifo (
 		.rst(reset),
 		.wr_clk(c3_clk0),
 		.rd_clk(ti_clk),
-		.din(pipe_out_data),        // Bus [63 : 0] 
+		.din(pipe_out_data),        // Bus [31 : 0] 
 		.wr_en(pipe_out_write),
 		.rd_en(FIFO_read_from),     // was po0_ep_read
-		.dout(FIFO_data_out),       // Bus [15 : 0]       // was po0_ep_datain
-		.full(),
-		.empty(),
+		.dout(FIFO_data_out),       // Bus [31 : 0]       // was po0_ep_datain
+		.full(pipe_out_full),
+		.empty(pipe_out_empty),
 		.valid(),
-		.rd_data_count(pipe_out_word_count), // Bus [10 : 0] 
-		.wr_data_count(pipe_out_count));     // Bus [8 : 0] 
+		.rd_data_count(pipe_out_rd_count),      // Bus [9 : 0] 
+		.wr_data_count(pipe_out_wr_count));     // Bus [9 : 0] 
 	
 	
 	// FIFO capacity calculation: how many 16-bit words are in the entire FIFO?
@@ -516,8 +548,8 @@ module SDRAM_FIFO  #(
 	always @(posedge ti_clk) begin
 		buffer_byte_addr_rd_ti <= buffer_byte_addr_rd;
 		buffer_byte_addr_wr_ti <= buffer_byte_addr_wr;
-		pipe_in_word_count_ti <= pipe_in_word_count;
-		pipe_out_word_count_ti <= pipe_out_word_count;
+		pipe_in_word_count_ti <= pipe_in_wr_count;
+		pipe_out_word_count_ti <= pipe_out_rd_count;
 	end	
 
 	// Note: only 27 bits of the 30-bit address are used by the 128 MiByte SDRAM	
