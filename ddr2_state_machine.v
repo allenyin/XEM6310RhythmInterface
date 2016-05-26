@@ -68,7 +68,6 @@ module ddr2_state_machine
     // "leftover" data words that will not be accepted by the FIFO after sampling
     // has paused or stopped.
 
-	wire        rd_fifo_afull;
 	reg  [5:0]  burst_cnt;
 
 	reg         write_mode;
@@ -110,13 +109,17 @@ module ddr2_state_machine
 			ob_we <= 1'b0;
 
 			case (state)
-				s_idle: begin
-					burst_cnt <= BURST_LEN;
-
-                    // only start writing when initialization done
+                s_idle: begin
+                    burst_cnt <= BURST_LEN;
+                    // only start writing when initialization is done and
+                    // there is sufficient data present in the input FIFO
                     if (calib_done==1 && write_mode==1 && (ib_count >= BURST_LEN)) begin
                         state <= s_write1;
-                    end else if (calib_done==1 && read_mode==1 && (ob_count<(FIFO_SIZE-1-BURST_LEN)) && (cmd_byte_addr_wr != cmd_byte_addr_rd)) begin
+                    // Only start reading when init is done, there is room in
+                    // the output FIFO buffer and (IMPORTANT, added this to
+                    // ramtest code!) we are not reading past the point where
+                    // data was just written.
+                    end else if (calib_done==1 && write_mode==1 && (ob_count<(FIFO_SIZE-1-BURST_LEN/2)) && (cmd_byte_addr_wr != cmd_byte_addr_rd)) begin
                         state <= s_read1;
                     end
                 end
@@ -146,7 +149,7 @@ module ddr2_state_machine
                         state <= s_write1;
                     end
                 end
-		
+
 				s_read1: begin
 					p0_cmd_byte_addr <= cmd_byte_addr_rd;
 					cmd_byte_addr_rd <= cmd_byte_addr_rd + 4*BURST_LEN;
@@ -156,6 +159,7 @@ module ddr2_state_machine
 				end
 				
 				s_read2: begin
+                    // if SDRAM not empty, read. otherwise wait.
 					if(p0_rd_empty==0) begin
 						p0_rd_en_o   <= 1'b1;
 						state <= s_read3;

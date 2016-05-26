@@ -47,8 +47,8 @@
 // to get more than 75% full in case the computer OS hangs for a moment.
 //
 // In order to completely "clean out" the FIFO after pausing or stopping the flow of data
-// into it, it is necessary to write an integer multiple of 4 16-bit words to the FIFO.
-// The SDRAM reads data only in 64-bit chunks, so if there is a remaining 1, 2, or 3 words
+// into it, it is necessary to write an integer multiple of 2 16-bit words to the FIFO.
+// The SDRAM reads data only in 32-bit chunks, so if there is a remaining 1 word
 // of data in the input mini-FIFO, this will not be read into the SDRAM (and passed to the
 // output mini-FIFO) after the flow of data from the source has stopped.  See
 // ddr_state_machine.v for details on this.
@@ -267,32 +267,28 @@ module SDRAM_FIFO  #(
 
 	wire        	pipe_in_read;
 	wire [31:0] 	pipe_in_data;
-	wire [9:0]  	pipe_in_rd_count;
-    wire [10:0]     pipe_in_wr_count;
+	wire [10:0]  	pipe_in_rd_count;
+    wire [11:0]     pipe_in_wr_count;
 	wire        	pipe_in_valid;
     wire            pipe_in_full;
 	wire        	pipe_in_empty;
-    reg             pipe_in_ready;      // For block throttle
 	
 	wire        	pipe_out_write;
 	wire [31:0] 	pipe_out_data;
-	wire [9:0]  	pipe_out_rd_count;
-    wire [9:0]      pipe_out_wr_count;
+	wire [10:0]  	pipe_out_rd_count;
+    wire [10:0]     pipe_out_wr_count;
     wire            pipe_out_full;
     wire            pipe_out_empty;
-    reg             pipe_out_ready;     // For block throttle
-	
-    // For monitoring FIFO capacity.
+
+   // For monitoring FIFO capacity.
 	reg [10:0]		pipe_in_word_count_ti, pipe_out_word_count_ti;  
 	wire [29:0]		buffer_byte_addr_wr, buffer_byte_addr_rd;
 	reg [29:0]		buffer_byte_addr_wr_ti, buffer_byte_addr_rd_ti;
 	wire [25:0]		buffer_word_addr_rd_ti, buffer_word_addr_wr_ti;
 	wire [26:0]		buffer_word_addr_diff_ti;
 	
-	
 	assign c3_sys_clk = 1'b0;
 	assign ddr2_cs_n  = 1'b0;
-
 
 	//MIG infrastructure reset
 	
@@ -511,8 +507,8 @@ module SDRAM_FIFO  #(
 		);
 
 
-	// Input mini-FIFO (2048 x 16 bits in from Intan chips; 1024 x 32 bits out to SDRAM)
-	fifo_w16_2048_r32_1024 okPipeIn_fifo (
+	// Input mini-FIFO (4096 x 16 bits in from Intan chips; 2048 x 32 bits out to SDRAM)
+	fifo_w16_4096_r32_2048 okPipeIn_fifo (
 		.rst(reset),
 		.wr_clk(data_in_clk),                   // was okClk in ramtest.v
 		.rd_clk(c3_clk0),
@@ -523,11 +519,11 @@ module SDRAM_FIFO  #(
 		.full(pipe_in_full),
 		.empty(pipe_in_empty),
 		.valid(pipe_in_valid),
-		.rd_data_count(pipe_in_rd_count),       // Bus [9 : 0] 
-		.wr_data_count(pipe_in_wr_count));      // Bus [10 : 0] 
+		.rd_data_count(pipe_in_rd_count),       // Bus [10 : 0] 
+		.wr_data_count(pipe_in_wr_count));      // Bus [11 : 0] 
 
-	// Output mini-FIFO (1024 x 32 bits in from SDRAM; 1024 x 32 bits out to Opal Kelly interface)
-	fifo_w32_1024_r32_1024 okPipeOut_fifo (
+	// Output mini-FIFO (2048 x 32 bits in from SDRAM; 2048 x 32 bits out to Opal Kelly interface)
+	fifo_w32_2048_r32_2048 okPipeOut_fifo (
 		.rst(reset),
 		.wr_clk(c3_clk0),
 		.rd_clk(ti_clk),
@@ -538,8 +534,8 @@ module SDRAM_FIFO  #(
 		.full(pipe_out_full),
 		.empty(pipe_out_empty),
 		.valid(),
-		.rd_data_count(pipe_out_rd_count),      // Bus [9 : 0] 
-		.wr_data_count(pipe_out_wr_count));     // Bus [9 : 0] 
+		.rd_data_count(pipe_out_rd_count),      // Bus [10 : 0] 
+		.wr_data_count(pipe_out_wr_count));     // Bus [10 : 0] 
 	
 	
 	// FIFO capacity calculation: how many 16-bit words are in the entire FIFO?
@@ -550,7 +546,7 @@ module SDRAM_FIFO  #(
 		buffer_byte_addr_wr_ti <= buffer_byte_addr_wr;
 		pipe_in_word_count_ti <= pipe_in_wr_count;
 		pipe_out_word_count_ti <= pipe_out_rd_count;
-	end	
+    end	
 
 	// Note: only 27 bits of the 30-bit address are used by the 128 MiByte SDRAM	
 	assign buffer_word_addr_rd_ti = { buffer_byte_addr_rd_ti[26:1] }; // divide by two to convert byte address to word address

@@ -260,7 +260,6 @@ module main #(
 	reg [31:0] 		timestamp;			 
 	reg [31:0]		max_timestep;
 	wire [31:0]		max_timestep_in;
-	wire [31:0] 	data_stream_timestamp;
 	wire [63:0]		header_magic_number;
 	wire [15:0]		data_stream_filler;
 	
@@ -340,8 +339,6 @@ module main #(
 
 	// Opal Kelly USB Host Interface
 	
-    // XEM6010 config
-	//wire        ti_clk;		// 48 MHz clock from Opal Kelly USB interface
 
     wire        ti_clk;         // 100.8 MHz from Opal Kelly USB3 interface         
 	wire [112:0] okHE;
@@ -643,7 +640,7 @@ module main #(
 		.DCM_prog_done		(DCM_prog_done),
 		.locked				(dataclk_locked)
 		);
-
+    
 
 	// SDRAM FIFO that regulates data flow from Xilinx FPGA to USB interface
 	
@@ -2796,8 +2793,9 @@ module main #(
     // PC client was implemented in USB2, which reads 16-bit words at
     // a time. Therefore we flip the 16-bit word order in the 32-bit FIFO
     // output.
-	okPipeOut    poa0 (.okHE(okHE), .okEH(okEHx[ 32*65 +: 65 ]), .ep_addr(8'ha0), .ep_read(FIFO_read_from), .ep_datain({FIFO_data_out[15:0], FIFO_data_out[31:16]}));
 
+    // Regulare PipeOut
+    okPipeOut    poa0 (.okHE(okHE), .okEH(okEHx[ 32*65 +: 65 ]), .ep_addr(8'ha0), .ep_read(FIFO_read_from), .ep_datain({FIFO_data_out[15:0], FIFO_data_out[31:16]}));
 
 endmodule
 
@@ -2854,5 +2852,3 @@ module command_selector (
 	end	
 	
 endmodule
-
-	
