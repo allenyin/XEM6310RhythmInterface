@@ -575,6 +575,9 @@ module main #(
 
 	// USB WireOut outputs
 
+    // technically with USB3, one wireout endpoint is enough for
+    // num_words_in_FIFO...but we keep it here to avoid breaking
+    // host-side software.
 	assign ep20wireout = 				{16'b0, num_words_in_FIFO[15:0]};
 	assign ep21wireout = 				num_words_in_FIFO[31:16];
 	
@@ -673,6 +676,7 @@ module main #(
 		.FIFO_data_in				(FIFO_data_in),
 		.FIFO_read_from				(FIFO_read_from),
 		.FIFO_data_out				(FIFO_data_out),
+        .FIFO_out_rdy               (pipeout_rdy),      // for block throttled pipe
 		.num_words_in_FIFO			(num_words_in_FIFO),
 		.ddr2_dq					(ddr2_dq),
 		.ddr2_a					    (ddr2_a),
@@ -2794,8 +2798,9 @@ module main #(
     // a time. Therefore we flip the 16-bit word order in the 32-bit FIFO
     // output.
 
-    // Regulare PipeOut
-    okPipeOut    poa0 (.okHE(okHE), .okEH(okEHx[ 32*65 +: 65 ]), .ep_addr(8'ha0), .ep_read(FIFO_read_from), .ep_datain({FIFO_data_out[15:0], FIFO_data_out[31:16]}));
+    // Block throttled pipe out
+	okBTPipeOut poa0(.okHE(okHE), .okEH(okEHx[ 32*65 +: 65]), .ep_addr(8'ha0), .ep_read(FIFO_read_from), 
+	                 .ep_blockstrobe(), .ep_datain({FIFO_data_out[15:0],FIFO_data_out[31:16]}), .ep_ready(pipeout_rdy));
 
 endmodule
 

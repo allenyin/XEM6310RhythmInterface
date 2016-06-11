@@ -65,7 +65,7 @@
 //
 //
 //
-// Signals added by Opal Kelly in addition to RAMTester
+// Signals added to Opal Kelly's RAMTester
 //  clk1_out                :   Output from memc3_infrastructure
 //  num_words_in_FIFO       :   FIFO capacity monitor.
 //  pipe_in_word_count_ti   :
@@ -119,6 +119,7 @@ module SDRAM_FIFO  #(
 	input wire [15:0] 						FIFO_data_in,
 	input wire								FIFO_read_from,
 	output wire [31:0]						FIFO_data_out,
+    output reg                              FIFO_out_rdy,
 
 	// FIFO capacity monitor
 	output wire [31:0]					    num_words_in_FIFO,
@@ -507,8 +508,8 @@ module SDRAM_FIFO  #(
 		);
 
 
-	// Input mini-FIFO (4096 x 16 bits in from Intan chips; 2048 x 32 bits out to SDRAM)
-	fifo_w16_4096_r32_2048 okPipeIn_fifo (
+	// Input mini-FIFO (2048 x 16 bits in from Intan chips; 1024 x 32 bits out to SDRAM)
+	fifo_w16_2048_r32_1024 okPipeIn_fifo (
 		.rst(reset),
 		.wr_clk(data_in_clk),                   // was okClk in ramtest.v
 		.rd_clk(c3_clk0),
@@ -519,11 +520,11 @@ module SDRAM_FIFO  #(
 		.full(pipe_in_full),
 		.empty(pipe_in_empty),
 		.valid(pipe_in_valid),
-		.rd_data_count(pipe_in_rd_count),       // Bus [10 : 0] 
-		.wr_data_count(pipe_in_wr_count));      // Bus [11 : 0] 
+		.rd_data_count(pipe_in_rd_count),       // Bus [9 : 0] - Number of words available for reading
+		.wr_data_count(pipe_in_wr_count));      // Bus [10 : 0] - Number of words written into FIFO
 
-	// Output mini-FIFO (2048 x 32 bits in from SDRAM; 2048 x 32 bits out to Opal Kelly interface)
-	fifo_w32_2048_r32_2048 okPipeOut_fifo (
+	// Output mini-FIFO (1024 x 32 bits in from SDRAM; 1024 x 32 bits out to Opal Kelly interface)
+	fifo_w32_1024_r32_1024 okPipeOut_fifo (
 		.rst(reset),
 		.wr_clk(c3_clk0),
 		.rd_clk(ti_clk),
@@ -534,18 +535,38 @@ module SDRAM_FIFO  #(
 		.full(pipe_out_full),
 		.empty(pipe_out_empty),
 		.valid(),
-		.rd_data_count(pipe_out_rd_count),      // Bus [10 : 0] 
-		.wr_data_count(pipe_out_wr_count));     // Bus [10 : 0] 
+		.rd_data_count(pipe_out_rd_count),      // Bus [9 : 0] - Number of words available for reading
+		.wr_data_count(pipe_out_wr_count));     // Bus [9 : 0] - number of words written into FIFO
 	
 	
-	// FIFO capacity calculation: how many 16-bit words are in the entire FIFO?
-	// (Including the contents of the SDRAM and the two mini-FIFOs.)
-
+    // Block size for BTPipeOut - this needs to be changed if the
+    // corresponding setting in software is changed (blockSize in
+    // ReadFromBlockPipeOut()).
+    // 
+	// If blockSize is set to 512 bytes, and our output FIFO word-size is
+    // 32-bits, then BLOCK_SIZE here should be 512 bytes/(4 bytes/word)=128.
+	//
+	// blockSize = 1024 bytes -> BLOCK_SIZE = 256.
+	//
+	// blockSize = 256 bytes -> BLOCK_SIZE = 64
+    // 
+    // okHost will only transfer if there are at least this many words
+    // available in the okPipeOut_fifo.
+    localparam BLOCK_SIZE = 128; 
 	always @(posedge ti_clk) begin
+        // FIFO capacity calculation: how many 16-bit words are in the entire FIFO?
+        // (Including the contents of the SDRAM and the two mini-FIFOs.)
 		buffer_byte_addr_rd_ti <= buffer_byte_addr_rd;
 		buffer_byte_addr_wr_ti <= buffer_byte_addr_wr;
 		pipe_in_word_count_ti <= pipe_in_wr_count;
 		pipe_out_word_count_ti <= pipe_out_rd_count;
+
+        // ready signal for okBTPipeOut
+        if (pipe_out_rd_count >= BLOCK_SIZE) begin
+            FIFO_out_rdy <= 1'b1;
+        end else begin
+            FIFO_out_rdy <= 1'b0;
+        end
     end	
 
 	// Note: only 27 bits of the 30-bit address are used by the 128 MiByte SDRAM	

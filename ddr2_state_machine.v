@@ -67,6 +67,8 @@ module ddr2_state_machine
     // integer multiple of 4 words to the FIFO.  Otherwise, we will end up with 1-3
     // "leftover" data words that will not be accepted by the FIFO after sampling
     // has paused or stopped.
+    //
+    // Setting BURST_LEN to 2 should allow quicker filling of output FIFO...?
 
 	reg  [5:0]  burst_cnt;
 
@@ -119,7 +121,7 @@ module ddr2_state_machine
                     // the output FIFO buffer and (IMPORTANT, added this to
                     // ramtest code!) we are not reading past the point where
                     // data was just written.
-                    end else if (calib_done==1 && write_mode==1 && (ob_count<(FIFO_SIZE-1-BURST_LEN/2)) && (cmd_byte_addr_wr != cmd_byte_addr_rd)) begin
+                    end else if (calib_done==1 && read_mode==1 && (ob_count<=(FIFO_SIZE-1-BURST_LEN)) && (cmd_byte_addr_wr != cmd_byte_addr_rd)) begin
                         state <= s_read1;
                     end
                 end
