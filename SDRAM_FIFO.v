@@ -123,7 +123,7 @@ module SDRAM_FIFO  #(
 
 	// FIFO capacity monitor
 	output wire [31:0]					    num_words_in_FIFO,
-
+	
 	// I/O connections from Xilinx FPGA to 128-MiByte SDRAM
 	inout  wire [C3_NUM_DQ_PINS-1:0]         ddr2_dq,
 	output wire [C3_MEM_ADDR_WIDTH-1:0]      ddr2_a,
@@ -276,8 +276,8 @@ module SDRAM_FIFO  #(
 	
 	wire        	pipe_out_write;
 	wire [31:0] 	pipe_out_data;
-	wire [10:0]  	pipe_out_rd_count;
-    wire [10:0]     pipe_out_wr_count;
+	wire [9:0]  	pipe_out_rd_count;
+    wire [9:0]      pipe_out_wr_count;
     wire            pipe_out_full;
     wire            pipe_out_empty;
 
@@ -547,19 +547,20 @@ module SDRAM_FIFO  #(
     // 32-bits, then BLOCK_SIZE here should be 512 bytes/(4 bytes/word)=128.
 	//
 	// blockSize = 1024 bytes -> BLOCK_SIZE = 256.
-	//
+	// blockSize = 512 bytes -> BLOCK_SIZE = 128
 	// blockSize = 256 bytes -> BLOCK_SIZE = 64
+	// blockSize = 128 bytes -> BLOCK_SIZE = 32
     // 
     // okHost will only transfer if there are at least this many words
     // available in the okPipeOut_fifo.
-    localparam BLOCK_SIZE = 128; 
+    localparam BLOCK_SIZE = 64; 
 	always @(posedge ti_clk) begin
         // FIFO capacity calculation: how many 16-bit words are in the entire FIFO?
         // (Including the contents of the SDRAM and the two mini-FIFOs.)
 		buffer_byte_addr_rd_ti <= buffer_byte_addr_rd;
 		buffer_byte_addr_wr_ti <= buffer_byte_addr_wr;
-		pipe_in_word_count_ti <= pipe_in_wr_count;
-		pipe_out_word_count_ti <= pipe_out_rd_count;
+		pipe_in_word_count_ti <= pipe_in_wr_count;				// number of 16-bit words in input FIFO
+		pipe_out_word_count_ti <= {pipe_out_rd_count, 1'b0};	// number of 16-bit words in output FIFO
 
         // ready signal for okBTPipeOut
         if (pipe_out_rd_count >= BLOCK_SIZE) begin
@@ -575,6 +576,6 @@ module SDRAM_FIFO  #(
 	
 	assign buffer_word_addr_diff_ti = buffer_word_addr_wr_ti - buffer_word_addr_rd_ti;
 	
-	assign num_words_in_FIFO = { 5'b00000, { 1'b0, buffer_word_addr_diff_ti[25:0] } + { 16'b0, pipe_in_word_count_ti } + { 16'b0, pipe_out_word_count_ti }};
+	assign num_words_in_FIFO = { 5'b00000, {1'b0, buffer_word_addr_diff_ti[25:0]} + {16'b0, pipe_in_word_count_ti} + {16'b0, pipe_out_word_count_ti}};
 	
 endmodule

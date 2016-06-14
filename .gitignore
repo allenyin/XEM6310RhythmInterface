@@ -17,7 +17,6 @@
 *.bld
 *.cmd_log
 *.drc
-*.ncd
 *.ngd
 *.ngr
 *.pad

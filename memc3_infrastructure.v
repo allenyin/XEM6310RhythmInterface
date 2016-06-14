@@ -108,7 +108,7 @@ module memc3_infrastructure #
 
   localparam RST_SYNC_NUM = 25;
   localparam CLK_PERIOD_NS = C_MEMCLK_PERIOD / 1000.0;
-  localparam CLK_PERIOD_INT = C_MEMCLK_PERIOD/1000;
+  //localparam CLK_PERIOD_INT = C_MEMCLK_PERIOD/1000;
 
   wire                       clk_2x_0;
   wire                       clk_2x_180;

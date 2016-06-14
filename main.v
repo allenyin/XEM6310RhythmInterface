@@ -364,6 +364,7 @@ module main #(
 	assign SPI_run_continuous = 		ep00wirein[1];
 	assign DSP_settle =     			ep00wirein[2];
 	assign TTL_out_mode = 				ep00wirein[3];
+	assign pipeout_override_en =		ep00wirein[4];	// assert ready on block pipeout manually
 	assign DAC_noise_suppress = 		ep00wirein[12:6];
 	assign DAC_gain = 					ep00wirein[15:13];
 
@@ -2800,7 +2801,8 @@ module main #(
 
     // Block throttled pipe out
 	okBTPipeOut poa0(.okHE(okHE), .okEH(okEHx[ 32*65 +: 65]), .ep_addr(8'ha0), .ep_read(FIFO_read_from), 
-	                 .ep_blockstrobe(), .ep_datain({FIFO_data_out[15:0],FIFO_data_out[31:16]}), .ep_ready(pipeout_rdy));
+	                 .ep_blockstrobe(), .ep_datain({FIFO_data_out[15:0],FIFO_data_out[31:16]}), 
+					 .ep_ready(pipeout_rdy | pipeout_override_en));
 
 endmodule
 

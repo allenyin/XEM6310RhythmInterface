@@ -57,7 +57,7 @@ module ddr2_state_machine
 	);
 
 	localparam FIFO_SIZE	  = 1024;
-	localparam BURST_LEN      = 2;  // Number of 32-bit data chunks transferred per cycle
+	localparam BURST_LEN      = 4;  // Number of 32-bit data chunks transferred per cycle
 									// Must be multiple of two!
     // Note: This parameter was set to 32 in the Opal Kelly RAMTester example.
     // We set this parameter to its minimum allowable value (2) and see no
