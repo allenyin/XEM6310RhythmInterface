@@ -27,16 +27,20 @@ module ddr2_state_machine
 	input  wire          writes_en,
 	input  wire          reads_en,
 	input  wire          calib_done, 
+	
 	//DDR Input Buffer (ib_)
 	output reg           ib_re,
 	input  wire [31:0]   ib_data,
-	input  wire [9:0]    ib_count,
+	//input  wire [9:0]    ib_count,	// if FIFO_SIZE = 1024
+	input  wire [10:0]	 ib_count,
 	input  wire          ib_valid,
 	input  wire          ib_empty,
+	
 	//DDR Output Buffer (ob_)
 	output reg           ob_we,
 	output reg  [31:0]   ob_data,
-	input  wire [9:0]    ob_count,
+	//input  wire [9:0]    ob_count,	// if FIFO_SIZE = 1024
+	input  wire [10:0]	 ob_count,
 	
 	output reg           p0_rd_en_o, 
 	input  wire          p0_rd_empty,
@@ -56,8 +60,8 @@ module ddr2_state_machine
 	output reg [29:0]    cmd_byte_addr_rd   // Added by Intan as output for capacity monitoring
 	);
 
-	localparam FIFO_SIZE	  = 1024;
-	localparam BURST_LEN      = 4;  // Number of 32-bit data chunks transferred per cycle
+	localparam FIFO_SIZE	  = 2048;
+	localparam BURST_LEN      = 2;  // Number of 32-bit data chunks transferred per cycle
 									// Must be multiple of two!
     // Note: This parameter was set to 32 in the Opal Kelly RAMTester example.
     // We set this parameter to its minimum allowable value (2) and see no
@@ -83,7 +87,6 @@ module ddr2_state_machine
 	always @(posedge clk) write_mode <= writes_en;
 	always @(posedge clk) read_mode <= reads_en;
 	always @(posedge clk) reset_d <= reset;
-
 
 	integer state;
 	localparam    s_idle  = 0,
@@ -121,7 +124,7 @@ module ddr2_state_machine
                     // the output FIFO buffer and (IMPORTANT, added this to
                     // ramtest code!) we are not reading past the point where
                     // data was just written.
-                    end else if (calib_done==1 && read_mode==1 && (ob_count<=(FIFO_SIZE-1-BURST_LEN)) && (cmd_byte_addr_wr != cmd_byte_addr_rd)) begin
+                    end else if (calib_done==1 && read_mode==1 && (ob_count<(FIFO_SIZE-1-BURST_LEN)) && (cmd_byte_addr_wr != cmd_byte_addr_rd)) begin
                         state <= s_read1;
                     end
                 end

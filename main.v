@@ -233,10 +233,10 @@ module main #(
 	reg [5:0] 		channel, channel_MISO;  // varies from 0-34 (amplfier channels 0-31, plus 3 auxiliary commands)
 	reg [15:0] 		MOSI_cmd_A, MOSI_cmd_B, MOSI_cmd_C, MOSI_cmd_D;
 	
-	reg [73:0] 		    in4x_A1, in4x_A2;
-	reg [73:0] 		    in4x_B1, in4x_B2;
-	reg [73:0] 		    in4x_C1, in4x_C2;
-	reg [73:0] 		    in4x_D1, in4x_D2;
+	reg [73:0] 		in4x_A1, in4x_A2;
+	reg [73:0] 		in4x_B1, in4x_B2;
+	reg [73:0] 		in4x_C1, in4x_C2;
+	reg [73:0] 		in4x_D1, in4x_D2;
 	wire [15:0] 	in_A1, in_A2;
 	wire [15:0] 	in_B1, in_B2;
 	wire [15:0] 	in_C1, in_C2;
