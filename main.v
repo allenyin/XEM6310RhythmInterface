@@ -50,15 +50,15 @@ module main #(
 	)
 	(
 	// okHost wires
-	input  wire [4:0]  							  okUH,
-	output wire [2:0]  							  okHU,
-	inout  wire [31:0] 							  okUHU,
-	inout  wire        							  okAA,
+	input  wire [4:0]  						 okUH,
+	output wire [2:0]  						 okHU,
+	inout  wire [31:0] 						 okUHU,
+	inout  wire        						 okAA,
 	
-	output wire [7:0]  							  led,
+	output wire [7:0]  						 led,
 
-	input wire								clk1_in_p,
-	input wire								clk1_in_n,
+	input wire								 clk1_in_p,
+	input wire								 clk1_in_n,
 
 	inout  wire [C3_NUM_DQ_PINS-1:0]         ddr2_dq,
 	output wire [C3_MEM_ADDR_WIDTH-1:0]      ddr2_a,
@@ -131,32 +131,32 @@ module main #(
 	output reg                               MOSI_C,
 	output reg                               MOSI_D,
 	
-	output reg										  sample_clk,
+	output reg								 sample_clk,
 	
-	input wire [15:0]								 TTL_in,
-	output wire [15:0]							     TTL_out,
+	input wire [15:0]						 TTL_in,
+	output wire [15:0]						 TTL_out,
 	
-	output wire										  DAC_SYNC,
-	output wire										  DAC_SCLK,
-	output wire										  DAC_DIN_1,
-	output wire										  DAC_DIN_2,
-	output wire										  DAC_DIN_3,
-	output wire										  DAC_DIN_4,
-	output wire										  DAC_DIN_5,
-	output wire										  DAC_DIN_6,
-	output wire										  DAC_DIN_7,
-	output wire										  DAC_DIN_8,
+	output wire								 DAC_SYNC,
+	output wire								 DAC_SCLK,
+	output wire								 DAC_DIN_1,
+	output wire								 DAC_DIN_2,
+	output wire								 DAC_DIN_3,
+	output wire								 DAC_DIN_4,
+	output wire								 DAC_DIN_5,
+	output wire								 DAC_DIN_6,
+	output wire								 DAC_DIN_7,
+	output wire								 DAC_DIN_8,
 	
-	output wire										  ADC_CS,
-	output wire										  ADC_SCLK,
-	input wire										  ADC_DOUT_1,
-	input wire										  ADC_DOUT_2,
-	input wire										  ADC_DOUT_3,
-	input wire										  ADC_DOUT_4,
-	input wire										  ADC_DOUT_5,
-	input wire										  ADC_DOUT_6,
-	input wire										  ADC_DOUT_7,
-	input wire										  ADC_DOUT_8,
+    output wire								 ADC_CS,
+	output wire								 ADC_SCLK,
+	input wire								 ADC_DOUT_1,
+	input wire								 ADC_DOUT_2,
+	input wire								 ADC_DOUT_3,
+	input wire								 ADC_DOUT_4,
+	input wire								 ADC_DOUT_5,
+	input wire								 ADC_DOUT_6,
+	input wire								 ADC_DOUT_7,
+	input wire								 ADC_DOUT_8,
 	
 	input wire [3:0]								  board_mode
 	);
@@ -211,140 +211,156 @@ module main #(
 	
 	// Wires and registers
 
-	wire 				clk1;				// buffered 100 MHz clock
-	wire				dataclk;			// programmable frequency clock (f = 2800 * per-channel amplifier sampling rate)
-	wire				dataclk_locked, DCM_prog_done;
+	wire 		clk1;				// buffered 100 MHz clock
+	wire		dataclk;			// programmable frequency clock (f = 2800 * per-channel amplifier sampling rate)
+	wire		dataclk_locked, DCM_prog_done;
 	
-	reg [15:0]		FIFO_data_in;
-	reg				FIFO_write_to;
-	wire [31:0] 	FIFO_data_out;
-	wire		    FIFO_read_from;
-	wire [31:0] 	num_words_in_FIFO;
+	reg [15:0]	FIFO_data_in;
+	reg			FIFO_write_to;
+	wire [31:0] FIFO_data_out;
+	wire		FIFO_read_from;
+	wire [31:0] num_words_in_FIFO;
 
-	wire [9:0]		RAM_addr_wr;
-	reg [9:0]		RAM_addr_rd;
-	wire [3:0]		RAM_bank_sel_wr;
-	reg [3:0]		RAM_bank_sel_rd;
-	wire [15:0]		RAM_data_in;
-	wire [15:0]		RAM_data_out_1_pre, RAM_data_out_2_pre, RAM_data_out_3_pre;
-	reg [15:0]		RAM_data_out_1, RAM_data_out_2, RAM_data_out_3;
-    wire		    RAM_we_1, RAM_we_2, RAM_we_3;
+	wire [9:0]	RAM_addr_wr;
+	reg [9:0]	RAM_addr_rd;
+	wire [3:0]	RAM_bank_sel_wr;
+	reg [3:0]	RAM_bank_sel_rd;
+	wire [15:0]	RAM_data_in;
+	wire [15:0]	RAM_data_out_1_pre, RAM_data_out_2_pre, RAM_data_out_3_pre;
+	reg [15:0]	RAM_data_out_1, RAM_data_out_2, RAM_data_out_3;
+    wire		RAM_we_1, RAM_we_2, RAM_we_3;
 		
-	reg [5:0] 		channel, channel_MISO;  // varies from 0-34 (amplfier channels 0-31, plus 3 auxiliary commands)
-	reg [15:0] 		MOSI_cmd_A, MOSI_cmd_B, MOSI_cmd_C, MOSI_cmd_D;
+	reg [5:0] 	channel, channel_MISO;  // varies from 0-34 (amplfier channels 0-31, plus 3 auxiliary commands)
+	reg [15:0] 	MOSI_cmd_A, MOSI_cmd_B, MOSI_cmd_C, MOSI_cmd_D;
 	
-	reg [73:0] 		in4x_A1, in4x_A2;
-	reg [73:0] 		in4x_B1, in4x_B2;
-	reg [73:0] 		in4x_C1, in4x_C2;
-	reg [73:0] 		in4x_D1, in4x_D2;
-	wire [15:0] 	in_A1, in_A2;
-	wire [15:0] 	in_B1, in_B2;
-	wire [15:0] 	in_C1, in_C2;
-	wire [15:0] 	in_D1, in_D2;
-	wire [15:0] 	in_DDR_A1, in_DDR_A2;
-	wire [15:0] 	in_DDR_B1, in_DDR_B2;
-	wire [15:0] 	in_DDR_C1, in_DDR_C2;
-	wire [15:0] 	in_DDR_D1, in_DDR_D2;
+	reg [73:0] 	in4x_A1, in4x_A2;
+	reg [73:0] 	in4x_B1, in4x_B2;
+	reg [73:0] 	in4x_C1, in4x_C2;
+	reg [73:0] 	in4x_D1, in4x_D2;
+	wire [15:0]	in_A1, in_A2;
+	wire [15:0]	in_B1, in_B2;
+	wire [15:0]	in_C1, in_C2;
+	wire [15:0]	in_D1, in_D2;
+	wire [15:0]	in_DDR_A1, in_DDR_A2;
+	wire [15:0]	in_DDR_B1, in_DDR_B2;
+	wire [15:0]	in_DDR_C1, in_DDR_C2;
+	wire [15:0]	in_DDR_D1, in_DDR_D2;
 	
-	wire [3:0] 		delay_A, delay_B, delay_C, delay_D;
+	wire [3:0] 	delay_A, delay_B, delay_C, delay_D;
 	
-	reg [15:0] 		result_A1, result_A2;
-	reg [15:0] 		result_B1, result_B2;
-	reg [15:0] 		result_C1, result_C2;
-	reg [15:0] 		result_D1, result_D2;
-	reg [15:0] 		result_DDR_A1, result_DDR_A2;
-	reg [15:0] 		result_DDR_B1, result_DDR_B2;
-	reg [15:0] 		result_DDR_C1, result_DDR_C2;
-	reg [15:0] 		result_DDR_D1, result_DDR_D2;
+	reg [15:0] 	result_A1, result_A2;
+	reg [15:0] 	result_B1, result_B2;
+	reg [15:0] 	result_C1, result_C2;
+	reg [15:0] 	result_D1, result_D2;
+	reg [15:0] 	result_DDR_A1, result_DDR_A2;
+	reg [15:0] 	result_DDR_B1, result_DDR_B2;
+	reg [15:0] 	result_DDR_C1, result_DDR_C2;
+	reg [15:0] 	result_DDR_D1, result_DDR_D2;
 
-	reg [31:0] 		timestamp;			 
-	reg [31:0]		max_timestep;
-	wire [31:0]		max_timestep_in;
-	wire [63:0]		header_magic_number;
-	wire [15:0]		data_stream_filler;
+	reg [31:0] 	timestamp;			 
+	reg [31:0]	max_timestep;
+	wire [31:0]	max_timestep_in;
+	wire [63:0]	header_magic_number;
+	wire [15:0]	data_stream_filler;
 	
-	reg [15:0]		data_stream_1, data_stream_2, data_stream_3, data_stream_4;
-	reg [15:0]		data_stream_5, data_stream_6, data_stream_7, data_stream_8;
-	reg [3:0]		data_stream_1_sel, data_stream_2_sel, data_stream_3_sel, data_stream_4_sel;
-	reg [3:0]		data_stream_5_sel, data_stream_6_sel, data_stream_7_sel, data_stream_8_sel;
-	wire [3:0]		data_stream_1_sel_in, data_stream_2_sel_in, data_stream_3_sel_in, data_stream_4_sel_in;
-	wire [3:0]		data_stream_5_sel_in, data_stream_6_sel_in, data_stream_7_sel_in, data_stream_8_sel_in;
-	reg				data_stream_1_en, data_stream_2_en, data_stream_3_en, data_stream_4_en;
-	reg				data_stream_5_en, data_stream_6_en, data_stream_7_en, data_stream_8_en;
-	wire				data_stream_1_en_in, data_stream_2_en_in, data_stream_3_en_in, data_stream_4_en_in;
-	wire				data_stream_5_en_in, data_stream_6_en_in, data_stream_7_en_in, data_stream_8_en_in;
+	reg [15:0]  data_stream_1,  data_stream_2,  data_stream_3,  data_stream_4;
+	reg [15:0]  data_stream_5,  data_stream_6,  data_stream_7,  data_stream_8;
+    reg [15:0]  data_stream_9,  data_stream_10, data_stream_11, data_stream_12; 
+    reg [15:0]  data_stream_13, data_stream_14, data_stream_15, data_stream_16; 
 	
-	reg [15:0]		data_stream_TTL_in, data_stream_TTL_out;
-	wire [15:0]		data_stream_ADC_1, data_stream_ADC_2, data_stream_ADC_3, data_stream_ADC_4;
-	wire [15:0]		data_stream_ADC_5, data_stream_ADC_6, data_stream_ADC_7, data_stream_ADC_8;
+    reg [3:0]   data_stream_1_sel, data_stream_2_sel, data_stream_3_sel, data_stream_4_sel;
+	reg [3:0]   data_stream_5_sel, data_stream_6_sel, data_stream_7_sel, data_stream_8_sel;
+    reg [3:0]   data_stream_9_sel, data_stream_10_sel, data_stream_11_sel, data_stream_12_sel;
+    reg [3:0]   data_stream_13_sel, data_stream_14_sel, data_stream_15_sel, data_stream_16_sel;
 	
-	wire				TTL_out_mode;
-	reg [15:0]		TTL_out_user;
-	
-	wire				reset, SPI_start, SPI_run_continuous;
-	reg				SPI_running;
+    wire [3:0]  data_stream_1_sel_in, data_stream_2_sel_in, data_stream_3_sel_in, data_stream_4_sel_in;
+	wire [3:0]  data_stream_5_sel_in, data_stream_6_sel_in, data_stream_7_sel_in, data_stream_8_sel_in;
+    wire [3:0]  data_stream_9_sel_in, data_stream_10_sel_in, data_stream_11_sel_in, data_stream_12_sel_in;
+    wire [3:0]  data_stream_13_sel_in, data_stream_14_sel_in, data_stream_15_sel_in, data_stream_16_sel_in;
 
-	wire [8:0]		dataclk_M, dataclk_D;
-	wire				DCM_prog_trigger;
-	wire           DSP_settle;
+	reg         data_stream_1_en, data_stream_2_en, data_stream_3_en, data_stream_4_en;
+	reg		    data_stream_5_en, data_stream_6_en, data_stream_7_en, data_stream_8_en;
+    reg         data_stream_9_en, data_stream_10_en, data_stream_11_en, data_stream_12_en;
+    reg         data_stream_13_en, data_stream_14_en, data_stream_15_en, data_stream_16_en;
 
-	wire [15:0] 	MOSI_cmd_selected_A, MOSI_cmd_selected_B, MOSI_cmd_selected_C, MOSI_cmd_selected_D;
-
-	reg [15:0] 		aux_cmd_A, aux_cmd_B, aux_cmd_C, aux_cmd_D;
-	reg [9:0] 		aux_cmd_index_1, aux_cmd_index_2, aux_cmd_index_3;
-	wire [9:0] 		max_aux_cmd_index_1_in, max_aux_cmd_index_2_in, max_aux_cmd_index_3_in;
-	reg [9:0] 		max_aux_cmd_index_1, max_aux_cmd_index_2, max_aux_cmd_index_3;
-	reg [9:0]		loop_aux_cmd_index_1, loop_aux_cmd_index_2, loop_aux_cmd_index_3;
-
-	wire [3:0] 		aux_cmd_bank_1_A_in, aux_cmd_bank_1_B_in, aux_cmd_bank_1_C_in, aux_cmd_bank_1_D_in;
-	wire [3:0] 		aux_cmd_bank_2_A_in, aux_cmd_bank_2_B_in, aux_cmd_bank_2_C_in, aux_cmd_bank_2_D_in;
-	wire [3:0] 		aux_cmd_bank_3_A_in, aux_cmd_bank_3_B_in, aux_cmd_bank_3_C_in, aux_cmd_bank_3_D_in;
-	reg [3:0] 		aux_cmd_bank_1_A, aux_cmd_bank_1_B, aux_cmd_bank_1_C, aux_cmd_bank_1_D;
-	reg [3:0] 		aux_cmd_bank_2_A, aux_cmd_bank_2_B, aux_cmd_bank_2_C, aux_cmd_bank_2_D;
-	reg [3:0] 		aux_cmd_bank_3_A, aux_cmd_bank_3_B, aux_cmd_bank_3_C, aux_cmd_bank_3_D;
-
-	wire [4:0] 		DAC_channel_sel_1, DAC_channel_sel_2, DAC_channel_sel_3, DAC_channel_sel_4;
-	wire [4:0] 		DAC_channel_sel_5, DAC_channel_sel_6, DAC_channel_sel_7, DAC_channel_sel_8;
-	wire [3:0] 		DAC_stream_sel_1, DAC_stream_sel_2, DAC_stream_sel_3, DAC_stream_sel_4;
-	wire [3:0] 		DAC_stream_sel_5, DAC_stream_sel_6, DAC_stream_sel_7, DAC_stream_sel_8;
-	wire 				DAC_en_1, DAC_en_2, DAC_en_3, DAC_en_4;
-	wire 				DAC_en_5, DAC_en_6, DAC_en_7, DAC_en_8;
-	reg [15:0]		DAC_pre_register_1, DAC_pre_register_2, DAC_pre_register_3, DAC_pre_register_4;
-	reg [15:0]		DAC_pre_register_5, DAC_pre_register_6, DAC_pre_register_7, DAC_pre_register_8;
-	reg [15:0]		DAC_register_1, DAC_register_2, DAC_register_3, DAC_register_4;
-	reg [15:0]		DAC_register_5, DAC_register_6, DAC_register_7, DAC_register_8;
-
-	reg [15:0]		DAC_manual;
-	wire [6:0]     DAC_noise_suppress;
-	wire [2:0]		DAC_gain;
+	wire        data_stream_1_en_in, data_stream_2_en_in, data_stream_3_en_in, data_stream_4_en_in;
+	wire	    data_stream_5_en_in, data_stream_6_en_in, data_stream_7_en_in, data_stream_8_en_in;
+    wire        data_stream_9_en_in, data_stream_10_en_in, data_stream_11_en_in, data_stream_12_en_in;
+    wire        data_stream_13_en_in, data_stream_14_en_in, data_stream_15_en_in, data_stream_16_en_in;
 	
-	reg [15:0]		DAC_thresh_1, DAC_thresh_2, DAC_thresh_3, DAC_thresh_4;
-	reg [15:0]		DAC_thresh_5, DAC_thresh_6, DAC_thresh_7, DAC_thresh_8;
-	reg				DAC_thresh_pol_1, DAC_thresh_pol_2, DAC_thresh_pol_3, DAC_thresh_pol_4;
-	reg				DAC_thresh_pol_5, DAC_thresh_pol_6, DAC_thresh_pol_7, DAC_thresh_pol_8;
-	wire [7:0]		DAC_thresh_out;
+	reg [15:0]  data_stream_TTL_in, data_stream_TTL_out;
+	wire [15:0]	data_stream_ADC_1, data_stream_ADC_2, data_stream_ADC_3, data_stream_ADC_4;
+	wire [15:0]	data_stream_ADC_5, data_stream_ADC_6, data_stream_ADC_7, data_stream_ADC_8;
 	
-	reg				HPF_en;
-	reg [15:0]		HPF_coefficient;
+	wire		TTL_out_mode;
+	reg [15:0]	TTL_out_user;
 	
-	reg				external_fast_settle_enable;
-	reg [3:0]		external_fast_settle_channel;
-	reg				external_fast_settle, external_fast_settle_prev;
+	wire		reset, SPI_start, SPI_run_continuous;
+	reg			SPI_running;
 
-	reg				external_digout_enable_A, external_digout_enable_B, external_digout_enable_C, external_digout_enable_D;
-	reg [3:0]		external_digout_channel_A, external_digout_channel_B, external_digout_channel_C, external_digout_channel_D;
-	reg				external_digout_A, external_digout_B, external_digout_C, external_digout_D;
+	wire [8:0]	dataclk_M, dataclk_D;
+	wire		DCM_prog_trigger;
+	wire        DSP_settle;
+
+	wire [15:0] MOSI_cmd_selected_A, MOSI_cmd_selected_B, MOSI_cmd_selected_C, MOSI_cmd_selected_D;
+
+	reg [15:0] 	aux_cmd_A, aux_cmd_B, aux_cmd_C, aux_cmd_D;
+	reg [9:0] 	aux_cmd_index_1, aux_cmd_index_2, aux_cmd_index_3;
+	wire [9:0] 	max_aux_cmd_index_1_in, max_aux_cmd_index_2_in, max_aux_cmd_index_3_in;
+	reg [9:0] 	max_aux_cmd_index_1, max_aux_cmd_index_2, max_aux_cmd_index_3;
+	reg [9:0]	loop_aux_cmd_index_1, loop_aux_cmd_index_2, loop_aux_cmd_index_3;
+
+	wire [3:0] 	aux_cmd_bank_1_A_in, aux_cmd_bank_1_B_in, aux_cmd_bank_1_C_in, aux_cmd_bank_1_D_in;
+	wire [3:0] 	aux_cmd_bank_2_A_in, aux_cmd_bank_2_B_in, aux_cmd_bank_2_C_in, aux_cmd_bank_2_D_in;
+	wire [3:0] 	aux_cmd_bank_3_A_in, aux_cmd_bank_3_B_in, aux_cmd_bank_3_C_in, aux_cmd_bank_3_D_in;
+	reg [3:0] 	aux_cmd_bank_1_A, aux_cmd_bank_1_B, aux_cmd_bank_1_C, aux_cmd_bank_1_D;
+	reg [3:0] 	aux_cmd_bank_2_A, aux_cmd_bank_2_B, aux_cmd_bank_2_C, aux_cmd_bank_2_D;
+	reg [3:0] 	aux_cmd_bank_3_A, aux_cmd_bank_3_B, aux_cmd_bank_3_C, aux_cmd_bank_3_D;
+
+	wire [4:0] 	DAC_channel_sel_1, DAC_channel_sel_2, DAC_channel_sel_3, DAC_channel_sel_4;
+	wire [4:0] 	DAC_channel_sel_5, DAC_channel_sel_6, DAC_channel_sel_7, DAC_channel_sel_8;
+	wire [4:0] 	DAC_stream_sel_1, DAC_stream_sel_2, DAC_stream_sel_3, DAC_stream_sel_4;
+	wire [4:0] 	DAC_stream_sel_5, DAC_stream_sel_6, DAC_stream_sel_7, DAC_stream_sel_8;
+	wire 		DAC_en_1, DAC_en_2, DAC_en_3, DAC_en_4;
+	wire 		DAC_en_5, DAC_en_6, DAC_en_7, DAC_en_8;
+	reg [15:0]	DAC_pre_register_1, DAC_pre_register_2, DAC_pre_register_3, DAC_pre_register_4;
+	reg [15:0]	DAC_pre_register_5, DAC_pre_register_6, DAC_pre_register_7, DAC_pre_register_8;
+	reg [15:0]	DAC_register_1, DAC_register_2, DAC_register_3, DAC_register_4;
+	reg [15:0]	DAC_register_5, DAC_register_6, DAC_register_7, DAC_register_8;
+
+	reg [15:0]	DAC_manual;
+	wire [6:0]  DAC_noise_suppress;
+	wire [2:0]	DAC_gain;
 	
-	wire [7:0]		led_in;
+	reg [15:0]	DAC_thresh_1, DAC_thresh_2, DAC_thresh_3, DAC_thresh_4;
+	reg [15:0]	DAC_thresh_5, DAC_thresh_6, DAC_thresh_7, DAC_thresh_8;
+	reg			DAC_thresh_pol_1, DAC_thresh_pol_2, DAC_thresh_pol_3, DAC_thresh_pol_4;
+	reg			DAC_thresh_pol_5, DAC_thresh_pol_6, DAC_thresh_pol_7, DAC_thresh_pol_8;
+	wire [7:0]	DAC_thresh_out;
+	
+	reg			HPF_en;
+	reg [15:0]	HPF_coefficient;
+	
+	reg			external_fast_settle_enable;
+	reg [3:0]	external_fast_settle_channel;
+	reg			external_fast_settle, external_fast_settle_prev;
+
+	reg	        external_digout_enable_A, external_digout_enable_B, external_digout_enable_C, external_digout_enable_D;
+	reg [3:0]	external_digout_channel_A, external_digout_channel_B, external_digout_channel_C, external_digout_channel_D;
+	reg			external_digout_A, external_digout_B, external_digout_C, external_digout_D;
+	
+	wire [7:0]	led_in;
 
 	// Opal Kelly USB Host Interface
 	
 
-    wire        ti_clk;         // 100.8 MHz from Opal Kelly USB3 interface         
+    wire         ti_clk;         // 100.8 MHz from Opal Kelly USB3 interface         
 	wire [112:0] okHE;
 	wire [64:0]  okEH;
 
     // USB3.0 bus width is 32 (USB2 width is 16)
+    // Should still be compatible with USB2 though, taking the least
+    // significant 16 bits.
 	wire [31:0] ep00wirein, ep01wirein, ep02wirein, ep03wirein, ep04wirein, ep05wirein, ep06wirein, ep07wirein;
 	wire [31:0] ep08wirein, ep09wirein, ep0awirein, ep0bwirein, ep0cwirein, ep0dwirein, ep0ewirein, ep0fwirein;
 	wire [31:0] ep10wirein, ep11wirein, ep12wirein, ep13wirein, ep14wirein, ep15wirein, ep16wirein, ep17wirein;
@@ -360,13 +376,13 @@ module main #(
 
 	// USB WireIn inputs
 
-	assign reset = 						ep00wirein[0];
-	assign SPI_run_continuous = 		ep00wirein[1];
-	assign DSP_settle =     			ep00wirein[2];
-	assign TTL_out_mode = 				ep00wirein[3];
-	assign pipeout_override_en =		ep00wirein[4];	// assert ready on block pipeout manually
-	assign DAC_noise_suppress = 		ep00wirein[12:6];
-	assign DAC_gain = 					ep00wirein[15:13];
+	assign reset = 				 ep00wirein[0];
+	assign SPI_run_continuous =  ep00wirein[1];
+	assign DSP_settle =     	 ep00wirein[2];
+	assign TTL_out_mode = 		 ep00wirein[3];
+	assign pipeout_override_en = ep00wirein[4];	// assert ready on block pipeout manually
+	assign DAC_noise_suppress =  ep00wirein[12:6];
+	assign DAC_gain = 			 ep00wirein[15:13];
 
 	assign max_timestep_in[15:0] = 	ep01wirein[15:0];
 	assign max_timestep_in[31:16] =	ep02wirein[15:0];
@@ -375,170 +391,188 @@ module main #(
 		max_timestep <= max_timestep_in;
 	end
 
-	assign dataclk_M = 					{ 1'b0, ep03wirein[15:8] };
-	assign dataclk_D = 					{ 1'b0, ep03wirein[7:0] };
+	assign dataclk_M = { 1'b0, ep03wirein[15:8] };
+	assign dataclk_D = { 1'b0, ep03wirein[7:0] };
 
-	assign delay_A = 						ep04wirein[3:0];
-	assign delay_B = 						ep04wirein[7:4];
-	assign delay_C = 						ep04wirein[11:8];
-	assign delay_D = 						ep04wirein[15:12];
+    assign delay_A = ep04wirein[3:0];
+	assign delay_B = ep04wirein[7:4];
+	assign delay_C = ep04wirein[11:8];
+	assign delay_D = ep04wirein[15:12];
 	
-	assign RAM_addr_wr = 				ep05wirein[9:0];
-	assign RAM_bank_sel_wr = 			ep06wirein[3:0];	
-	assign RAM_data_in = 				ep07wirein[15:0];
+	assign RAM_addr_wr =     ep05wirein[9:0];
+	assign RAM_bank_sel_wr = ep06wirein[3:0];	
+	assign RAM_data_in = 	 ep07wirein[15:0];
 
-	assign aux_cmd_bank_1_A_in = 		ep08wirein[3:0];
-	assign aux_cmd_bank_1_B_in = 		ep08wirein[7:4];
-	assign aux_cmd_bank_1_C_in = 		ep08wirein[11:8];
-	assign aux_cmd_bank_1_D_in = 		ep08wirein[15:12];
+	assign aux_cmd_bank_1_A_in = ep08wirein[3:0];
+	assign aux_cmd_bank_1_B_in = ep08wirein[7:4];
+	assign aux_cmd_bank_1_C_in = ep08wirein[11:8];
+	assign aux_cmd_bank_1_D_in = ep08wirein[15:12];
 
-	assign aux_cmd_bank_2_A_in = 		ep09wirein[3:0];
-	assign aux_cmd_bank_2_B_in = 		ep09wirein[7:4];
-	assign aux_cmd_bank_2_C_in = 		ep09wirein[11:8];
-	assign aux_cmd_bank_2_D_in = 		ep09wirein[15:12];
+	assign aux_cmd_bank_2_A_in = ep09wirein[3:0];
+	assign aux_cmd_bank_2_B_in = ep09wirein[7:4];
+	assign aux_cmd_bank_2_C_in = ep09wirein[11:8];
+	assign aux_cmd_bank_2_D_in = ep09wirein[15:12];
 
-	assign aux_cmd_bank_3_A_in = 		ep0awirein[3:0];
-	assign aux_cmd_bank_3_B_in = 		ep0awirein[7:4];
-	assign aux_cmd_bank_3_C_in = 		ep0awirein[11:8];
-	assign aux_cmd_bank_3_D_in = 		ep0awirein[15:12];
+	assign aux_cmd_bank_3_A_in = ep0awirein[3:0];
+	assign aux_cmd_bank_3_B_in = ep0awirein[7:4];
+	assign aux_cmd_bank_3_C_in = ep0awirein[11:8];
+	assign aux_cmd_bank_3_D_in = ep0awirein[15:12];
 		
-	assign max_aux_cmd_index_1_in = 	ep0bwirein[9:0];
-	assign max_aux_cmd_index_2_in = 	ep0cwirein[9:0];
-	assign max_aux_cmd_index_3_in = 	ep0dwirein[9:0];
+	assign max_aux_cmd_index_1_in =	ep0bwirein[9:0];
+	assign max_aux_cmd_index_2_in =	ep0cwirein[9:0];
+	assign max_aux_cmd_index_3_in =	ep0dwirein[9:0];
 
 	always @(posedge dataclk) begin
-		loop_aux_cmd_index_1 <=			ep0ewirein[9:0];
-		loop_aux_cmd_index_2 <=			ep0fwirein[9:0];
-		loop_aux_cmd_index_3 <=			ep10wirein[9:0];
+		loop_aux_cmd_index_1 <=	ep0ewirein[9:0];
+		loop_aux_cmd_index_2 <=	ep0fwirein[9:0];
+		loop_aux_cmd_index_3 <=	ep10wirein[9:0];
 	end
 
-	assign led_in =  		   			ep11wirein[7:0];
+	assign led_in = ep11wirein[7:0];
 
-	assign data_stream_1_sel_in = 	ep12wirein[3:0];
-	assign data_stream_2_sel_in = 	ep12wirein[7:4];
-	assign data_stream_3_sel_in = 	ep12wirein[11:8];
-	assign data_stream_4_sel_in = 	ep12wirein[15:12];
-	assign data_stream_5_sel_in = 	ep13wirein[3:0];
-	assign data_stream_6_sel_in = 	ep13wirein[7:4];
-	assign data_stream_7_sel_in = 	ep13wirein[11:8];
-	assign data_stream_8_sel_in = 	ep13wirein[15:12];
+	assign data_stream_1_sel_in =   ep12wirein[3:0];
+	assign data_stream_2_sel_in =   ep12wirein[7:4];
+	assign data_stream_3_sel_in =   ep12wirein[11:8];
+	assign data_stream_4_sel_in =   ep12wirein[15:12];
+	assign data_stream_5_sel_in =   ep13wirein[3:0];
+	assign data_stream_6_sel_in =   ep13wirein[7:4];
+	assign data_stream_7_sel_in =   ep13wirein[11:8];
+	assign data_stream_8_sel_in =   ep13wirein[15:12];
 
-   assign data_stream_1_en_in = 		ep14wirein[0];
-   assign data_stream_2_en_in = 		ep14wirein[1];
-   assign data_stream_3_en_in = 		ep14wirein[2];
-   assign data_stream_4_en_in = 		ep14wirein[3];
-   assign data_stream_5_en_in = 		ep14wirein[4];
-   assign data_stream_6_en_in = 		ep14wirein[5];
-   assign data_stream_7_en_in = 		ep14wirein[6];
-   assign data_stream_8_en_in = 		ep14wirein[7];
+    assign data_stream_9_sel_in =   ep12wirein[19:16];
+	assign data_stream_10_sel_in =  ep12wirein[23:20];
+	assign data_stream_11_sel_in =  ep12wirein[27:24];
+	assign data_stream_12_sel_in =  ep12wirein[31:28];
+	assign data_stream_13_sel_in =  ep13wirein[19:16];
+	assign data_stream_14_sel_in =  ep13wirein[23:20];
+	assign data_stream_15_sel_in =  ep13wirein[27:24];
+	assign data_stream_16_sel_in =  ep13wirein[31:28];
+
+    assign data_stream_1_en_in =    ep14wirein[0];
+    assign data_stream_2_en_in =    ep14wirein[1];
+    assign data_stream_3_en_in =    ep14wirein[2];
+    assign data_stream_4_en_in =    ep14wirein[3];
+    assign data_stream_5_en_in =    ep14wirein[4];
+    assign data_stream_6_en_in =    ep14wirein[5];
+    assign data_stream_7_en_in =    ep14wirein[6];
+    assign data_stream_8_en_in =    ep14wirein[7];
+
+    assign data_stream_9_en_in =    ep14wirein[8];
+    assign data_stream_10_en_in =   ep14wirein[9];
+    assign data_stream_11_en_in =   ep14wirein[10];
+    assign data_stream_12_en_in =   ep14wirein[11];
+    assign data_stream_13_en_in =   ep14wirein[12];
+    assign data_stream_14_en_in =   ep14wirein[13];
+    assign data_stream_15_en_in =   ep14wirein[14];
+    assign data_stream_16_en_in =   ep14wirein[15];
 
 	always @(posedge dataclk) begin
-		TTL_out_user <= 					ep15wirein[15:0];
+		TTL_out_user <= ep15wirein[15:0];
 	end
 		
 	assign TTL_out = TTL_out_mode ? {TTL_out_user[15:8], DAC_thresh_out} : TTL_out_user;
 		
-	assign DAC_channel_sel_1 = 		ep16wirein[4:0];
-	assign DAC_stream_sel_1 = 			ep16wirein[8:5];
-	assign DAC_en_1 = 					    ep16wirein[9];
+	assign DAC_channel_sel_1 = ep16wirein[4:0];
+	assign DAC_stream_sel_1 =  ep16wirein[9:5];
+	assign DAC_en_1 = 		   ep16wirein[10];
 	
-	assign DAC_channel_sel_2 = 		ep17wirein[4:0];
-	assign DAC_stream_sel_2 = 			ep17wirein[8:5];
-	assign DAC_en_2 = 					    ep17wirein[9];
+	assign DAC_channel_sel_2 = ep17wirein[4:0];
+	assign DAC_stream_sel_2 =  ep17wirein[9:5];
+	assign DAC_en_2 = 		   ep17wirein[10];
 	
-	assign DAC_channel_sel_3 = 		ep18wirein[4:0];
-	assign DAC_stream_sel_3 = 			ep18wirein[8:5];
-	assign DAC_en_3 = 					    ep18wirein[9];
+	assign DAC_channel_sel_3 = ep18wirein[4:0];
+	assign DAC_stream_sel_3 =  ep18wirein[9:5];
+	assign DAC_en_3 = 		   ep18wirein[10];
 	
-	assign DAC_channel_sel_4 = 		ep19wirein[4:0];
-	assign DAC_stream_sel_4 = 			ep19wirein[8:5];
-	assign DAC_en_4 = 					    ep19wirein[9];
+	assign DAC_channel_sel_4 = ep19wirein[4:0];
+	assign DAC_stream_sel_4 =  ep19wirein[9:5];
+	assign DAC_en_4 = 		   ep19wirein[10];
 	
-	assign DAC_channel_sel_5 = 		ep1awirein[4:0];
-	assign DAC_stream_sel_5 = 			ep1awirein[8:5];
-	assign DAC_en_5 = 					    ep1awirein[9];
+	assign DAC_channel_sel_5 = ep1awirein[4:0];
+	assign DAC_stream_sel_5 =  ep1awirein[9:5];
+	assign DAC_en_5 = 		   ep1awirein[10];
 	
-	assign DAC_channel_sel_6 = 		ep1bwirein[4:0];
-	assign DAC_stream_sel_6 = 			ep1bwirein[8:5];
-	assign DAC_en_6 = 					    ep1bwirein[9];
+	assign DAC_channel_sel_6 = ep1bwirein[4:0];
+	assign DAC_stream_sel_6 =  ep1bwirein[9:5];
+	assign DAC_en_6 = 		   ep1bwirein[10];
 	
-	assign DAC_channel_sel_7 = 		ep1cwirein[4:0];
-	assign DAC_stream_sel_7 = 			ep1cwirein[8:5];
-	assign DAC_en_7 = 					    ep1cwirein[9];
+	assign DAC_channel_sel_7 = ep1cwirein[4:0];
+	assign DAC_stream_sel_7 =  ep1cwirein[9:5];
+	assign DAC_en_7 = 		   ep1cwirein[10];
 	
-	assign DAC_channel_sel_8 = 		ep1dwirein[4:0];
-	assign DAC_stream_sel_8 = 			ep1dwirein[8:5];
-	assign DAC_en_8 = 					    ep1dwirein[9];
+	assign DAC_channel_sel_8 = ep1dwirein[4:0];
+	assign DAC_stream_sel_8 =  ep1dwirein[9:5];
+	assign DAC_en_8 = 		   ep1dwirein[10];
 	
 	always @(posedge dataclk) begin
-		DAC_manual <= 						ep1ewirein[15:0];
+		DAC_manual <= ep1ewirein[15:0];
 	end
 
 	
 	// USB TriggerIn inputs
 
-	assign DCM_prog_trigger = 			ep40trigin[0];
+	assign DCM_prog_trigger = ep40trigin[0];
 	
-	assign SPI_start = 					ep41trigin[0];
+	assign SPI_start = 		  ep41trigin[0];
 
-	assign RAM_we_1 = 					ep42trigin[0];
-	assign RAM_we_2 = 					ep42trigin[1];
-	assign RAM_we_3 = 					ep42trigin[2];
+	assign RAM_we_1 = 		  ep42trigin[0];
+	assign RAM_we_2 = 		  ep42trigin[1];
+	assign RAM_we_3 = 		  ep42trigin[2];
 
 	always @(posedge ep43trigin[0]) begin
-		DAC_thresh_1 <= 					ep1fwirein[15:0];
+		DAC_thresh_1 <= ep1fwirein[15:0];
 	end
 	always @(posedge ep43trigin[1]) begin
-		DAC_thresh_2 <= 					ep1fwirein[15:0];
+		DAC_thresh_2 <= ep1fwirein[15:0];
 	end
 	always @(posedge ep43trigin[2]) begin
-		DAC_thresh_3 <= 					ep1fwirein[15:0];
+		DAC_thresh_3 <= ep1fwirein[15:0];
 	end
 	always @(posedge ep43trigin[3]) begin
-		DAC_thresh_4 <= 					ep1fwirein[15:0];
+		DAC_thresh_4 <= ep1fwirein[15:0];
 	end
 	always @(posedge ep43trigin[4]) begin
-		DAC_thresh_5 <= 					ep1fwirein[15:0];
+		DAC_thresh_5 <= ep1fwirein[15:0];
 	end
 	always @(posedge ep43trigin[5]) begin
-		DAC_thresh_6 <= 					ep1fwirein[15:0];
+		DAC_thresh_6 <= ep1fwirein[15:0];
 	end
 	always @(posedge ep43trigin[6]) begin
-		DAC_thresh_7 <= 					ep1fwirein[15:0];
+		DAC_thresh_7 <= ep1fwirein[15:0];
 	end
 	always @(posedge ep43trigin[7]) begin
-		DAC_thresh_8 <= 					ep1fwirein[15:0];
+		DAC_thresh_8 <= ep1fwirein[15:0];
 	end
 	always @(posedge ep43trigin[8]) begin
-		DAC_thresh_pol_1 <= 				ep1fwirein[0];
+		DAC_thresh_pol_1 <= ep1fwirein[0];
 	end
 	always @(posedge ep43trigin[9]) begin
-		DAC_thresh_pol_2 <= 				ep1fwirein[0];
+		DAC_thresh_pol_2 <= ep1fwirein[0];
 	end
 	always @(posedge ep43trigin[10]) begin
-		DAC_thresh_pol_3 <= 				ep1fwirein[0];
+		DAC_thresh_pol_3 <= ep1fwirein[0];
 	end
 	always @(posedge ep43trigin[11]) begin
-		DAC_thresh_pol_4 <= 				ep1fwirein[0];
+		DAC_thresh_pol_4 <= ep1fwirein[0];
 	end
 	always @(posedge ep43trigin[12]) begin
-		DAC_thresh_pol_5 <= 				ep1fwirein[0];
+		DAC_thresh_pol_5 <= ep1fwirein[0];
 	end
 	always @(posedge ep43trigin[13]) begin
-		DAC_thresh_pol_6 <= 				ep1fwirein[0];
+		DAC_thresh_pol_6 <= ep1fwirein[0];
 	end
 	always @(posedge ep43trigin[14]) begin
-		DAC_thresh_pol_7 <= 				ep1fwirein[0];
+		DAC_thresh_pol_7 <= ep1fwirein[0];
 	end
 	always @(posedge ep43trigin[15]) begin
-		DAC_thresh_pol_8 <= 				ep1fwirein[0];
+		DAC_thresh_pol_8 <= ep1fwirein[0];
 	end
 
 	always @(posedge ep44trigin[0]) begin
-		HPF_en <=							ep1fwirein[0];
+		HPF_en <=	        ep1fwirein[0];
 	end
 	always @(posedge ep44trigin[1]) begin
-		HPF_coefficient <=				ep1fwirein[15:0];
+		HPF_coefficient <=	ep1fwirein[15:0];
 	end
 	
 	always @(posedge ep45trigin[0]) begin
@@ -801,91 +835,89 @@ module main #(
 	assign data_stream_filler = 16'd0;
 		
 	integer main_state;
-   localparam
-				  ms_wait    = 99,
-	           ms_clk1_a  = 100,
-			     ms_clk1_b  = 101,
-              ms_clk1_c  = 102,
-              ms_clk1_d  = 103,
-				  ms_clk2_a  = 104,
-			     ms_clk2_b  = 105,
-              ms_clk2_c  = 106,
-              ms_clk2_d  = 107,
-				  ms_clk3_a  = 108,
-			     ms_clk3_b  = 109,
-              ms_clk3_c  = 110,
-              ms_clk3_d  = 111,
-				  ms_clk4_a  = 112,
-			     ms_clk4_b  = 113,
-              ms_clk4_c  = 114,
-              ms_clk4_d  = 115,
-				  ms_clk5_a  = 116,
-			     ms_clk5_b  = 117,
-              ms_clk5_c  = 118,
-              ms_clk5_d  = 119,
-				  ms_clk6_a  = 120,
-			     ms_clk6_b  = 121,
-              ms_clk6_c  = 122,
-              ms_clk6_d  = 123,
-				  ms_clk7_a  = 124,
-			     ms_clk7_b  = 125,
-              ms_clk7_c  = 126,
-              ms_clk7_d  = 127,
-				  ms_clk8_a  = 128,
-			     ms_clk8_b  = 129,
-              ms_clk8_c  = 130,
-              ms_clk8_d  = 131,
-				  ms_clk9_a  = 132,
-			     ms_clk9_b  = 133,
-              ms_clk9_c  = 134,
-              ms_clk9_d  = 135,
-				  ms_clk10_a = 136,
-			     ms_clk10_b = 137,
-              ms_clk10_c = 138,
-              ms_clk10_d = 139,
-				  ms_clk11_a = 140,
-			     ms_clk11_b = 141,
-              ms_clk11_c = 142,
-              ms_clk11_d = 143,
-				  ms_clk12_a = 144,
-			     ms_clk12_b = 145,
-              ms_clk12_c = 146,
-              ms_clk12_d = 147,
-				  ms_clk13_a = 148,
-			     ms_clk13_b = 149,
-              ms_clk13_c = 150,
-              ms_clk13_d = 151,
-				  ms_clk14_a = 152,
-			     ms_clk14_b = 153,
-              ms_clk14_c = 154,
-              ms_clk14_d = 155,
-				  ms_clk15_a = 156,
-			     ms_clk15_b = 157,
-              ms_clk15_c = 158,
-              ms_clk15_d = 159,
-				  ms_clk16_a = 160,
-			     ms_clk16_b = 161,
-              ms_clk16_c = 162,
-              ms_clk16_d = 163,
-				  
-              ms_clk17_a = 164,
-              ms_clk17_b = 165,
-				  
-				  ms_cs_a    = 166,
-				  ms_cs_b    = 167,
-				  ms_cs_c    = 168,
-				  ms_cs_d    = 169,
-				  ms_cs_e    = 170,
-				  ms_cs_f    = 171,
-				  ms_cs_g    = 172,
-				  ms_cs_h    = 173,
-				  ms_cs_i    = 174,
-				  ms_cs_j    = 175,
-				  ms_cs_k    = 176,
-				  ms_cs_l    = 177,
-				  ms_cs_m    = 178,
-				  ms_cs_n    = 179;
-
+    localparam
+             ms_wait    = 99,
+             ms_clk1_a  = 100,  // SCLK low
+             ms_clk1_b  = 101,  // SCLK low
+          ms_clk1_c  = 102,     // SCLK high
+          ms_clk1_d  = 103,     // SCLK high
+             ms_clk2_a  = 104,
+             ms_clk2_b  = 105,
+          ms_clk2_c  = 106,
+          ms_clk2_d  = 107,
+             ms_clk3_a  = 108,
+             ms_clk3_b  = 109,
+          ms_clk3_c  = 110,
+          ms_clk3_d  = 111,
+             ms_clk4_a  = 112,
+             ms_clk4_b  = 113,
+          ms_clk4_c  = 114,
+          ms_clk4_d  = 115,
+             ms_clk5_a  = 116,
+             ms_clk5_b  = 117,
+          ms_clk5_c  = 118,
+          ms_clk5_d  = 119,
+             ms_clk6_a  = 120,
+             ms_clk6_b  = 121,
+          ms_clk6_c  = 122,
+          ms_clk6_d  = 123,
+             ms_clk7_a  = 124,
+             ms_clk7_b  = 125,
+          ms_clk7_c  = 126,
+          ms_clk7_d  = 127,
+             ms_clk8_a  = 128,
+             ms_clk8_b  = 129,
+          ms_clk8_c  = 130,
+          ms_clk8_d  = 131,
+             ms_clk9_a  = 132,
+             ms_clk9_b  = 133,
+          ms_clk9_c  = 134,
+          ms_clk9_d  = 135,
+             ms_clk10_a = 136,
+             ms_clk10_b = 137,
+          ms_clk10_c = 138,
+          ms_clk10_d = 139,
+             ms_clk11_a = 140,
+             ms_clk11_b = 141,
+          ms_clk11_c = 142,
+          ms_clk11_d = 143,
+             ms_clk12_a = 144,
+             ms_clk12_b = 145,
+          ms_clk12_c = 146,
+          ms_clk12_d = 147,
+             ms_clk13_a = 148,
+             ms_clk13_b = 149,
+          ms_clk13_c = 150,
+          ms_clk13_d = 151,
+             ms_clk14_a = 152,
+             ms_clk14_b = 153,
+          ms_clk14_c = 154,
+          ms_clk14_d = 155,
+             ms_clk15_a = 156,
+             ms_clk15_b = 157,
+          ms_clk15_c = 158,
+          ms_clk15_d = 159,
+             ms_clk16_a = 160,
+             ms_clk16_b = 161,
+          ms_clk16_c = 162,
+          ms_clk16_d = 163,
+             ms_clk17_a = 164,
+             ms_clk17_b = 165,
+              
+              ms_cs_a    = 166,
+              ms_cs_b    = 167,
+              ms_cs_c    = 168,
+              ms_cs_d    = 169,
+              ms_cs_e    = 170,
+              ms_cs_f    = 171,
+              ms_cs_g    = 172,
+              ms_cs_h    = 173,
+              ms_cs_i    = 174,
+              ms_cs_j    = 175,
+              ms_cs_k    = 176,
+              ms_cs_l    = 177,
+              ms_cs_m    = 178,
+              ms_cs_n    = 179;
 				 	
 	always @(posedge dataclk) begin
 		if (reset) begin
@@ -941,7 +973,8 @@ module main #(
 					aux_cmd_bank_3_C <= aux_cmd_bank_3_C_in;
 					aux_cmd_bank_3_D <= aux_cmd_bank_3_D_in;
 					
-					data_stream_1_en <= data_stream_1_en_in;		// can only change USB streams after stopping SPI
+                    // can only change USB streams after stopping SPI
+					data_stream_1_en <= data_stream_1_en_in;		
 					data_stream_2_en <= data_stream_2_en_in;
 					data_stream_3_en <= data_stream_3_en_in;
 					data_stream_4_en <= data_stream_4_en_in;
@@ -949,6 +982,16 @@ module main #(
 					data_stream_6_en <= data_stream_6_en_in;
 					data_stream_7_en <= data_stream_7_en_in;
 					data_stream_8_en <= data_stream_8_en_in;
+
+                    data_stream_9_en <= data_stream_9_en_in;		
+					data_stream_10_en <= data_stream_10_en_in;
+					data_stream_11_en <= data_stream_11_en_in;
+					data_stream_12_en <= data_stream_12_en_in;
+					data_stream_13_en <= data_stream_13_en_in;
+					data_stream_14_en <= data_stream_14_en_in;
+					data_stream_15_en <= data_stream_15_en_in;
+					data_stream_16_en <= data_stream_16_en_in;
+
 					data_stream_1_sel <= data_stream_1_sel_in;
 					data_stream_2_sel <= data_stream_2_sel_in;
 					data_stream_3_sel <= data_stream_3_sel_in;
@@ -957,8 +1000,18 @@ module main #(
 					data_stream_6_sel <= data_stream_6_sel_in;
 					data_stream_7_sel <= data_stream_7_sel_in;
 					data_stream_8_sel <= data_stream_8_sel_in;
-					
-					DAC_pre_register_1 <= 16'h8000;		// set DACs to midrange, initially, to avoid loud 'pop' in audio at start
+                    
+                    data_stream_9_sel <= data_stream_9_sel_in;
+					data_stream_10_sel <= data_stream_10_sel_in;
+					data_stream_11_sel <= data_stream_11_sel_in;
+					data_stream_12_sel <= data_stream_12_sel_in;
+					data_stream_13_sel <= data_stream_13_sel_in;
+					data_stream_14_sel <= data_stream_14_sel_in;
+					data_stream_15_sel <= data_stream_15_sel_in;
+					data_stream_16_sel <= data_stream_16_sel_in;
+
+					// set DACs to midrange, initially, to avoid loud 'pop' in audio at start
+					DAC_pre_register_1 <= 16'h8000;		
 					DAC_pre_register_2 <= 16'h8000;
 					DAC_pre_register_3 <= 16'h8000;
 					DAC_pre_register_4 <= 16'h8000;
@@ -1295,6 +1348,11 @@ module main #(
 				end
 				
 				ms_clk4_d: begin
+                    if (data_stream_9_en == 1'b1) begin
+						FIFO_data_in <= data_stream_9;
+						FIFO_write_to <= 1'b1;
+					end
+
 					SCLK <= 1'b1;
 					in4x_A1[13] <= MISO_A1; in4x_A2[13] <= MISO_A2;
 					in4x_B1[13] <= MISO_B1; in4x_B2[13] <= MISO_B2;
@@ -1304,6 +1362,11 @@ module main #(
 				end
 				
 				ms_clk5_a: begin
+                    if (data_stream_10_en == 1'b1) begin
+						FIFO_data_in <= data_stream_10;
+						FIFO_write_to <= 1'b1;
+					end
+
 					MOSI_A <= MOSI_cmd_A[11];
 					MOSI_B <= MOSI_cmd_B[11];
 					MOSI_C <= MOSI_cmd_C[11];
@@ -1316,6 +1379,11 @@ module main #(
 				end
 
 				ms_clk5_b: begin
+                    if (data_stream_11_en == 1'b1) begin
+						FIFO_data_in <= data_stream_11;
+						FIFO_write_to <= 1'b1;
+					end
+
 					in4x_A1[15] <= MISO_A1; in4x_A2[15] <= MISO_A2;
 					in4x_B1[15] <= MISO_B1; in4x_B2[15] <= MISO_B2;
 					in4x_C1[15] <= MISO_C1; in4x_C2[15] <= MISO_C2;
@@ -1324,6 +1392,11 @@ module main #(
 				end
 
 				ms_clk5_c: begin
+                    if (data_stream_12_en == 1'b1) begin
+						FIFO_data_in <= data_stream_12;
+						FIFO_write_to <= 1'b1;
+					end
+
 					SCLK <= 1'b1;
 					in4x_A1[16] <= MISO_A1; in4x_A2[16] <= MISO_A2;
 					in4x_B1[16] <= MISO_B1; in4x_B2[16] <= MISO_B2;
@@ -1333,6 +1406,11 @@ module main #(
 				end
 				
 				ms_clk5_d: begin
+                    if (data_stream_13_en == 1'b1) begin
+						FIFO_data_in <= data_stream_13;
+						FIFO_write_to <= 1'b1;
+					end
+
 					SCLK <= 1'b1;
 					in4x_A1[17] <= MISO_A1; in4x_A2[17] <= MISO_A2;
 					in4x_B1[17] <= MISO_B1; in4x_B2[17] <= MISO_B2;
@@ -1342,6 +1420,11 @@ module main #(
 				end
 				
 				ms_clk6_a: begin
+                    if (data_stream_14_en == 1'b1) begin
+						FIFO_data_in <= data_stream_14;
+						FIFO_write_to <= 1'b1;
+					end
+
 					MOSI_A <= MOSI_cmd_A[10];
 					MOSI_B <= MOSI_cmd_B[10];
 					MOSI_C <= MOSI_cmd_C[10];
@@ -1354,6 +1437,11 @@ module main #(
 				end
 
 				ms_clk6_b: begin
+                    if (data_stream_15_en == 1'b1) begin
+						FIFO_data_in <= data_stream_15;
+						FIFO_write_to <= 1'b1;
+					end
+
 					in4x_A1[19] <= MISO_A1; in4x_A2[19] <= MISO_A2;
 					in4x_B1[19] <= MISO_B1; in4x_B2[19] <= MISO_B2;
 					in4x_C1[19] <= MISO_C1; in4x_C2[19] <= MISO_C2;
@@ -1362,6 +1450,11 @@ module main #(
 				end
 
 				ms_clk6_c: begin
+                    if (data_stream_16_en == 1'b1) begin
+						FIFO_data_in <= data_stream_16;
+						FIFO_write_to <= 1'b1;
+					end
+
 					SCLK <= 1'b1;
 					in4x_A1[20] <= MISO_A1; in4x_A2[20] <= MISO_A2;
 					in4x_B1[20] <= MISO_B1; in4x_B2[20] <= MISO_B2;
@@ -1637,6 +1730,11 @@ module main #(
 				end
 				
 				ms_clk13_d: begin
+                    if (data_stream_1_en == 1'b1 && channel == 34) begin
+						FIFO_data_in <= data_stream_filler;	// Send a 36th 'filler' sample to keep number of samples divisible by four
+						FIFO_write_to <= 1'b1;
+					end
+
 					SCLK <= 1'b1;
 					in4x_A1[49] <= MISO_A1; in4x_A2[49] <= MISO_A2;
 					in4x_B1[49] <= MISO_B1; in4x_B2[49] <= MISO_B2;
@@ -1646,6 +1744,11 @@ module main #(
 				end
 
 				ms_clk14_a: begin
+                    if (data_stream_2_en == 1'b1 && channel == 34) begin
+						FIFO_data_in <= data_stream_filler;	// Send a 36th 'filler' sample to keep number of samples divisible by four
+						FIFO_write_to <= 1'b1;
+					end
+
 					MOSI_A <= MOSI_cmd_A[2];
 					MOSI_B <= MOSI_cmd_B[2];
 					MOSI_C <= MOSI_cmd_C[2];
@@ -1658,6 +1761,11 @@ module main #(
 				end
 
 				ms_clk14_b: begin
+                    if (data_stream_3_en == 1'b1 && channel == 34) begin
+						FIFO_data_in <= data_stream_filler;	// Send a 36th 'filler' sample to keep number of samples divisible by four
+						FIFO_write_to <= 1'b1;
+					end
+
 					in4x_A1[51] <= MISO_A1; in4x_A2[51] <= MISO_A2;
 					in4x_B1[51] <= MISO_B1; in4x_B2[51] <= MISO_B2;
 					in4x_C1[51] <= MISO_C1; in4x_C2[51] <= MISO_C2;
@@ -1666,6 +1774,11 @@ module main #(
 				end
 
 				ms_clk14_c: begin
+                    if (data_stream_4_en == 1'b1 && channel == 34) begin
+						FIFO_data_in <= data_stream_filler;	// Send a 36th 'filler' sample to keep number of samples divisible by four
+						FIFO_write_to <= 1'b1;
+					end
+
 					SCLK <= 1'b1;
 					in4x_A1[52] <= MISO_A1; in4x_A2[52] <= MISO_A2;
 					in4x_B1[52] <= MISO_B1; in4x_B2[52] <= MISO_B2;
@@ -1675,6 +1788,11 @@ module main #(
 				end
 				
 				ms_clk14_d: begin
+                    if (data_stream_5_en == 1'b1 && channel == 34) begin
+						FIFO_data_in <= data_stream_filler;	// Send a 36th 'filler' sample to keep number of samples divisible by four
+						FIFO_write_to <= 1'b1;
+					end
+
 					SCLK <= 1'b1;
 					in4x_A1[53] <= MISO_A1; in4x_A2[53] <= MISO_A2;
 					in4x_B1[53] <= MISO_B1; in4x_B2[53] <= MISO_B2;
@@ -1684,6 +1802,11 @@ module main #(
 				end
 
 				ms_clk15_a: begin
+                    if (data_stream_6_en == 1'b1 && channel == 34) begin
+						FIFO_data_in <= data_stream_filler;	// Send a 36th 'filler' sample to keep number of samples divisible by four
+						FIFO_write_to <= 1'b1;
+					end
+
 					MOSI_A <= MOSI_cmd_A[1];
 					MOSI_B <= MOSI_cmd_B[1];
 					MOSI_C <= MOSI_cmd_C[1];
@@ -1696,6 +1819,11 @@ module main #(
 				end
 
 				ms_clk15_b: begin
+                    if (data_stream_7_en == 1'b1 && channel == 34) begin
+						FIFO_data_in <= data_stream_filler;	// Send a 36th 'filler' sample to keep number of samples divisible by four
+						FIFO_write_to <= 1'b1;
+					end
+
 					in4x_A1[55] <= MISO_A1; in4x_A2[55] <= MISO_A2;
 					in4x_B1[55] <= MISO_B1; in4x_B2[55] <= MISO_B2;
 					in4x_C1[55] <= MISO_C1; in4x_C2[55] <= MISO_C2;
@@ -1704,6 +1832,11 @@ module main #(
 				end
 
 				ms_clk15_c: begin
+                    if (data_stream_8_en == 1'b1 && channel == 34) begin
+						FIFO_data_in <= data_stream_filler;	// Send a 36th 'filler' sample to keep number of samples divisible by four
+						FIFO_write_to <= 1'b1;
+					end
+
 					SCLK <= 1'b1;
 					in4x_A1[56] <= MISO_A1; in4x_A2[56] <= MISO_A2;
 					in4x_B1[56] <= MISO_B1; in4x_B2[56] <= MISO_B2;
@@ -1713,7 +1846,7 @@ module main #(
 				end
 				
 				ms_clk15_d: begin
-					if (data_stream_1_en == 1'b1 && channel == 34) begin
+					if (data_stream_9_en == 1'b1 && channel == 34) begin
 						FIFO_data_in <= data_stream_filler;	// Send a 36th 'filler' sample to keep number of samples divisible by four
 						FIFO_write_to <= 1'b1;
 					end
@@ -1727,7 +1860,7 @@ module main #(
 				end
 
 				ms_clk16_a: begin
-					if (data_stream_2_en == 1'b1 && channel == 34) begin
+					if (data_stream_10_en == 1'b1 && channel == 34) begin
 						FIFO_data_in <= data_stream_filler;	// Send a 36th 'filler' sample to keep number of samples divisible by four
 						FIFO_write_to <= 1'b1;
 					end
@@ -1744,7 +1877,7 @@ module main #(
 				end
 
 				ms_clk16_b: begin
-					if (data_stream_3_en == 1'b1 && channel == 34) begin
+					if (data_stream_11_en == 1'b1 && channel == 34) begin
 						FIFO_data_in <= data_stream_filler;	// Send a 36th 'filler' sample to keep number of samples divisible by four
 						FIFO_write_to <= 1'b1;
 					end
@@ -1757,7 +1890,7 @@ module main #(
 				end
 
 				ms_clk16_c: begin
-					if (data_stream_4_en == 1'b1 && channel == 34) begin
+					if (data_stream_12_en == 1'b1 && channel == 34) begin
 						FIFO_data_in <= data_stream_filler;	// Send a 36th 'filler' sample to keep number of samples divisible by four
 						FIFO_write_to <= 1'b1;
 					end
@@ -1771,7 +1904,7 @@ module main #(
 				end
 				
 				ms_clk16_d: begin
-					if (data_stream_5_en == 1'b1 && channel == 34) begin
+					if (data_stream_13_en == 1'b1 && channel == 34) begin
 						FIFO_data_in <= data_stream_filler;	// Send a 36th 'filler' sample to keep number of samples divisible by four
 						FIFO_write_to <= 1'b1;
 					end
@@ -1785,7 +1918,7 @@ module main #(
 				end
 
 				ms_clk17_a: begin
-					if (data_stream_6_en == 1'b1 && channel == 34) begin
+					if (data_stream_14_en == 1'b1 && channel == 34) begin
 						FIFO_data_in <= data_stream_filler;	// Send a 36th 'filler' sample to keep number of samples divisible by four
 						FIFO_write_to <= 1'b1;
 					end
@@ -1802,7 +1935,7 @@ module main #(
 				end
 
 				ms_clk17_b: begin
-					if (data_stream_7_en == 1'b1 && channel == 34) begin
+					if (data_stream_15_en == 1'b1 && channel == 34) begin
 						FIFO_data_in <= data_stream_filler;	// Send a 36th 'filler' sample to keep number of samples divisible by four
 						FIFO_write_to <= 1'b1;
 					end
@@ -1815,7 +1948,7 @@ module main #(
 				end
 
 				ms_cs_a: begin
-					if (data_stream_8_en == 1'b1 && channel == 34) begin
+					if (data_stream_16_en == 1'b1 && channel == 34) begin
 						FIFO_data_in <= data_stream_filler;	// Send a 36th 'filler' sample to keep number of samples divisible by four
 						FIFO_write_to <= 1'b1;
 					end
@@ -2017,7 +2150,15 @@ module main #(
 							5: DAC_pre_register_1 <= data_stream_6;
 							6: DAC_pre_register_1 <= data_stream_7;
 							7: DAC_pre_register_1 <= data_stream_8;
-							8: DAC_pre_register_1 <= DAC_manual;
+							8: DAC_pre_register_1 <= data_stream_9;
+                            9: DAC_pre_register_1 <= data_stream_10;
+							10: DAC_pre_register_1 <= data_stream_11;
+							11: DAC_pre_register_1 <= data_stream_12;
+							12: DAC_pre_register_1 <= data_stream_13;
+							13: DAC_pre_register_1 <= data_stream_14;
+							14: DAC_pre_register_1 <= data_stream_15;
+							15: DAC_pre_register_1 <= data_stream_16;
+							16: DAC_pre_register_1 <= DAC_manual;
 							default: DAC_pre_register_1 <= 16'b0;
 						endcase
 					end
@@ -2031,7 +2172,15 @@ module main #(
 							5: DAC_pre_register_2 <= data_stream_6;
 							6: DAC_pre_register_2 <= data_stream_7;
 							7: DAC_pre_register_2 <= data_stream_8;
-							8: DAC_pre_register_2 <= DAC_manual;
+                            8: DAC_pre_register_2 <= data_stream_9;
+							9: DAC_pre_register_2 <= data_stream_10;
+							10: DAC_pre_register_2 <= data_stream_11;
+							11: DAC_pre_register_2 <= data_stream_12;
+							12: DAC_pre_register_2 <= data_stream_13;
+							13: DAC_pre_register_2 <= data_stream_14;
+							14: DAC_pre_register_2 <= data_stream_15;
+							15: DAC_pre_register_2 <= data_stream_16;
+							16: DAC_pre_register_2 <= DAC_manual;
 							default: DAC_pre_register_2 <= 16'b0;
 						endcase
 					end
@@ -2045,7 +2194,15 @@ module main #(
 							5: DAC_pre_register_3 <= data_stream_6;
 							6: DAC_pre_register_3 <= data_stream_7;
 							7: DAC_pre_register_3 <= data_stream_8;
-							8: DAC_pre_register_3 <= DAC_manual;
+                            8: DAC_pre_register_3 <= data_stream_9;
+							9: DAC_pre_register_3 <= data_stream_10;
+							10: DAC_pre_register_3 <= data_stream_11;
+							11: DAC_pre_register_3 <= data_stream_12;
+							12: DAC_pre_register_3 <= data_stream_13;
+							13: DAC_pre_register_3 <= data_stream_14;
+							14: DAC_pre_register_3 <= data_stream_15;
+							15: DAC_pre_register_3 <= data_stream_16;
+							16: DAC_pre_register_3 <= DAC_manual;
 							default: DAC_pre_register_3 <= 16'b0;
 						endcase
 					end
@@ -2059,7 +2216,15 @@ module main #(
 							5: DAC_pre_register_4 <= data_stream_6;
 							6: DAC_pre_register_4 <= data_stream_7;
 							7: DAC_pre_register_4 <= data_stream_8;
-							8: DAC_pre_register_4 <= DAC_manual;
+                            8: DAC_pre_register_4 <= data_stream_9;
+							9: DAC_pre_register_4 <= data_stream_10;
+							10: DAC_pre_register_4 <= data_stream_11;
+							11: DAC_pre_register_4 <= data_stream_12;
+							12: DAC_pre_register_4 <= data_stream_13;
+							13: DAC_pre_register_4 <= data_stream_14;
+							14: DAC_pre_register_4 <= data_stream_15;
+							15: DAC_pre_register_4 <= data_stream_16;
+							16: DAC_pre_register_4 <= DAC_manual;
 							default: DAC_pre_register_4 <= 16'b0;
 						endcase
 					end
@@ -2073,7 +2238,15 @@ module main #(
 							5: DAC_pre_register_5 <= data_stream_6;
 							6: DAC_pre_register_5 <= data_stream_7;
 							7: DAC_pre_register_5 <= data_stream_8;
-							8: DAC_pre_register_5 <= DAC_manual;
+                            8: DAC_pre_register_5 <= data_stream_9;
+							9: DAC_pre_register_5 <= data_stream_10;
+							10: DAC_pre_register_5 <= data_stream_11;
+							11: DAC_pre_register_5 <= data_stream_12;
+							12: DAC_pre_register_5 <= data_stream_13;
+							13: DAC_pre_register_5 <= data_stream_14;
+							14: DAC_pre_register_5 <= data_stream_15;
+							15: DAC_pre_register_5 <= data_stream_16;
+							16: DAC_pre_register_5 <= DAC_manual;
 							default: DAC_pre_register_5 <= 16'b0;
 						endcase
 					end
@@ -2087,7 +2260,15 @@ module main #(
 							5: DAC_pre_register_6 <= data_stream_6;
 							6: DAC_pre_register_6 <= data_stream_7;
 							7: DAC_pre_register_6 <= data_stream_8;
-							8: DAC_pre_register_6 <= DAC_manual;
+                            8: DAC_pre_register_6 <= data_stream_9;
+							9: DAC_pre_register_6 <= data_stream_10;
+							10: DAC_pre_register_6 <= data_stream_11;
+							11: DAC_pre_register_6 <= data_stream_12;
+							12: DAC_pre_register_6 <= data_stream_13;
+							13: DAC_pre_register_6 <= data_stream_14;
+							14: DAC_pre_register_6 <= data_stream_15;
+							15: DAC_pre_register_6 <= data_stream_16;
+							16: DAC_pre_register_6 <= DAC_manual;
 							default: DAC_pre_register_6 <= 16'b0;
 						endcase
 					end
@@ -2101,7 +2282,15 @@ module main #(
 							5: DAC_pre_register_7 <= data_stream_6;
 							6: DAC_pre_register_7 <= data_stream_7;
 							7: DAC_pre_register_7 <= data_stream_8;
-							8: DAC_pre_register_7 <= DAC_manual;
+                            8: DAC_pre_register_7 <= data_stream_9;
+							9: DAC_pre_register_7 <= data_stream_10;
+							10: DAC_pre_register_7 <= data_stream_11;
+							11: DAC_pre_register_7 <= data_stream_12;
+							12: DAC_pre_register_7 <= data_stream_13;
+							13: DAC_pre_register_7 <= data_stream_14;
+							14: DAC_pre_register_7 <= data_stream_15;
+							15: DAC_pre_register_7 <= data_stream_16;
+							16: DAC_pre_register_7 <= DAC_manual;
 							default: DAC_pre_register_7 <= 16'b0;
 						endcase
 					end
@@ -2115,7 +2304,15 @@ module main #(
 							5: DAC_pre_register_8 <= data_stream_6;
 							6: DAC_pre_register_8 <= data_stream_7;
 							7: DAC_pre_register_8 <= data_stream_8;
-							8: DAC_pre_register_8 <= DAC_manual;
+                            8: DAC_pre_register_8 <= data_stream_9;
+							9: DAC_pre_register_8 <= data_stream_10;
+							10: DAC_pre_register_8 <= data_stream_11;
+							11: DAC_pre_register_8 <= data_stream_12;
+							12: DAC_pre_register_8 <= data_stream_13;
+							13: DAC_pre_register_8 <= data_stream_14;
+							14: DAC_pre_register_8 <= data_stream_15;
+							15: DAC_pre_register_8 <= data_stream_16;
+							16: DAC_pre_register_8 <= DAC_manual;
 							default: DAC_pre_register_8 <= 16'b0;
 						endcase
 					end					
@@ -2548,7 +2745,7 @@ module main #(
 			5:		data_stream_1 <= result_C2;
 			6:		data_stream_1 <= result_D1;
 			7:		data_stream_1 <= result_D2;
-			8:		data_stream_1 <= result_DDR_A1;
+			8:	data_stream_1 <= result_DDR_A1;
 			9: 	data_stream_1 <= result_DDR_A2;
 			10:	data_stream_1 <= result_DDR_B1;
 			11:	data_stream_1 <= result_DDR_B2;
@@ -2569,7 +2766,7 @@ module main #(
 			5:		data_stream_2 <= result_C2;
 			6:		data_stream_2 <= result_D1;
 			7:		data_stream_2 <= result_D2;
-			8:		data_stream_2 <= result_DDR_A1;
+			8:	data_stream_2 <= result_DDR_A1;
 			9: 	data_stream_2 <= result_DDR_A2;
 			10:	data_stream_2 <= result_DDR_B1;
 			11:	data_stream_2 <= result_DDR_B2;
@@ -2590,7 +2787,7 @@ module main #(
 			5:		data_stream_3 <= result_C2;
 			6:		data_stream_3 <= result_D1;
 			7:		data_stream_3 <= result_D2;
-			8:		data_stream_3 <= result_DDR_A1;
+			8:	data_stream_3 <= result_DDR_A1;
 			9: 	data_stream_3 <= result_DDR_A2;
 			10:	data_stream_3 <= result_DDR_B1;
 			11:	data_stream_3 <= result_DDR_B2;
@@ -2611,7 +2808,7 @@ module main #(
 			5:		data_stream_4 <= result_C2;
 			6:		data_stream_4 <= result_D1;
 			7:		data_stream_4 <= result_D2;
-			8:		data_stream_4 <= result_DDR_A1;
+			8:	data_stream_4 <= result_DDR_A1;
 			9: 	data_stream_4 <= result_DDR_A2;
 			10:	data_stream_4 <= result_DDR_B1;
 			11:	data_stream_4 <= result_DDR_B2;
@@ -2632,7 +2829,7 @@ module main #(
 			5:		data_stream_5 <= result_C2;
 			6:		data_stream_5 <= result_D1;
 			7:		data_stream_5 <= result_D2;
-			8:		data_stream_5 <= result_DDR_A1;
+			8:	data_stream_5 <= result_DDR_A1;
 			9: 	data_stream_5 <= result_DDR_A2;
 			10:	data_stream_5 <= result_DDR_B1;
 			11:	data_stream_5 <= result_DDR_B2;
@@ -2653,7 +2850,7 @@ module main #(
 			5:		data_stream_6 <= result_C2;
 			6:		data_stream_6 <= result_D1;
 			7:		data_stream_6 <= result_D2;
-			8:		data_stream_6 <= result_DDR_A1;
+			8:	data_stream_6 <= result_DDR_A1;
 			9: 	data_stream_6 <= result_DDR_A2;
 			10:	data_stream_6 <= result_DDR_B1;
 			11:	data_stream_6 <= result_DDR_B2;
@@ -2674,7 +2871,7 @@ module main #(
 			5:		data_stream_7 <= result_C2;
 			6:		data_stream_7 <= result_D1;
 			7:		data_stream_7 <= result_D2;
-			8:		data_stream_7 <= result_DDR_A1;
+			8:	data_stream_7 <= result_DDR_A1;
 			9: 	data_stream_7 <= result_DDR_A2;
 			10:	data_stream_7 <= result_DDR_B1;
 			11:	data_stream_7 <= result_DDR_B2;
@@ -2695,7 +2892,7 @@ module main #(
 			5:		data_stream_8 <= result_C2;
 			6:		data_stream_8 <= result_D1;
 			7:		data_stream_8 <= result_D2;
-			8:		data_stream_8 <= result_DDR_A1;
+			8:	data_stream_8 <= result_DDR_A1;
 			9: 	data_stream_8 <= result_DDR_A2;
 			10:	data_stream_8 <= result_DDR_B1;
 			11:	data_stream_8 <= result_DDR_B2;
@@ -2705,7 +2902,175 @@ module main #(
 			15:	data_stream_8 <= result_DDR_D2;
 		endcase
 	end
+		
+    always @(*) begin
+		case (data_stream_9_sel)
+			0:		data_stream_9 <= result_A1;
+			1:		data_stream_9 <= result_A2;
+			2:		data_stream_9 <= result_B1;
+			3:		data_stream_9 <= result_B2;
+			4:		data_stream_9 <= result_C1;
+			5:		data_stream_9 <= result_C2;
+			6:		data_stream_9 <= result_D1;
+			7:		data_stream_9 <= result_D2;
+			8:	data_stream_9 <= result_DDR_A1;
+			9: 	data_stream_9 <= result_DDR_A2;
+			10:	data_stream_9 <= result_DDR_B1;
+			11:	data_stream_9 <= result_DDR_B2;
+			12:	data_stream_9 <= result_DDR_C1;
+			13:	data_stream_9 <= result_DDR_C2;
+			14:	data_stream_9 <= result_DDR_D1;
+			15:	data_stream_9 <= result_DDR_D2;
+		endcase
+	end
 	
+	always @(*) begin
+		case (data_stream_10_sel)
+			0:		data_stream_10 <= result_A1;
+			1:		data_stream_10 <= result_A2;
+			2:		data_stream_10 <= result_B1;
+			3:		data_stream_10 <= result_B2;
+			4:		data_stream_10 <= result_C1;
+			5:		data_stream_10 <= result_C2;
+			6:		data_stream_10 <= result_D1;
+			7:		data_stream_10 <= result_D2;
+			8:	data_stream_10 <= result_DDR_A1;
+			9: 	data_stream_10 <= result_DDR_A2;
+			10:	data_stream_10 <= result_DDR_B1;
+			11:	data_stream_10 <= result_DDR_B2;
+			12:	data_stream_10 <= result_DDR_C1;
+			13:	data_stream_10 <= result_DDR_C2;
+			14:	data_stream_10 <= result_DDR_D1;
+			15:	data_stream_10 <= result_DDR_D2;
+		endcase
+	end
+	
+	always @(*) begin
+		case (data_stream_11_sel)
+			0:		data_stream_11 <= result_A1;
+			1:		data_stream_11 <= result_A2;
+			2:		data_stream_11 <= result_B1;
+			3:		data_stream_11 <= result_B2;
+			4:		data_stream_11 <= result_C1;
+			5:		data_stream_11 <= result_C2;
+			6:		data_stream_11 <= result_D1;
+			7:		data_stream_11 <= result_D2;
+			8:	data_stream_11 <= result_DDR_A1;
+			9: 	data_stream_11 <= result_DDR_A2;
+			10:	data_stream_11 <= result_DDR_B1;
+			11:	data_stream_11 <= result_DDR_B2;
+			12:	data_stream_11 <= result_DDR_C1;
+			13:	data_stream_11 <= result_DDR_C2;
+			14:	data_stream_11 <= result_DDR_D1;
+			15:	data_stream_11 <= result_DDR_D2;
+		endcase
+	end
+	
+	always @(*) begin
+		case (data_stream_12_sel)
+			0:		data_stream_12 <= result_A1;
+			1:		data_stream_12 <= result_A2;
+			2:		data_stream_12 <= result_B1;
+			3:		data_stream_12 <= result_B2;
+			4:		data_stream_12 <= result_C1;
+			5:		data_stream_12 <= result_C2;
+			6:		data_stream_12 <= result_D1;
+			7:		data_stream_12 <= result_D2;
+			8:	data_stream_12 <= result_DDR_A1;
+			9: 	data_stream_12 <= result_DDR_A2;
+			10:	data_stream_12 <= result_DDR_B1;
+			11:	data_stream_12 <= result_DDR_B2;
+			12:	data_stream_12 <= result_DDR_C1;
+			13:	data_stream_12 <= result_DDR_C2;
+			14:	data_stream_12 <= result_DDR_D1;
+			15:	data_stream_12 <= result_DDR_D2;
+		endcase
+	end
+	
+	always @(*) begin
+		case (data_stream_13_sel)
+			0:		data_stream_13 <= result_A1;
+			1:		data_stream_13 <= result_A2;
+			2:		data_stream_13 <= result_B1;
+			3:		data_stream_13 <= result_B2;
+			4:		data_stream_13 <= result_C1;
+			5:		data_stream_13 <= result_C2;
+			6:		data_stream_13 <= result_D1;
+			7:		data_stream_13 <= result_D2;
+			8:	data_stream_13 <= result_DDR_A1;
+			9: 	data_stream_13 <= result_DDR_A2;
+			10:	data_stream_13 <= result_DDR_B1;
+			11:	data_stream_13 <= result_DDR_B2;
+			12:	data_stream_13 <= result_DDR_C1;
+			13:	data_stream_13 <= result_DDR_C2;
+			14:	data_stream_13 <= result_DDR_D1;
+			15:	data_stream_13 <= result_DDR_D2;
+		endcase
+	end
+	
+	always @(*) begin
+		case (data_stream_14_sel)
+			0:		data_stream_14 <= result_A1;
+			1:		data_stream_14 <= result_A2;
+			2:		data_stream_14 <= result_B1;
+			3:		data_stream_14 <= result_B2;
+			4:		data_stream_14 <= result_C1;
+			5:		data_stream_14 <= result_C2;
+			6:		data_stream_14 <= result_D1;
+			7:		data_stream_14 <= result_D2;
+			8:	data_stream_14 <= result_DDR_A1;
+			9: 	data_stream_14 <= result_DDR_A2;
+			10:	data_stream_14 <= result_DDR_B1;
+			11:	data_stream_14 <= result_DDR_B2;
+			12:	data_stream_14 <= result_DDR_C1;
+			13:	data_stream_14 <= result_DDR_C2;
+			14:	data_stream_14 <= result_DDR_D1;
+			15:	data_stream_14 <= result_DDR_D2;
+		endcase
+	end
+	
+	always @(*) begin
+		case (data_stream_15_sel)
+			0:		data_stream_15 <= result_A1;
+			1:		data_stream_15 <= result_A2;
+			2:		data_stream_15 <= result_B1;
+			3:		data_stream_15 <= result_B2;
+			4:		data_stream_15 <= result_C1;
+			5:		data_stream_15 <= result_C2;
+			6:		data_stream_15 <= result_D1;
+			7:		data_stream_15 <= result_D2;
+			8:	data_stream_15 <= result_DDR_A1;
+			9: 	data_stream_15 <= result_DDR_A2;
+			10:	data_stream_15 <= result_DDR_B1;
+			11:	data_stream_15 <= result_DDR_B2;
+			12:	data_stream_15 <= result_DDR_C1;
+			13:	data_stream_15 <= result_DDR_C2;
+			14:	data_stream_15 <= result_DDR_D1;
+			15:	data_stream_15 <= result_DDR_D2;
+		endcase
+	end
+	
+	always @(*) begin
+		case (data_stream_16_sel)
+			0:		data_stream_16 <= result_A1;
+			1:		data_stream_16 <= result_A2;
+			2:		data_stream_16 <= result_B1;
+			3:		data_stream_16 <= result_B2;
+			4:		data_stream_16 <= result_C1;
+			5:		data_stream_16 <= result_C2;
+			6:		data_stream_16 <= result_D1;
+			7:		data_stream_16 <= result_D2;
+			8:	data_stream_16 <= result_DDR_A1;
+			9: 	data_stream_16 <= result_DDR_A2;
+			10:	data_stream_16 <= result_DDR_B1;
+			11:	data_stream_16 <= result_DDR_B2;
+			12:	data_stream_16 <= result_DDR_C1;
+			13:	data_stream_16 <= result_DDR_C2;
+			14:	data_stream_16 <= result_DDR_D1;
+			15:	data_stream_16 <= result_DDR_D2;
+		endcase
+	end
+
 	// Opal Kelly USB I/O Host and Endpoint Modules
     // USB3 instantiation is different!	
 	okHost host (
@@ -2851,9 +3216,9 @@ module command_selector (
 			29:      MOSI_cmd <= { 2'b00, channel, 7'b0000000, DSP_settle };
 			30:      MOSI_cmd <= { 2'b00, channel, 7'b0000000, DSP_settle };
 			31:      MOSI_cmd <= { 2'b00, channel, 7'b0000000, DSP_settle };
-			32:		MOSI_cmd <= (aux_cmd[15:8] == 8'h83) ? {aux_cmd[15:1], digout_override} : aux_cmd; // If we detect a write to Register 3, overridge the digout value.
-			33:		MOSI_cmd <= (aux_cmd[15:8] == 8'h83) ? {aux_cmd[15:1], digout_override} : aux_cmd; // If we detect a write to Register 3, overridge the digout value.
-			34:		MOSI_cmd <= (aux_cmd[15:8] == 8'h83) ? {aux_cmd[15:1], digout_override} : aux_cmd; // If we detect a write to Register 3, overridge the digout value.
+			32:		 MOSI_cmd <= (aux_cmd[15:8] == 8'h83) ? {aux_cmd[15:1], digout_override} : aux_cmd; // If we detect a write to Register 3, overridge the digout value.
+			33:		 MOSI_cmd <= (aux_cmd[15:8] == 8'h83) ? {aux_cmd[15:1], digout_override} : aux_cmd; // If we detect a write to Register 3, overridge the digout value.
+			34:		 MOSI_cmd <= (aux_cmd[15:8] == 8'h83) ? {aux_cmd[15:1], digout_override} : aux_cmd; // If we detect a write to Register 3, overridge the digout value.
 			default: MOSI_cmd <= 16'b0;
 			endcase
 	end	
