@@ -47,8 +47,8 @@
 // to get more than 75% full in case the computer OS hangs for a moment.
 //
 // In order to completely "clean out" the FIFO after pausing or stopping the flow of data
-// into it, it is necessary to write an integer multiple of 2 16-bit words to the FIFO.
-// The SDRAM reads data only in 32-bit chunks, so if there is a remaining 1 word
+// into it, it is necessary to write an integer multiple of 2*BURST_LEN 16-bit words to the FIFO.
+// The SDRAM reads data only in 32-bit chunks, so if there is a remaining word
 // of data in the input mini-FIFO, this will not be read into the SDRAM (and passed to the
 // output mini-FIFO) after the flow of data from the source has stopped.  See
 // ddr_state_machine.v for details on this.
@@ -119,10 +119,16 @@ module SDRAM_FIFO  #(
 	input wire [15:0] 						FIFO_data_in,
 	input wire								FIFO_read_from,
 	output wire [31:0]						FIFO_data_out,
-    output reg                              FIFO_out_rdy,
+    output reg                              FIFO_out_rdy,       // True when at least blocksize in output FIFO
+    input wire [31:0]                       usb3_blocksize,     // Block size for BTPipe
+    input wire [31:0]                       ddr_burst_len,      // Burst length for SDRAM MCB
+    input wire                              ddr_burst_override, // Assert to change BURST_LEN
 
 	// FIFO capacity monitor
 	output wire [31:0]					    num_words_in_FIFO,
+    output wire [31:0]                      input_FIFO_numwords,
+    output wire [31:0]                      output_FIFO_numwords,
+    output wire [31:0]                      SDRAM_numwords,
 	
 	// I/O connections from Xilinx FPGA to 128-MiByte SDRAM
 	inout  wire [C3_NUM_DQ_PINS-1:0]         ddr2_dq,
@@ -145,7 +151,22 @@ module SDRAM_FIFO  #(
 	output wire                              ddr2_ck_n,
 	output wire                              ddr2_cs_n
    );
-    
+    // Block size for BTPipeOut - this needs to be changed if the
+    // corresponding setting in software is changed (blockSize in
+    // ReadFromBlockPipeOut()).
+    // 
+	// If blockSize is set to 512 bytes, and our output FIFO word-size is
+    // 32-bits, then BLOCK_SIZE here should be 512 bytes/(4 bytes/word)=128.
+	//
+	// blockSize = 1024 bytes -> BLOCK_SIZE = 256.
+	// blockSize = 512 bytes -> BLOCK_SIZE = 128
+	// blockSize = 256 bytes -> BLOCK_SIZE = 64
+	// blockSize = 128 bytes -> BLOCK_SIZE = 32
+    // 
+    // okHost will only transfer if there are at least this many words
+    // available in the okPipeOut_fifo.
+    localparam BLOCK_SIZE = 128;                  // default
+   
     localparam C3_INCLK_PERIOD          = 10000;  // 10000ps -> 10ns -> 100MHz
     localparam C3_CLKOUT0_DIVIDE        = 1;      // 625MHz system clock
     localparam C3_CLKOUT1_DIVIDE        = 1;      // 625MHz system clock (180 deg)
@@ -268,10 +289,7 @@ module SDRAM_FIFO  #(
 
 	wire        	pipe_in_read;
 	wire [31:0] 	pipe_in_data;
-	// If FIFO_SIZE = 1024 (32-bit words)
-	//wire [9:0]  	pipe_in_rd_count;
-    //wire [10:0]     pipe_in_wr_count;
-	// If FIFO_SIZE = 2048 (32-bit words)
+	// FIFO_SIZE = 2048 (32-bit words)
 	wire [10:0]		pipe_in_rd_count;
 	wire [11:0]		pipe_in_wr_count;
 	wire        	pipe_in_valid;
@@ -280,9 +298,6 @@ module SDRAM_FIFO  #(
 	
 	wire        	pipe_out_write;
 	wire [31:0] 	pipe_out_data;
-	// If FIFO_SIZE = 1024 (32-bit words)
-	//wire [9:0]  	pipe_out_rd_count;
-    //wire [9:0]      pipe_out_wr_count;
 	// If FIFO_SIZE = 2048 (32-bit words)
 	wire [10:0]		pipe_out_rd_count;
 	wire [10:0]		pipe_out_wr_count;
@@ -512,7 +527,9 @@ module SDRAM_FIFO  #(
 		.p0_wr_mask(c3_p0_wr_mask),
 		
 		.cmd_byte_addr_wr(buffer_byte_addr_wr),
-		.cmd_byte_addr_rd(buffer_byte_addr_rd)
+		.cmd_byte_addr_rd(buffer_byte_addr_rd),
+        .ddr_burst_len(ddr_burst_len),
+        .burst_override(ddr_burst_override)
 		);
 	
 	// If FIFO_SIZE = 2048
@@ -546,22 +563,7 @@ module SDRAM_FIFO  #(
 		.rd_data_count(pipe_out_rd_count),      // Bus [10 : 0] - Number of words available for reading
 		.wr_data_count(pipe_out_wr_count));     // Bus [10 : 0] - number of words written into FIFO
 	
-    // Block size for BTPipeOut - this needs to be changed if the
-    // corresponding setting in software is changed (blockSize in
-    // ReadFromBlockPipeOut()).
-    // 
-	// If blockSize is set to 512 bytes, and our output FIFO word-size is
-    // 32-bits, then BLOCK_SIZE here should be 512 bytes/(4 bytes/word)=128.
-	//
-	// blockSize = 1024 bytes -> BLOCK_SIZE = 256.
-	// blockSize = 512 bytes -> BLOCK_SIZE = 128
-	// blockSize = 256 bytes -> BLOCK_SIZE = 64
-	// blockSize = 128 bytes -> BLOCK_SIZE = 32
-    // 
-    // okHost will only transfer if there are at least this many words
-    // available in the okPipeOut_fifo.
-    localparam BLOCK_SIZE = 128; 
-	always @(posedge ti_clk) begin
+    	always @(posedge ti_clk) begin
         // FIFO capacity calculation: how many 16-bit words are in the entire FIFO?
         // (Including the contents of the SDRAM and the two mini-FIFOs.)
 		buffer_byte_addr_rd_ti <= buffer_byte_addr_rd;
@@ -570,7 +572,8 @@ module SDRAM_FIFO  #(
 		pipe_out_word_count_ti <= {pipe_out_rd_count, 1'b0};	// number of 16-bit words in output FIFO
 
         // ready signal for okBTPipeOut
-        if (pipe_out_rd_count >= BLOCK_SIZE) begin
+        // usb3_blocksize is 32 bits, pipe_out_rd_count is 11 bits
+        if ( {21'b0, pipe_out_rd_count} >= usb3_blocksize ) begin
             FIFO_out_rdy <= 1'b1;
         end else begin
             FIFO_out_rdy <= 1'b0;
@@ -583,8 +586,15 @@ module SDRAM_FIFO  #(
 	
 	assign buffer_word_addr_diff_ti = buffer_word_addr_wr_ti - buffer_word_addr_rd_ti;
 	
-	// FIFO_SIZE = 1024
-	//assign num_words_in_FIFO = { 5'b00000, {1'b0, buffer_word_addr_diff_ti[25:0]} + {16'b0, pipe_in_word_count_ti} + {16'b0, pipe_out_word_count_ti}};
 	// FIFO_SIZE = 2048
-	assign num_words_in_FIFO = { 5'b00000, {1'b0, buffer_word_addr_diff_ti[25:0]} + {16'b0, pipe_in_word_count_ti} + {16'b0, pipe_out_word_count_ti}};
+	//assign num_words_in_FIFO = { 5'b00000, {1'b0, buffer_word_addr_diff_ti[25:0]} + {16'b0, pipe_in_word_count_ti} + {16'b0, pipe_out_word_count_ti}};
+
+    // extra FIFO diagnostics
+    assign input_FIFO_numwords = {16'b0,  pipe_in_word_count_ti};
+    assign output_FIFO_numwords = {16'b0, pipe_out_word_count_ti}; 
+    assign SDRAM_numwords = {1'b0, buffer_word_addr_diff_ti[25:0]};
+
+    // FIFO_SIZE = 2048
+    assign num_words_in_FIFO = {5'b0, SDRAM_numwords + input_FIFO_numwords + output_FIFO_numwords};
+
 endmodule

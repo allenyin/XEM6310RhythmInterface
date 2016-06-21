@@ -351,8 +351,15 @@ module main #(
 	
 	wire [7:0]	led_in;
 
+    // Regs and wires added to Rhythm
+    reg [31:0]  usb3_blocksize;
+    reg [31:0]  ddr_burst_len;
+    wire        pipeout_override_en;
+    wire [31:0] input_FIFO_numwords;
+    wire [31:0] output_FIFO_numwords;
+    wire [31:0] SDRAM_numwords; 
+
 	// Opal Kelly USB Host Interface
-	
 
     wire         ti_clk;         // 100.8 MHz from Opal Kelly USB3 interface         
 	wire [112:0] okHE;
@@ -371,7 +378,7 @@ module main #(
 	wire [31:0] ep30wireout, ep31wireout, ep32wireout, ep33wireout, ep34wireout, ep35wireout, ep36wireout, ep37wireout;
 	wire [31:0] ep38wireout, ep39wireout, ep3awireout, ep3bwireout, ep3cwireout, ep3dwireout, ep3ewireout, ep3fwireout;
 
-	wire [31:0] ep40trigin, ep41trigin, ep42trigin, ep43trigin, ep44trigin, ep45trigin, ep46trigin;
+	wire [31:0] ep40trigin, ep41trigin, ep42trigin, ep43trigin, ep44trigin, ep45trigin, ep46trigin, ep47trigin;
 
 
 	// USB WireIn inputs
@@ -606,6 +613,26 @@ module main #(
 	always @(posedge ep46trigin[7]) begin
 		external_digout_channel_D <=	ep1fwirein[3:0];
 	end
+    // Additional triggers to Rhythm
+    always @(posedge ep47trigin[0] or posedge reset) begin
+        if (reset) begin
+            usb3_blocksize <= 32'd128;  // default is 512 bytes
+        end else begin
+            if (~SPI_running) begin
+                usb3_blocksize <= ep1fwirein[31:0];
+            end
+        end
+    end
+
+    always @(posedge ep47trigin[1] or posedge reset) begin
+        if (reset) begin
+           ddr_burst_len <= 32'd2;
+       end else begin
+           if (~SPI_running) begin
+              ddr_burst_len <= ep1fwirein[31:0];
+          end
+      end
+  end 
 	
 
 	// USB WireOut outputs
@@ -626,11 +653,11 @@ module main #(
 	
 
 	// Unused; future expansion
-	assign ep26wireout = 				32'h0000;
-	assign ep27wireout = 				32'h0000;
-	assign ep28wireout = 				32'h0000;
-	assign ep29wireout = 				32'h0000;
-	assign ep2awireout = 				32'h0000;
+	assign ep26wireout = 			    usb3_blocksize;	
+	assign ep27wireout = 			    ddr_burst_len;	
+	assign ep28wireout = 				input_FIFO_numwords;
+	assign ep29wireout = 				output_FIFO_numwords;
+	assign ep2awireout = 				SDRAM_numwords;
 	assign ep2bwireout = 				32'h0000;
 	assign ep2cwireout = 				32'h0000;
 	assign ep2dwireout = 				32'h0000;
@@ -711,8 +738,14 @@ module main #(
 		.FIFO_data_in				(FIFO_data_in),
 		.FIFO_read_from				(FIFO_read_from),
 		.FIFO_data_out				(FIFO_data_out),
-        .FIFO_out_rdy               (pipeout_rdy),      // for block throttled pipe
+        .FIFO_out_rdy               (pipeout_rdy),          // Ready signal for block throttled pipe
+        .usb3_blocksize             (usb3_blocksize),       // Blocksize for block throttled pipe
+        .ddr_burst_len              (ddr_burst_len),        // Burst length for ddr2 state machine
+        .ddr_burst_override         (pipeout_override_en),  // Assert to use new burst lenght.
 		.num_words_in_FIFO			(num_words_in_FIFO),
+        .input_FIFO_numwords        (input_FIFO_numwords),
+        .output_FIFO_numwords       (output_FIFO_numwords),
+        .SDRAM_numwords             (SDRAM_numwords),
 		.ddr2_dq					(ddr2_dq),
 		.ddr2_a					    (ddr2_a),
 		.ddr2_ba					(ddr2_ba),
@@ -3126,6 +3159,7 @@ module main #(
 	okTriggerIn  ti44 (.okHE(okHE), .ep_addr(8'h44), .ep_clk(ti_clk),  .ep_trigger(ep44trigin));
 	okTriggerIn  ti45 (.okHE(okHE), .ep_addr(8'h45), .ep_clk(ti_clk),  .ep_trigger(ep45trigin));
 	okTriggerIn  ti46 (.okHE(okHE), .ep_addr(8'h46), .ep_clk(ti_clk),  .ep_trigger(ep46trigin));
+    okTriggerIn  ti47 (.okHE(okHE), .ep_addr(8'h47), .ep_clk(ti_clk),  .ep_trigger(ep47trigin)); // additions to Rhythm
 	
 	okWireOut    wo20 (.okHE(okHE), .okEH(okEHx[ 0*65 +: 65 ]),  .ep_addr(8'h20), .ep_datain(ep20wireout));
 	okWireOut    wo21 (.okHE(okHE), .okEH(okEHx[ 1*65 +: 65 ]),  .ep_addr(8'h21), .ep_datain(ep21wireout));
