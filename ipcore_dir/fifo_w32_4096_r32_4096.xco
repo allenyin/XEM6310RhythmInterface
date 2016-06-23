@@ -1,7 +1,7 @@
 ##############################################################
 #
 # Xilinx Core Generator version 14.7
-# Date: Thu Jun 23 21:55:29 2016
+# Date: Thu Jun 23 22:07:13 2016
 #
 ##############################################################
 #
@@ -194,7 +194,7 @@ CSET use_clock_enable=false
 CSET use_dout_reset=true
 CSET use_embedded_registers=false
 CSET use_extra_logic=false
-CSET valid_flag=false
+CSET valid_flag=true
 CSET valid_sense=Active_High
 CSET wach_type=FIFO
 CSET wdch_type=FIFO
@@ -210,4 +210,4 @@ CSET wuser_width=1
 MISC pkg_timestamp=2012-11-19T12:39:56Z
 # END Extra information
 GENERATE
-# CRC: f8601bbf
+# CRC: 1b212f7e

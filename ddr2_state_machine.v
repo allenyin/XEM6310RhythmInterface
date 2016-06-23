@@ -31,14 +31,14 @@ module ddr2_state_machine
 	//DDR Input Buffer (ib_)
 	output reg           ib_re,
 	input  wire [31:0]   ib_data,
-	input  wire [10:0]	 ib_count,
+	input  wire [11:0]	 ib_count,
 	input  wire          ib_valid,
 	input  wire          ib_empty,
 	
 	//DDR Output Buffer (ob_)
 	output reg           ob_we,
 	output reg  [31:0]   ob_data,
-	input  wire [10:0]	 ob_count,
+	input  wire [11:0]	 ob_count,
 	
 	output reg           p0_rd_en_o, 
 	input  wire          p0_rd_empty,
@@ -60,7 +60,7 @@ module ddr2_state_machine
     input wire           burst_override     // Assert to change burst_len
 	);
 
-	localparam FIFO_SIZE	  = 2048;
+	localparam FIFO_SIZE	  = 4096;
 	//localparam BURST_LEN      = 32;  // Number of 32-bit data chunks transferred per cycle
 									    // Must be multiple of two!
     // Note: This parameter was set to 32 in the Opal Kelly RAMTester example.
