@@ -305,7 +305,7 @@ module SDRAM_FIFO  #(
     wire            pipe_out_empty;
 
    // For monitoring FIFO capacity.
-	reg [10:0]		pipe_in_word_count_ti, pipe_out_word_count_ti;  
+	reg [11:0]		pipe_in_word_count_ti, pipe_out_word_count_ti;  
 	wire [29:0]		buffer_byte_addr_wr, buffer_byte_addr_rd;
 	reg [29:0]		buffer_byte_addr_wr_ti, buffer_byte_addr_rd_ti;
 	wire [25:0]		buffer_word_addr_rd_ti, buffer_word_addr_wr_ti;
@@ -568,8 +568,8 @@ module SDRAM_FIFO  #(
         // (Including the contents of the SDRAM and the two mini-FIFOs.)
 		buffer_byte_addr_rd_ti <= buffer_byte_addr_rd;
 		buffer_byte_addr_wr_ti <= buffer_byte_addr_wr;
-		pipe_in_word_count_ti <= pipe_in_wr_count;				// number of 16-bit words in input FIFO
-		pipe_out_word_count_ti <= {pipe_out_rd_count, 1'b0};	// number of 16-bit words in output FIFO
+		pipe_in_word_count_ti <= pipe_in_wr_count;				// num 16-bit words in input FIFO, 12bits
+		pipe_out_word_count_ti <= {pipe_out_rd_count, 1'b0};	// num 16-bit words in output FIFO, 12bits
 
         // ready signal for okBTPipeOut
         // usb3_blocksize is 32 bits, pipe_out_rd_count is 11 bits
@@ -587,11 +587,10 @@ module SDRAM_FIFO  #(
 	assign buffer_word_addr_diff_ti = buffer_word_addr_wr_ti - buffer_word_addr_rd_ti;
 	
 	// FIFO_SIZE = 2048
-	//assign num_words_in_FIFO = { 5'b00000, {1'b0, buffer_word_addr_diff_ti[25:0]} + {16'b0, pipe_in_word_count_ti} + {16'b0, pipe_out_word_count_ti}};
 
     // extra FIFO diagnostics
-    assign input_FIFO_numwords = {16'b0,  pipe_in_word_count_ti};
-    assign output_FIFO_numwords = {16'b0, pipe_out_word_count_ti}; 
+    assign input_FIFO_numwords = {15'b0,  pipe_in_word_count_ti};
+    assign output_FIFO_numwords = {15'b0, pipe_out_word_count_ti}; 
     assign SDRAM_numwords = {1'b0, buffer_word_addr_diff_ti[25:0]};
 
     // FIFO_SIZE = 2048

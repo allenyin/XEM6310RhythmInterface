@@ -144,6 +144,14 @@
       <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="109"/>
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
+    <file xil_pn:name="ipcore_dir/fifo_w16_8192_r32_4096.xco" xil_pn:type="FILE_COREGEN">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="164"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="164"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/fifo_w32_4096_r32_4096.xco" xil_pn:type="FILE_COREGEN">
+      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="171"/>
+      <association xil_pn:name="Implementation" xil_pn:seqID="171"/>
+    </file>
     <file xil_pn:name="ipcore_dir/multiplier_18x18.xise" xil_pn:type="FILE_COREGENISE">
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
     </file>
@@ -158,6 +166,12 @@
     </file>
     <file xil_pn:name="ipcore_dir/fifo_w32_1024_r32_1024.xise" xil_pn:type="FILE_COREGENISE">
       <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/fifo_w16_8192_r32_4096.xise" xil_pn:type="FILE_COREGENISE">
+      <association xil_pn:name="Implementation" xil_pn:seqID="165"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/fifo_w32_4096_r32_4096.xise" xil_pn:type="FILE_COREGENISE">
+      <association xil_pn:name="Implementation" xil_pn:seqID="172"/>
     </file>
   </files>
 

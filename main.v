@@ -380,7 +380,6 @@ module main #(
 
 	wire [31:0] ep40trigin, ep41trigin, ep42trigin, ep43trigin, ep44trigin, ep45trigin, ep46trigin, ep47trigin;
 
-
 	// USB WireIn inputs
 
 	assign reset = 				 ep00wirein[0];
@@ -613,6 +612,7 @@ module main #(
 	always @(posedge ep46trigin[7]) begin
 		external_digout_channel_D <=	ep1fwirein[3:0];
 	end
+    
     // Additional triggers to Rhythm
     always @(posedge ep47trigin[0] or posedge reset) begin
         if (reset) begin
@@ -633,7 +633,6 @@ module main #(
           end
       end
   end 
-	
 
 	// USB WireOut outputs
 
@@ -3198,10 +3197,12 @@ module main #(
     // a time. Therefore we flip the 16-bit word order in the 32-bit FIFO
     // output.
 
+
     // Block throttled pipe out
 	okBTPipeOut poa0(.okHE(okHE), .okEH(okEHx[ 32*65 +: 65]), .ep_addr(8'ha0), .ep_read(FIFO_read_from), 
 	                 .ep_blockstrobe(), .ep_datain({FIFO_data_out[15:0],FIFO_data_out[31:16]}), 
 					 .ep_ready(pipeout_rdy | pipeout_override_en));
+
 
 endmodule
 
